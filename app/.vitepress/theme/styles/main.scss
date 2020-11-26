@@ -1,0 +1,51 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+a:not(.unstyled) {
+  position: relative;
+  overflow: hidden;
+
+  &:before {
+    position: absolute;
+    height: 3px;
+    content: ' ';
+    display: block;
+    background-color: rgb(5, 150, 105);
+    width: 12px;
+    opacity: 0;
+    right: 0;
+    top: 1.4em;
+    transition: 0.2s;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    overflow: hidden;
+  }
+
+  &:after {
+    position: absolute;
+    height: 3px;
+    content: ' ';
+    display: block;
+    background-color: rgb(5, 150, 105);
+    width: 12px;
+    opacity: 0;
+    left: 0;
+    top: 1.4em;
+    transition: 0.4s;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    overflow: hidden;
+  }
+
+  &:hover, &.active {
+    &:after {
+      opacity: 1;
+      width: 50%;
+    }
+    &:before {
+      opacity: 1;
+      width: 50%;
+    }
+  }
+}

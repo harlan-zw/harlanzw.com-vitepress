@@ -1,0 +1,22 @@
+{
+  "name": "new.harlanzw.com",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.3.1",
+    "autoprefixer": "^9",
+    "node-sass": "^5.0.0",
+    "postcss": "^7",
+    "sass": "^1.29.0",
+    "sass-loader": "^10.1.0",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "vitepress": "^0.8.1",
+    "zooming": "^2.1.1"
+  },
+  "scripts": {
+    "dev": "export NODE_ENV=development; vitepress dev app",
+    "build": "export NODE_ENV=production; vitepress build app",
+    "serve": "vitepress serve app"
+  }
+}
