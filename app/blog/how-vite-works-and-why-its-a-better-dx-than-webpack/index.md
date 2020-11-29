@@ -252,8 +252,6 @@ It also only loads files that are needed to show on the route you've visited, al
 The HMR is pretty complex and I haven't got my head around it completely yet. All you need to know is that it works out of the box
 for most files and it's fast.
 
-@todo
-
 
 ## How fast is fast?
 
