@@ -49,3 +49,11 @@ a:not(.unstyled) {
     }
   }
 }
+
+.prose {
+  iframe {
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+  }
+}

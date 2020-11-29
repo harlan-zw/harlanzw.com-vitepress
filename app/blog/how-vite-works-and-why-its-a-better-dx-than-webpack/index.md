@@ -1,18 +1,22 @@
 ---
-title: "How Vite Upgrades The Vue Developer Experience"
-description: "I had a play around with Vite, VitePress and TailwindCSS to build a new blazing ⚡ fast blog. Discover why Vite is the next best thing."
-publishDate: 24th Nov 2020
+title: "How Vite Works And Why It's A Better DX Than Webpack"
+description: "I used Vite to build a new blazing fast blog ⚡, find out what I learnt and why Vite is the next big thing."
+publishDate: 30th Nov 2020
 ---
 
-# How Vite Upgrades The Vue Developer Experience
+# {{ $page.title }}
 
-<div class="text-xs text-gray-600"><time>30th Nov 2020</time></div>
+<div class="text-xs text-gray-600"><time>{{ $page.frontmatter.publishDate }}</time></div>
 
-In rebuilding my personal blog, I wanted to challenge myself to learn the latest tech, the unknown.
+In rebuilding my old Nuxt.js personal site, I wanted to challenge myself to learn the latest tech, the unknown. I wanted to use
+ something that could offer me a better developer experience (DX).
 
 The unknown was the new project by Evan You: [⚡ Vite](https://github.com/vitejs/vite) (/veet/). Called Fast, for the 🇫🇷 Frenchies.
 
-In this post I'm going to assume you're using a webpack + webpack-dev-server stack, it's used by all major Vue frameworks: Nuxt.js, Vue-CLI, VuePress, etc. You'll learn a little about how webpack works, how Vite works and comparing the two.
+I'll be comparing how it works to the standard [webpack](https://github.com/webpack/webpack) config using [webpack-dev-server](https://github.com/webpack/webpack-dev-server), which all major Vue frameworks
+are using for development.
+
+You'll learn how webpack works and how Vite works differently. As well as the best way to get started with Vite. 
 
 Vite could the next best thing in tooling, currently, it's still in a pre-release stage though so be careful out there 🐛.
 
@@ -24,7 +28,7 @@ Vite could the next best thing in tooling, currently, it's still in a pre-releas
 
 Vite is a framework-agnostic web dev build tool. It's an experimental new direction in how build tools can work with a greenfield ecosystem. 
 
-Vite's core functionality is similar to [webpack](https://github.com/webpack/webpack) + [webpack-dev-server](https://github.com/webpack/webpack-dev-server) with some core improvements
+Vite's core functionality is similar to webpack + webpack-dev-server with some core improvements
 on developer experience:
  
 - ⌛ Less time waiting for your app to start, regardless of app size
@@ -38,33 +42,34 @@ on developer experience:
 The core difference you'll notice with Vite is how code is served in development and which modules are supported. 
 
 Webpack apps (Nuxt.js / Vue-CLI / etc): 
-- Modules: [ES Modules](https://www.2ality.com/2014/09/es6-modules-final.html), [CommonJS](http://wiki.commonjs.org/) and [AMD Modules](https://github.com/amdjs/amdjs-api/wiki/AMD) 
-- Dev Server: Bundled modules served via [webpack-dev-server](https://github.com/webpack/webpack-dev-server) using express.js web server
-- Production Build: Webpack Bundled modules 
+- Supported Modules: [ES Modules](https://www.2ality.com/2014/09/es6-modules-final.html), [CommonJS](http://wiki.commonjs.org/) and [AMD Modules](https://github.com/amdjs/amdjs-api/wiki/AMD) 
+- Dev Server: Bundled modules served via webpack-dev-server using express.js web server
+- Production Build: Webpack
 
 Vite apps:
-- Modules: [ES Modules](https://www.2ality.com/2014/09/es6-modules-final.html)
+- Supported Modules: [ES Modules](https://www.2ality.com/2014/09/es6-modules-final.html)
 - Dev Server: Native-ES-Modules, served via Vite using a koa web server
-- Production build: [Rollup](https://github.com/rollup/rollup) bundled modules
+- Production build: [Rollup](https://github.com/rollup/rollup)
 
-Don't worry if the above comparison doesn't make sense to you, we'll be exploring these concepts.
+Don't worry if the above comparison doesn't make sense to you, we'll be exploring these concepts below.
     
 ::: tip TIP
-Check out Mozilla's <a href="https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/" target="_blank">article</a> on ES Modules.
+Check out Mozilla's <a href="https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/" target="_blank">article</a> on ES Modules if their new to you.
 :::
 
 ### Understanding Webpack apps
 
-To understand how Vite works, it's easiest to look at how Webpack works first. Even with its popularly, understanding it can be intimidating, so I'll try to keep it simple.
+To understand how Vite works, it's best to look at how Webpack works first. Even with its popularly, understanding Webpack can be intimidating, so I'll try to keep it simple.
 
-Webpack's core function is to bundle your code with the following steps:
-- Starting with an entry file, build a graph of your dependency tree: all the imports, exports from your code/files (modules)
-- Orchestrate the transforming of modules: think transpiling js for older browsers, turning SCSS into CSS
-- Use algorithms to sort, rewrite and concatenate
+Webpack's is actually quite versatile in what you can do with it, but at it's core, it will:
+- Start with an entry file, build a graph of your dependency tree: all the imports, exports from your code/files (modules)
+- Transform / compile modules: think transpiling js for older browsers, turning SCSS into CSS
+- Use algorithms to sort, rewrite and concatenate code
+- Optimise
 
 #### What bundles look like
 
-I'm very much a visual learner, so using the [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer), checking the HTML source and network tab helps.
+I'm a visual learner, using the [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer), checking the HTML source and network tab lets us see what's really going on.
 
 ```html
 <script src="/_nuxt/commons.app.js" defer></script>
@@ -79,9 +84,10 @@ I'm very much a visual learner, so using the [webpack-bundle-analyzer](https://w
 
 #### Webpack for Development
 
-Assuming we're using one of those main Vue frameworks when you start your app in development, it is going to do a couple of things:
+Assuming you're using one of those main Vue frameworks, when you start your app in development, it is going to do a few things:
 1. Bundle all of your code with the above steps
-2. Start the webpack-dev-server which will serve your bundles and handle Hot module reloading
+2. Start the webpack-dev-server which will serve the code
+3. Handle Hot Module Reloading
 
 As you may notice with your own apps, the bigger they grow, the longer you have to wait to start coding.
 
@@ -112,11 +118,11 @@ Vite makes the assumption that developers are going to be using the latest brows
 
 #### Vite Start
 
-When you start Vite for the first time pre-optimisations will be done on your dependencies, then [Koa](https://github.com/koajs/koa), a light-weight node web server starts. 
-There is no bundling or compiling needed to start the dev server.
+When you start Vite for the first time pre-optimisations will be done on your node_modules, then [Koa](https://github.com/koajs/koa), a light-weight node web server starts. 
+There is no bundling or compiling needed to start the dev server, so it's damn quick.
 
 When you open your Vite app, the browser is going look at your entry file as a native es module, meaning it will read the `export` and `import` statements from your code.
-It will transfer those lines into HTTP requests back to the server, where it will keep going through that waterfall process until all of your modules have been resolved.
+It will transfer those lines into HTTP requests back to the server, where it will keep going your dependencies in a process until everything has been resolved.
 
 ```html
 <script type="module">import "/vite/client"</script>
@@ -150,13 +156,48 @@ export default theme;
 ```
 
 Normally, in webpack, you would have to transpile this code to something legacy browsers can understand. But new browsers know 
-what to do with this. 
+what to do with it. 
 
-Let's drill into that highlighted line which is requesting the CardPost SFC.
+Let's drill into that highlighted line which is requesting the CardPost SFC. The browser will turn that import into a request for `http://localhost:3000/@theme/components/CardPost.vue`.
 
-This triggers a request in the browser to the path `http://localhost:3000/@theme/components/CardPost.vue`.
+This is the CardPost.vue component in my code.
+
+```vue
+<template>
+<div class="card-post">
+  ...
+</div>
+</template>
+
+<script>
+import posts from '../../posts'
+
+export default {
+  props: {
+    postIndex: {
+      type: Number,
+      required: true,
+    }
+  },
+  computed: {
+    post () {
+      return posts[this.postIndex]
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.card-post {
+  ...
+}
+</style>
+```
+
+Once the web server gets this request, it will need to compile the `CardPost,vue` file to javascript and send it back. Vite has many
+optimisations around the Vue compiling so this takes no time.
  
-At this point, the webserver will need to compile the Vue component to javascript and send it back to me. Let's look at what comes through:
+ Let's look at what comes through:
 
 ```js{22-23}
 import posts from '/.vitepress/posts.ts'
@@ -186,8 +227,10 @@ export default __script
 //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2hhcmxhbi9zaXRlcy9uZXcuaGFybGFuencuY29tL2FwcC8udml0ZXByZXNzL3RoZW1lL2NvbXBvbmVudHMvQ2FyZFBvc3QudnVlIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFpQkEsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7O0FBRTlCLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLEVBQUU7RUFDYixDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRTtJQUNMLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLEVBQUU7TUFDVCxDQUFDLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7TUFDWixDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDO0lBQ2hCO0VBQ0YsQ0FBQztFQUNELENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxFQUFFO0lBQ1IsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLEVBQUU7TUFDTixDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7SUFDN0I7RUFDRjtBQUNGIiwiZmlsZSI6Ii9ob21lL2hhcmxhbi9zaXRlcy9uZXcuaGFybGFuencuY29tL2FwcC8udml0ZXByZXNzL3RoZW1lL2NvbXBvbmVudHMvQ2FyZFBvc3QudnVlIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXNDb250ZW50IjpbIjx0ZW1wbGF0ZT5cbjxkaXYgY2xhc3M9XCJjYXJkLXBvc3QgLW14LTggbXktOCBob3ZlcjpzaGFkb3ctbGcgdHJhbnNpdGlvbi1hbGxcIj5cbiAgPGRpdiBjbGFzcz1cImNhcmQtcG9zdF9fZWZmZWN0XCI+PC9kaXY+XG4gIDxhIGNsYXNzPVwiY2FyZC1wb3N0X19saW5rIHVuc3R5bGVkXCIgOmhyZWY9XCJwb3N0LnVybFwiPjwvYT5cbiAgPGRpdiBjbGFzcz1cImNhcmQtcG9zdF9fY29udGVudFwiPlxuICAgICAgPGRpdiBjbGFzcz1cInAtOCBwcm9zZSBwcm9zZS14bFwiPlxuICAgICAgICA8aDMgc3R5bGU9XCJtYXJnaW4tdG9wOiAwICFpbXBvcnRhbnQ7XCI+PGEgOmhyZWY9XCJwb3N0LnVybFwiIGNsYXNzPVwidGV4dC0yeGxcIiBzdHlsZT1cImZvbnQtd2VpZ2h0OiBib2xkO1wiPnt7IHBvc3QudGl0bGUgfX08L2E+PC9oMz5cblxuICAgICAgICA8ZGl2IGNsYXNzPVwidGV4dC14cyB0ZXh0LWdyYXktNjAwXCI+PHRpbWU+e3sgcG9zdC5wdWJsaXNoZWQgfX08L3RpbWU+PC9kaXY+XG5cbiAgICAgICAgPHAgY2xhc3M9XCJ0ZXh0LW1kIHRleHQtZ3JheS02MDBcIj57eyBwb3N0LmV4Y2VycHQgfX08L3A+XG4gICAgICA8L2Rpdj5cbiAgPC9kaXY+XG48L2Rpdj5cbjwvdGVtcGxhdGU+XG5cbjxzY3JpcHQ+XG5pbXBvcnQgcG9zdHMgZnJvbSAnLi4vLi4vcG9zdHMnXG5cbmV4cG9ydCBkZWZhdWx0IHtcbiAgcHJvcHM6IHtcbiAgICBwb3N0SW5kZXg6IHtcbiAgICAgIHR5cGU6IE51bWJlcixcbiAgICAgIHJlcXVpcmVkOiB0cnVlLFxuICAgIH1cbiAgfSxcbiAgY29tcHV0ZWQ6IHtcbiAgICBwb3N0ICgpIHtcbiAgICAgIHJldHVybiBwb3N0c1t0aGlzLnBvc3RJbmRleF1cbiAgICB9XG4gIH1cbn1cbjwvc2NyaXB0PlxuXG48c3R5bGUgbGFuZz1cInNjc3NcIiBzY29wZWQ+XG4uY2FyZC1wb3N0IHtcblxuICBwb3NpdGlvbjogcmVsYXRpdmU7XG5cbiAgLnByb3NlIHtcbiAgICBtYXgtd2lkdGg6IDEwMCUgIWltcG9ydGFudDtcbiAgfVxuXG4gICZfX2xpbmsge1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICBsZWZ0OiAwO1xuICAgIHRvcDogMDtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBoZWlnaHQ6IDEwMCU7XG4gICAgY29udGVudDogJyAnO1xuICAgIHotaW5kZXg6IDE7XG4gIH1cblxuICAmX19jb250ZW50IHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgICB6LWluZGV4OiAxO1xuICB9XG5cbiAgJl9fZWZmZWN0IHtcbiAgICB6LWluZGV4OiAtMTtcbiAgICBjb250ZW50OiAnICc7XG4gICAgaGVpZ2h0OiAzMHB4O1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoNSwgMTUwLCAxMDUpO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gICAgb3BhY2l0eTogMDtcbiAgICB0b3A6IDMwcHg7XG4gIH1cblxuICAmOmhvdmVyIHtcbiAgICAuY2FyZC1wb3N0X19lZmZlY3Qge1xuICAgICAgdG9wOiAtNXB4O1xuICAgICAgb3BhY2l0eTogMTtcbiAgICAgIHRyYW5zZm9ybTogcm90YXRlKDAuMjVkZWcpO1xuICAgIH1cbiAgfVxufVxuPC9zdHlsZT5cbiJdfQ==
 ```
 
-Cool, so quite a bit going on here. Interestingly it's serving the template and styles from my component
-in separate requests.
+Cool, so quite a bit going on here. Interestingly, it's importing the `posts.ts,` template and styles from my component. It hasn't
+attempted to bundle these imports into the main component.
+
+If you're curious, this is what the style component response looks like, it's pretty nifty.
 
 ```js
 import {updateStyle} from "/vite/client"
@@ -196,14 +239,20 @@ updateStyle("287b4794-0", css)
 export default css
 ```
 
-So just one small component we can see that it's making 3 HTTP requests, you can guess that this stacks up pretty quickly. 
-Vite optimises these waterfall requests using 304 Unmodified HTTP responses for modules which haven't changed, keeping things fast. It also
-only loads files that are needed to show that route.
+In one small component we can see that it's making 4 subsequent HTTP request, assuming our the child requests don't have their own modules to import.
+
+This is where Vite slows down, imagine hundreds of HTTP requests which rely on other HTTP requests. Fortunately, 
+there are optimisation to avoid this situation after the first load. The server will response with a 304 Unmodified HTTP response for modules which haven't
+ changed, meaning they used the cache version, loading instantly. 
+ 
+It also only loads files that are needed to show on the route you've visited, allowing it to scale to any app size.
 
 #### Vite Hot Module Reloading (HMR)
 
 The HMR is pretty complex and I haven't got my head around it completely yet. All you need to know is that it works out of the box
 for most files and it's fast.
+
+@todo
 
 
 ## How fast is fast?
@@ -216,7 +265,7 @@ New Vue 3 project / 10 components / no Babel / 2nd run, in development.
 | Vite     | 2.39s | 232ms️ | ~10 seconds |
 
 The page load time is slower because of the overhead of HTTP request but there is still a significant improvement. The real
-speed improvements you'll see on larger projects.
+speed improvements you'll see on larger projects, I don't have a real world example of this yet.
 
 ## Getting started with Vite
 
@@ -226,7 +275,7 @@ I'd recommend just spinning up bare-bones Vite to get a feel for it. It's really
 npm init vite-app
 ```
 
-Once you're familiar with it and are sold, it's worth checking out [the ecosystem](https://github.com/vitejs/awesome-vite)   
+Once you are sold, it's worth checking out [the ecosystem](https://github.com/vitejs/awesome-vite) before you build.  
 
 ### Recommendations
 
@@ -239,7 +288,7 @@ The Vite ecosystem isn't that mature yet, the two main projects I'd recommend ch
 If you are need of a documentation site then VitePress is really awesome, otherwise, I'd choose Vitesse as it's going to give you more flexible
 on customising your app.
 
-If you like my blog, then you're more than welcome to clone the repo and build your own personal blog. It's built using VitePress with a custom theme.
+If you like my blog (VitePress + tailwindcss), then you're more than welcome to clone it.
 
 ## Summary
 
@@ -250,6 +299,6 @@ If you want to find out more about Vite, I'd watch Evan's talk on Vite & VitePre
 Vite does seem really promising, there is so much potential in the ecosystem at the moment. Watch this space, given 12  months we could see an explosion of Vite related projects.
 
 A week ago I had little knowledge about bundling, dev servers and modules. It has been a long, rewarding week of learning. I wrote this article to cement
-my own learning and have some content for my new blog. I'd love any and all feedback you have.
+my own learning and have some content for my new site. I'd love any and all feedback you have.
 
 Thanks for reading :D
