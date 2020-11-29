@@ -1,0 +1,29 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-southeast-2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - run: yarn install
+      - run: yarn build
+      - name: Deploy Non-HTML
+        run: aws s3 cp dist s3://new.harlanzw.com --recursive --acl=public-read --include="*" --exclude "*.html" --cache-control max-age=31536000,public
+      - name: Deploy HTML
+        run: aws s3 cp dist s3://new.harlanzw.com --recursive --acl=public-read --exclude="*" --include "*.html" --cache-control max-age=0,no-cache,no-store,must-revalidate
+      - name: Invalidate Cloudfront
+        run: aws cloudfront create-invalidation --distribution-id=EMBZGGZKSX2IY --paths '/*'
