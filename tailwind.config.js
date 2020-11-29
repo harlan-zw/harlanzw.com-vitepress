@@ -5,6 +5,8 @@ module.exports = {
       './app/.vitepress/**/*.vue',
       './app/.vitepress/**/*.js',
       './app/.vitepress/**/*.ts',
+      './app/**/*.md',
+      './app/*.md',
     ],
   },
   theme: {
