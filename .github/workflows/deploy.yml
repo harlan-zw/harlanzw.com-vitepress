@@ -22,8 +22,8 @@ jobs:
       - run: yarn install
       - run: yarn build
       - name: Deploy Non-HTML
-        run: aws s3 cp dist s3://new.harlanzw.com --recursive --acl=public-read --include="*" --exclude "*.html" --cache-control max-age=31536000,public
+        run: aws s3 cp app/.vitepress/dist s3://new.harlanzw.com --recursive --acl=public-read --include="*" --exclude "*.html" --cache-control max-age=31536000,public
       - name: Deploy HTML
-        run: aws s3 cp dist s3://new.harlanzw.com --recursive --acl=public-read --exclude="*" --include "*.html" --cache-control max-age=0,no-cache,no-store,must-revalidate
+        run: aws s3 cp app/.vitepress/dist s3://new.harlanzw.com --recursive --acl=public-read --exclude="*" --include "*.html" --cache-control max-age=0,no-cache,no-store,must-revalidate
       - name: Invalidate Cloudfront
         run: aws cloudfront create-invalidation --distribution-id=EMBZGGZKSX2IY --paths '/*'
