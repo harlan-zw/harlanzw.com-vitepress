@@ -37,13 +37,4 @@ export default {
 
 <style lang="scss" scoped>
 
-.page {
-  margin: 0 auto;
-  padding: 0 1.5rem 4rem;
-  max-width: 50rem;
-}
-
-.content {
-  padding-bottom: 1.5rem;
-}
 </style>

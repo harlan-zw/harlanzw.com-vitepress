@@ -1,18 +1,36 @@
 <template>
 <div class="card-post -mx-8 my-8 hover:shadow-lg transition-all">
   <div class="card-post__effect"></div>
-  <a class="card-post__link unstyled" href="/blog/building-a-blog-with-vitepress/"></a>
+  <a class="card-post__link unstyled" :href="post.url"></a>
   <div class="card-post__content">
       <div class="p-8 prose prose-xl">
-        <h3 style="margin-top: 0 !important;"><a href="/blog/building-a-blog-with-vitepress/" class="text-2xl" style="font-weight: bold;">Vue Bleeding Edge: Vite & VitePress</a></h3>
+        <h3 style="margin-top: 0 !important;"><a :href="post.url" class="text-2xl" style="font-weight: bold;">{{ post.title }}</a></h3>
 
-        <div class="text-xs text-gray-600"><time>24th Nov 2020</time></div>
+        <div class="text-xs text-gray-600"><time>{{ post.published }}</time></div>
 
-        <p class="text-md text-gray-600">I had a play around with Vite, VitePress to build a new blazing ⚡ fast blog. Learn about how the latest Vue tech is making your life easier.</p>
+        <p class="text-md text-gray-600">{{ post.excerpt }}</p>
       </div>
   </div>
 </div>
 </template>
+
+<script>
+import posts from '../../posts'
+
+export default {
+  props: {
+    postIndex: {
+      type: Number,
+      required: true,
+    }
+  },
+  computed: {
+    post () {
+      return posts[this.postIndex]
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .card-post {
