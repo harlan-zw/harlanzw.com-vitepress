@@ -1,4 +1,9 @@
-# Contact
+---
+title: Contact
+description: My name's Harlan. I am a full stack developer living and working out of Sydney, Australia.
+---
+
+# {{ $page.title }}
 
 Get in touch, let's chat! :)
 

@@ -1,5 +1,6 @@
 ---
 title: "How Vite Works Differently To Webpack And Getting Started"
+
 description: "I used Vite to build a new blazing fast blog ⚡, find out what I learnt and why Vite is the next big thing."
 publishDate: 30th Nov 2020
 ---

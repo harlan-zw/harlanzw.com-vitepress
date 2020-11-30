@@ -1,12 +1,13 @@
 ---
-description: This is the about page
+title: About
+description: My name's Harlan. I am a full stack developer living and working out of Sydney, Australia.
 ---
 
-# About
+# {{ $page.title }}
 
 Hey! Thank you for checking out my site 😊
 
-I am a {{ (new Date().getFullYear()) - 1994 }} year old full stack developer living and working out of Sydney, Australia.
+My name's Harlan. I am a full stack developer living and working out of Sydney, Australia.
 
 
 ## Overview
@@ -15,27 +16,29 @@ I am a {{ (new Date().getFullYear()) - 1994 }} year old full stack developer liv
 
 Starting December 2020, I have moved to working for myself full time.
 
-The previous 6 years I have felt a consistent buzz of burn out: working full time, freelancing and doing side projects. 
-There was never enough time to do everything I wanted. I couldn't get to my freelance clients promptly,
-I couldn't be 100% focused at work and couldn't finish side projects.
+Whilst working professionally full time for the last few years I have felt a consistent hum of burn out. 
+
+There was an underlying tension from not having the time to work on what I wanted to work on. A tension from the stacks 
+of unanswered emails from my freelancing client that I haven't had the time to answer. Feeling guilty for taking time off
+when I needed it.
 
 I have no idea how long I can last, but at least I now have better balance. The goal is to earn enough money to support
 working for myself.
 
 ### :hammer: Trying to build profitable SaaS projects with Laravel & Vue
 
-The primary way I want to support myself is through building projects myself. Laravel and Vue are the stacks I spend most of my time with.
+The primary way I want to support myself is through building profitable SaaS projects. Laravel and Vue are the stacks I'm 
+currently using and plan to continue to use.
 
 I've been working on a side project for the past 6 months, I haven't made a lot of progress, but I plan to launch the
 landing page and share details soon.
 
 ### :writing_hand: Sharing my journey along the way
 
-I want to be able to motivate others to take the plunge into the unknown, the best way I can do that is by sharing my 
-journey and making it work.
+I want to be able to motivate others to take the plunge having work-lifestyle that works for them, the best way I can do
+ that is by sharing my journey and making it work.
 
 I'll be posting here, <a href="https://twitter.com/harlan_zw" target="_blank">Twitter</a> and <a href="https://www.indiehackers.com/harlanzw" target="_blank">IndieHackers</a> for now.
-
 
 
 ### :money_with_wings: $0 MMR so far

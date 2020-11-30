@@ -6,6 +6,7 @@ import './styles/custom-blocks.css';
 import Layout from './Layout.vue';
 import NotFound from './NotFound.vue';
 import CardPost from './components/CardPost.vue';
+import Posts from './components/Posts.vue'
 import Zooming from 'zooming'
 
 const theme = {
@@ -23,6 +24,7 @@ const theme = {
         }
 
         app.component('CardPost', CardPost)
+        app.component('Posts', Posts)
     }
 };
 export default theme;

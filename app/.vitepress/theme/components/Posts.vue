@@ -1,27 +1,20 @@
 <template>
-<div class="card-post -mx-8 my-8 hover:shadow-lg transition-all">
-  <div class="card-post__effect"></div>
-  <a class="card-post__link unstyled" :href="post.url"></a>
-  <div class="card-post__content">
-      <div class="p-8 prose prose-xl">
-        <h3 style="margin-top: 0 !important;"><a :href="post.url" class="text-2xl" style="font-weight: bold;">{{ post.title }}</a></h3>
-
-        <div class="text-xs text-gray-600"><time>{{ post.published }}</time></div>
-
-        <p class="text-md text-gray-600">{{ post.excerpt }}</p>
-      </div>
-  </div>
+<div class="posts">
+  <template v-for="(post, key) in posts">
+    <CardPost  v-if="post.status === 'published'" :key="posts" :post="post" />
+  </template>
 </div>
 </template>
 
 <script>
+import posts from '../../posts'
+
 export default {
-  props: {
-    post: {
-      type: Object,
-      required: true,
+  computed: {
+    posts () {
+      return posts
     }
-  },
+  }
 }
 </script>
 

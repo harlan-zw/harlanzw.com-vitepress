@@ -8,4 +8,4 @@ title: Full Stack Sydney Dev
 
 ## Blog
 
-<CardPost :post-index="0"/>
+<Posts/>
