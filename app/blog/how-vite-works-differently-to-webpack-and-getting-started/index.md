@@ -1,6 +1,5 @@
 ---
 title: "How Vite Works Differently To Webpack And Getting Started"
-
 description: "I used Vite to build a new blazing fast blog ⚡, find out what I learnt and why Vite is the next big thing."
 publishDate: 30th Nov 2020
 ---
@@ -328,9 +327,7 @@ bundling and no-bundling look in action.
 
 Hopefully you've seen why Vite does is really promising. There is so much potential in the ecosystem at the moment, watch this space, given 12-months we could see an explosion of Vite related projects.
 
-If you want to find out more about Vite, I'd watch Evan's talk on Vite & VitePress here:  
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/xXrhg26VCSc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+If you want to find out more about Vite, I'd watch Evan's talk on [Vite & VitePress](https://www.youtube.com/watch?v=xXrhg26VCSc&).  
 
 
 ## Getting started with Vite
@@ -346,7 +343,7 @@ Once you are sold, it's worth checking out [the ecosystem](https://github.com/vi
 ### Recommendations
 
 ::: warning TIP
-You shouldn't be looking to replace Vue-CLI or Webpack with Vite for existing projects yet, but it may be worthwhile to check out for new smaller scoped projects.
+You shouldn't be looking to replace Vue CLI or Webpack with Vite for existing projects yet, but it may be worthwhile to check out for new smaller scoped projects.
 :::
 
 The Vite ecosystem isn't that mature yet, the two main projects I'd recommend checking out are [VitePress](https://vitepress.vuejs.org/) and [Vitesse](https://github.com/antfu/vitesse). 
@@ -354,7 +351,7 @@ The Vite ecosystem isn't that mature yet, the two main projects I'd recommend ch
 If you are need of a documentation site then VitePress is really awesome, otherwise, I'd choose Vitesse as it's going to give you more flexible
 on customising your app.
 
-If you like my blog (VitePress + tailwindcss), then you're more than welcome to clone it.
+If you like my blog (VitePress + TailwindCSS), then you're more than welcome to clone it.
 
 
 ## Final Thoughts

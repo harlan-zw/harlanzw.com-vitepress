@@ -28,6 +28,10 @@ export default {
             this.zoom.listen('.prose img')
           }, 500)
         }
+        if (typeof document !== 'undefined') {
+          // @todo fix vitepress seo
+          document.querySelector('meta[name="description"]').setAttribute('content', this.$page.frontmatter.description);
+        }
       },
       immediate: true
     }

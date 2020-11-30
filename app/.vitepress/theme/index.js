@@ -13,7 +13,7 @@ const theme = {
     Layout,
     NotFound,
     enhanceApp({ app, }) {
-        if (typeof document !== 'undefined') {
+        if (typeof document !== 'undefined' && typeof window !== 'undefined') {
 
             const zooming = new Zooming()
             zooming.config({
@@ -21,16 +21,19 @@ const theme = {
                 bgOpacity: 0.75,
             })
             app.provide('zoom', zooming)
+
+            window.addEventListener('load', () => {
+                // analytics
+                window.panelbear = window.panelbear || function () {
+                    window.panelbearQ = window.panelbearQ || [];
+                    panelbearQ.push(arguments);
+                };
+                window.panelbear('config', { site: '9EWSXgG8txm', spaMode: 'history' });
+            })
         }
 
         app.component('CardPost', CardPost)
         app.component('Posts', Posts)
-
-        window.addEventListener('load', () => {
-            // analytics
-            window.panelbear = window.panelbear || function(){ window.panelbearQ = window.panelbearQ || []; panelbearQ.push(arguments); };
-            window.panelbear('config', { site: '9EWSXgG8txm', spaMode: 'history' });
-        })
     }
 };
 export default theme;
