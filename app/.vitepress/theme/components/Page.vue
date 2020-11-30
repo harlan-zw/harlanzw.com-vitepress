@@ -21,7 +21,7 @@ export default {
     }
   },
   watch: {
-    '$page.path': {
+    $page: {
       handler () {
         if (this.zoom) {
           setTimeout(() => {
