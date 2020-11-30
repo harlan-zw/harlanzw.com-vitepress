@@ -19,10 +19,16 @@ module.exports = {
         DEFAULT: {
           css: {
             h1: {
-              color: theme('color.gray.600'),
+              color: 'rgb(55, 70, 60)',
               fontWeight: '600',
               fontFamily: theme('fontFamily.header'),
               lineHeight: 1.3
+            },
+            h2: {
+              color: 'rgb(55, 70, 60)',
+            },
+            h3: {
+              color: 'rgb(55, 70, 60)',
             },
             a: {
               textDecoration: 'initial',

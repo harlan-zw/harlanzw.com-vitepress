@@ -13,15 +13,18 @@ h6:focus .header-anchor {
   opacity: 1;
 }
 
-
+h1, h2, h3, h4, h5 {
+  position: relative;
+}
 a.header-anchor {
-  float: left;
-  margin-top: .125em;
-  margin-left: -1em;
-  padding-right: .23em;
-  font-size: .85em;
+  position: absolute;
+  left: -50px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  font-size: 0.85em !important;
   opacity: 0;
-  transition: 0.2s;
+  transition: all 0.2s ease 0s;
 }
 
 a.header-anchor,
@@ -31,110 +34,13 @@ a.header-anchor:focus {
 }
 
 .theme .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--header-height);
-  background-color: #fff;
-  border-bottom: 1px solid var(--c-divider);
-  z-index: 4;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.7rem 1.5rem;
 }
 
 @media screen and (max-width: 719px) {
   .theme .navbar {
     padding-left: 4rem;
-  }
-}
-
-.theme aside {
-  position: fixed;
-  top: var(--header-height);
-  bottom: 0;
-  left: 0;
-  width: var(--sidebar-width);
-  border-right: 1px solid var(--c-divider);
-  background-color: #fff;
-  z-index: 3;
-  overflow-y: auto;
-}
-
-.theme.sidebar-open .sidebar-mask {
-  display: block;
-}
-
-.theme.no-navbar > h1,
-.theme.no-navbar > h2,
-.theme.no-navbar > h3,
-.theme.no-navbar > h4,
-.theme.no-navbar > h5,
-.theme.no-navbar > h6 {
-  margin-top: 1.5rem;
-  padding-top: 0;
-}
-
-.theme.no-navbar aside {
-  top: 0;
-}
-
-@media screen and (max-width: 959px) {
-  .theme aside {
-    width: var(--sidebar-width);
-  }
-}
-
-@media screen and (max-width: 719px) {
-  .theme aside {
-    transition: transform 0.2s ease;
-    transform: translateX(-100%);
-  }
-
-  .theme aside.open {
-    transform: translateX(0);
-  }
-}
-
-.sidebar-mask {
-  z-index: 2;
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  display: none;
-}
-
-.theme main {
-  padding-top: var(--header-height);
-}
-
-@media screen and (min-width: 720px) {
-  .theme.no-sidebar aside {
-    display: none;
-  }
-  .theme.no-sidebar main {
-    margin-left: 0;
-  }
-}
-
-@media screen and (max-width: 719px) {
-  .theme main {
-    margin-left: 0;
-  }
-}
-
-.theme main.home {
-  padding: var(--header-height) 2rem 0;
-  max-width: 960px;
-  margin: 0px auto;
-  display: block;
-}
-
-@media screen and (max-width: 429px) {
-  .theme main.home {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
   }
 }
