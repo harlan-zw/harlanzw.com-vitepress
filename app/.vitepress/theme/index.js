@@ -25,6 +25,12 @@ const theme = {
 
         app.component('CardPost', CardPost)
         app.component('Posts', Posts)
+
+        window.addEventListener('load', () => {
+            // analytics
+            window.panelbear = window.panelbear || function(){ window.panelbearQ = window.panelbearQ || []; panelbearQ.push(arguments); };
+            window.panelbear('config', { site: '9EWSXgG8txm', spaMode: 'history' });
+        })
     }
 };
 export default theme;
