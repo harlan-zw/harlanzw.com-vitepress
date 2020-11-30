@@ -165,7 +165,7 @@ These are third-party modules, usually coming from node_modules. The two main li
 
 Taking a quick look at the app.js file, we can find our HelloWorld component code within it. Some really beautiful code.
 
-```html
+```js
 /***/ "./src/components/HelloWorld.vue":
 /*!***************************************!*\
   !*** ./src/components/HelloWorld.vue ***!
