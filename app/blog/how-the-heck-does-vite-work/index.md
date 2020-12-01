@@ -361,9 +361,12 @@ on customising your app.
 If you like my blog (VitePress + TailwindCSS), then you're more than welcome to [clone it](https://github.com/loonpwn/harlanzw.com).
 
 
+
 ## Final Thoughts
+
 
 A week ago I had zero knowledge of Vite, no knowledge about bundling, dev servers and modules. It has been a long, 
 rewarding week of learning. I wrote this article to cement my own learning and have some content for my new site. I'd love any and all feedback you have.
+
 
 Thanks for reading.
