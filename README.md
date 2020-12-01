@@ -1,5 +1,7 @@
 # harlanzw.com
 
+![](https://github.com/loonpwn/harlanzw.com/workflows/Deploy/badge.svg)
+
 This repo is the project for my personal website. It's built using VitePress (Vite + Vue3) with a custom templat using TailwindCSS.
 
 Feel free to clone it if you'd like to setup your own personal site. 
