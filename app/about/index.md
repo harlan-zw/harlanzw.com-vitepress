@@ -11,9 +11,6 @@ head:
 
 Hey! Thank you for checking out my site 😊
 
-My name's Harlan. I am a full stack developer living and working out of Sydney, Australia.
-
-
 ## Overview
 
 ### 👨‍💻 Working full time for myself 

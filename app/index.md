@@ -1,5 +1,5 @@
 ---
-title: Full Stack Sydney Dev
+title: Laravel & Vue Sydney Developer
 description: "Hey 👋 I'm building Laravel & Vue projects and would like to share my journey with you."
 head:
 - - meta
