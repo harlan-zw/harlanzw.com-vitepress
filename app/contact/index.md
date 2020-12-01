@@ -1,6 +1,10 @@
 ---
 title: Contact
-description: My name's Harlan. I am a full stack developer living and working out of Sydney, Australia.
+description: "Get in touch, I'm always happy to chat about anything"
+head:
+- - meta
+  - name: description
+    content: "Get in touch, I'm always happy to chat about anything"
 ---
 
 # {{ $page.title }}

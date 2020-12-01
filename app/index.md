@@ -1,6 +1,13 @@
 ---
 title: Full Stack Sydney Dev
+description: "Hey 👋 I'm building Laravel & Vue projects and would like to share my journey with you."
+head:
+- - meta
+  - name: description
+    content: "Hey 👋 I'm building Laravel & Vue projects and would like to share my journey with you."
 ---
+
+
 
 <h1><img src="./resources/me.png" width="80" height="80" loading="lazy" alt="Harlan Wilton" style="margin-top: 0 !important; margin-bottom: 0 !important;" class="inline rounded-full object-center md:h-20 md:w-20 h-12 w-12 object-cover"> Harlan Wilton</h1>
 

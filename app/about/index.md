@@ -1,6 +1,10 @@
 ---
 title: About
-description: My name's Harlan. I am a full stack developer living and working out of Sydney, Australia.
+description: "My name's Harlan. I am a full stack developer living and working out of Sydney, Australia."
+head:
+- - meta
+  - name: description
+    content: "My name's Harlan. I am a full stack developer living and working out of Sydney, Australia."
 ---
 
 # {{ $page.title }}
