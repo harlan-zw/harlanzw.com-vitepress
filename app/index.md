@@ -5,6 +5,9 @@ head:
 - - meta
   - name: description
     content: "Hey 👋 I'm building Laravel & Vue projects and would like to share my journey with you."
+- - meta
+  - property: "og:image"
+    content: "https://harlanzw.com/social/home.png"    
 ---
 
 
