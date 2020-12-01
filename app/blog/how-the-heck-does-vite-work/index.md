@@ -56,20 +56,20 @@ on developer experience:
 
 ## Vite vs Webpack
 
-The main difference you'll notice with Vite and your webpack app, is how code is served in development and which modules are supported. 
+The main difference you'll notice with Vite and your webpack app, is how code is served in development and which modules are supported.
 
-**Webpack (Nuxt.js / Vue-CLI / etc):** 
+Don't worry if the below terms don't make sense to you, we'll be exploring these concepts below.
+
+### Webpack (Nuxt.js / Vue CLI / etc) 
 - Supported Modules: [ES Modules](https://www.2ality.com/2014/09/es6-modules-final.html), [CommonJS](http://wiki.commonjs.org/) and [AMD Modules](https://github.com/amdjs/amdjs-api/wiki/AMD) 
 - Dev Server: Bundled modules served via webpack-dev-server using express.js web server
 - Production Build: Webpack
 
-**Vite:**
+### Vite
 - Supported Modules: [ES Modules](https://www.2ality.com/2014/09/es6-modules-final.html)
 - Dev Server: Native-ES-Modules, served via Vite using a koa web server
 - Production build: [Rollup](https://github.com/rollup/rollup)
 
-Don't worry if the above terms don't make sense to you, we'll be exploring these concepts below.
-    
 ::: tip TIP
 Check out Mozilla's <a href="https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/" target="_blank">article</a> on ES Modules if their new to you.
 :::
@@ -151,7 +151,7 @@ When I start my app and visit localhost I get the following HTML document back.
 You'll notice we have 2 script files there. On inspecting them you'd see a lot of gibberish looking code,
  it helps to use the [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer) to see how it works visually.
 
-**chunk-vendors.js** 
+#### chunk-vendors.js 
 
 These are third-party modules, usually coming from node_modules. The two main libraries in here are Vue itself and sockjs which is used for HMR.
 
@@ -160,7 +160,7 @@ These are third-party modules, usually coming from node_modules. The two main li
   <figcaption>chunk-vendors.js</figcaption>
 </figure>
 
-**app.js**
+#### app.js
 
  This is all the code for my application. It contains components, assets, etc. You'll notice that for a SFC it splits
  it into multiple modules.
@@ -307,8 +307,14 @@ export default __script
 //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2hhcmxhbi9zaXRlcy9uZXcuaGFybGFuencuY29tL2FwcC8udml0ZXByZXNzL3RoZW1lL2NvbXBvbmVudHMvQ2FyZFBvc3QudnVlIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFpQkEsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7O0FBRTlCLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLEVBQUU7RUFDYixDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRTtJQUNMLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLEVBQUU7TUFDVCxDQUFDLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7TUFDWixDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDO0lBQ2hCO0VBQ0YsQ0FBQztFQUNELENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxFQUFFO0lBQ1IsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLEVBQUU7TUFDTixDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7SUFDN0I7RUFDRjtBQUNGIiwiZmlsZSI6Ii9ob21lL2hhcmxhbi9zaXRlcy9uZXcuaGFybGFuencuY29tL2FwcC8udml0ZXByZXNzL3RoZW1lL2NvbXBvbmVudHMvQ2FyZFBvc3QudnVlIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXNDb250ZW50IjpbIjx0ZW1wbGF0ZT5cbjxkaXYgY2xhc3M9XCJjYXJkLXBvc3QgLW14LTggbXktOCBob3ZlcjpzaGFkb3ctbGcgdHJhbnNpdGlvbi1hbGxcIj5cbiAgPGRpdiBjbGFzcz1cImNhcmQtcG9zdF9fZWZmZWN0XCI+PC9kaXY+XG4gIDxhIGNsYXNzPVwiY2FyZC1wb3N0X19saW5rIHVuc3R5bGVkXCIgOmhyZWY9XCJwb3N0LnVybFwiPjwvYT5cbiAgPGRpdiBjbGFzcz1cImNhcmQtcG9zdF9fY29udGVudFwiPlxuICAgICAgPGRpdiBjbGFzcz1cInAtOCBwcm9zZSBwcm9zZS14bFwiPlxuICAgICAgICA8aDMgc3R5bGU9XCJtYXJnaW4tdG9wOiAwICFpbXBvcnRhbnQ7XCI+PGEgOmhyZWY9XCJwb3N0LnVybFwiIGNsYXNzPVwidGV4dC0yeGxcIiBzdHlsZT1cImZvbnQtd2VpZ2h0OiBib2xkO1wiPnt7IHBvc3QudGl0bGUgfX08L2E+PC9oMz5cblxuICAgICAgICA8ZGl2IGNsYXNzPVwidGV4dC14cyB0ZXh0LWdyYXktNjAwXCI+PHRpbWU+e3sgcG9zdC5wdWJsaXNoZWQgfX08L3RpbWU+PC9kaXY+XG5cbiAgICAgICAgPHAgY2xhc3M9XCJ0ZXh0LW1kIHRleHQtZ3JheS02MDBcIj57eyBwb3N0LmV4Y2VycHQgfX08L3A+XG4gICAgICA8L2Rpdj5cbiAgPC9kaXY+XG48L2Rpdj5cbjwvdGVtcGxhdGU+XG5cbjxzY3JpcHQ+XG5pbXBvcnQgcG9zdHMgZnJvbSAnLi4vLi4vcG9zdHMnXG5cbmV4cG9ydCBkZWZhdWx0IHtcbiAgcHJvcHM6IHtcbiAgICBwb3N0SW5kZXg6IHtcbiAgICAgIHR5cGU6IE51bWJlcixcbiAgICAgIHJlcXVpcmVkOiB0cnVlLFxuICAgIH1cbiAgfSxcbiAgY29tcHV0ZWQ6IHtcbiAgICBwb3N0ICgpIHtcbiAgICAgIHJldHVybiBwb3N0c1t0aGlzLnBvc3RJbmRleF1cbiAgICB9XG4gIH1cbn1cbjwvc2NyaXB0PlxuXG48c3R5bGUgbGFuZz1cInNjc3NcIiBzY29wZWQ+XG4uY2FyZC1wb3N0IHtcblxuICBwb3NpdGlvbjogcmVsYXRpdmU7XG5cbiAgLnByb3NlIHtcbiAgICBtYXgtd2lkdGg6IDEwMCUgIWltcG9ydGFudDtcbiAgfVxuXG4gICZfX2xpbmsge1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICBsZWZ0OiAwO1xuICAgIHRvcDogMDtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBoZWlnaHQ6IDEwMCU7XG4gICAgY29udGVudDogJyAnO1xuICAgIHotaW5kZXg6IDE7XG4gIH1cblxuICAmX19jb250ZW50IHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgICB6LWluZGV4OiAxO1xuICB9XG5cbiAgJl9fZWZmZWN0IHtcbiAgICB6LWluZGV4OiAtMTtcbiAgICBjb250ZW50OiAnICc7XG4gICAgaGVpZ2h0OiAzMHB4O1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoNSwgMTUwLCAxMDUpO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gICAgb3BhY2l0eTogMDtcbiAgICB0b3A6IDMwcHg7XG4gIH1cblxuICAmOmhvdmVyIHtcbiAgICAuY2FyZC1wb3N0X19lZmZlY3Qge1xuICAgICAgdG9wOiAtNXB4O1xuICAgICAgb3BhY2l0eTogMTtcbiAgICAgIHRyYW5zZm9ybTogcm90YXRlKDAuMjVkZWcpO1xuICAgIH1cbiAgfVxufVxuPC9zdHlsZT5cbiJdfQ==
 ```
 
-Cool, so quite a bit going on here. Interestingly, it's importing the `posts.ts`, template and styles from my component. It hasn't
-attempted to bundle these imports into the main component.
+Cool, so quite a bit going on here. The main thing to note here is how it's split up the SFC into different modules which 
+will need separate requests to fetch. It hasn't bundled these imports into the SFC or some other monolith file.
+
+- Dependencies: `/.vitepress/posts.ts`
+- Template: `/@theme/components/CardPost.vue?type=template`
+- Stylesheet: `/@theme/components/CardPost.vue?type=style&index=0`
+
+
 
 If you're curious, this is what the style component response looks like, it's pretty nifty.
 
@@ -319,20 +325,21 @@ updateStyle("287b4794-0", css)
 export default css
 ```
 
-In one small component we can see that it's making 4 subsequent HTTP request, assuming our the child requests don't have their own modules to import.
+You can see how the above allows the Hot Module Replacement to work efficiently. When you have a module that is changed,
+say the styles within a component, instead of reloading the entire component tree, only the style module needs to be replaced. 
 
-This is where Vite slows down, imagine hundreds of HTTP requests which rely on other HTTP requests. Fortunately, 
-there are optimisation to avoid this situation after the first load. The server will response with a 304 Unmodified HTTP response for modules which haven't
- changed, meaning they used the cache version, loading instantly. 
+You can also imagine with the above, where Vite slows down. Imagine hundreds of HTTP requests which rely on nested HTTP requests, recursively.
+Fortunately, there are optimisation to avoid this situation after the first load. The server will return a 304
+Unmodified HTTP Status code for modules which haven't changed, meaning they will use the browser's cached version of the file. 
  
-It also only loads files that are needed to show on the route you've visited, allowing it to scale to any app size.
+Vite scales well for any app size because it only needs to request the modules for the route you're on.
 
 ## Summary
 
 While I haven't touched on a lot of the complexities of Vite and Webpack, I've tried to show you the main difference, how 
 bundling and no-bundling look in action. 
 
-Hopefully you've seen why Vite does is really promising. There is so much potential in the ecosystem at the moment, watch this space, given 12-months we could see an explosion of Vite related projects.
+Hopefully you've seen why Vite is promising alternative. There is so much potential in the ecosystem at the moment, watch this space, given 12-months we could see an explosion of Vite related projects.
 
 If you want to find out more about Vite, I'd watch Evan's talk on [Vite & VitePress](https://www.youtube.com/watch?v=xXrhg26VCSc&).  
 
