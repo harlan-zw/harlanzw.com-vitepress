@@ -8,7 +8,7 @@ head:
     content: "I used Vite to build a new blazing fast blog ⚡, find out what I learnt and why Vite is the next big thing."
 - - meta
   - property: "og:image"
-    content: "/social/how-vite-works-social.png"
+    content: "https://harlanzw.com/social/how-vite-works.png"
 ---
 
 # {{ $page.title }}
