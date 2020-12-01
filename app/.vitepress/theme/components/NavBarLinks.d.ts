@@ -4,6 +4,7 @@ declare const _default: {
         NavDropdownLink: import("vue").ComponentOptions<{}, any, any, any, any, any, any, any>;
     };
     setup(): {
+        menuOpen: false,
         navData: import("vue").ComputedRef<any>;
         repoInfo: import("vue").ComputedRef<{
             link: string;

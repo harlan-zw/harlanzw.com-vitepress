@@ -1,7 +1,7 @@
 <template>
 <div class="page">
   <slot name="top" />
-  <div class="mx-auto prose prose-xl prose-green">
+  <div class="mx-auto prose md:prose-xl prose-green">
     <Content />
   </div>
 
@@ -38,9 +38,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped>
-.page {
-  padding: 100px 0;
-}
-</style>

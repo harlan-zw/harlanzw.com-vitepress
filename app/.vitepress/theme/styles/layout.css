@@ -32,15 +32,3 @@ a.header-anchor:hover,
 a.header-anchor:focus {
   text-decoration: none;
 }
-
-.theme .navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-@media screen and (max-width: 719px) {
-  .theme .navbar {
-    padding-left: 4rem;
-  }
-}

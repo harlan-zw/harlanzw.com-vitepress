@@ -1,8 +1,8 @@
 export default [
     {
-        url: '/blog/how-vite-works-differently-to-webpack-and-getting-started/',
-        title: 'How Vite Works And Why It\'s A Better DX Than Webpack',
-        published: '30th Nov 2020',
+        url: '/blog/how-the-heck-does-vite-work/',
+        title: 'How The Heck Does Vite Work - A comparison to Webpack',
+        published: '1st Dec 2020',
         excerpt: 'I used Vite to build a new blazing fast blog ⚡, find out what I learnt and why Vite is the next big thing.',
         status: 'published'
     },

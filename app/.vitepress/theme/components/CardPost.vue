@@ -1,10 +1,10 @@
 <template>
-<div class="card-post -mx-8 my-8 hover:shadow-lg transition-all">
+<div class="card-post md:-mx-8 my-8 hover:shadow-lg transition-all">
   <div class="card-post__effect"></div>
   <a class="card-post__link unstyled" :href="post.url"></a>
   <div class="card-post__content">
-      <div class="p-8 prose prose-xl">
-        <h3 style="margin-top: 0 !important;"><a :href="post.url" class="text-2xl" style="font-weight: bold;">{{ post.title }}</a></h3>
+      <div class="md:p-8 p-4 prose md:prose-xl">
+        <h3 style="margin-top: 0 !important;"><a :href="post.url" class="md:text-2xl" style="font-weight: bold;">{{ post.title }}</a></h3>
 
         <div class="text-xs text-gray-600"><time>{{ post.published }}</time></div>
 

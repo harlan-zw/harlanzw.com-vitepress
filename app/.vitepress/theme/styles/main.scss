@@ -2,7 +2,7 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-a:not(.unstyled) {
+a:not(.unstyled):not(.header-anchor) {
   position: relative;
   overflow: hidden;
 
@@ -55,5 +55,20 @@ a:not(.unstyled) {
     width: 100%;
     height: auto;
     min-height: 400px;
+  }
+  p > code {
+    padding: .25rem 0.5rem;
+    font-size: 1.125rem;
+    border-radius: .125rem;
+    background-color: #c7e5dd;
+    overflow-wrap: break-word;
+    word-break: break-all;
+    font-weight: normal;
+    &:before {
+      display: none;
+    }
+    &:after {
+      display: none;
+    }
   }
 }
