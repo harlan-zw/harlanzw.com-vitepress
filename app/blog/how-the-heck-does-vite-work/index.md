@@ -351,7 +351,7 @@ The Vite ecosystem isn't that mature yet, the two main projects I'd recommend ch
 If you are need of a documentation site then VitePress is really awesome, otherwise, I'd choose Vitesse as it's going to give you more flexible
 on customising your app.
 
-If you like my blog (VitePress + TailwindCSS), then you're more than welcome to clone it.
+If you like my blog (VitePress + TailwindCSS), then you're more than welcome to [clone it](https://github.com/loonpwn/harlanzw.com).
 
 
 ## Final Thoughts
