@@ -1,12 +1,14 @@
 <template>
 <div class="theme">
-  <div class="bg-gray-50">
-    <header class="navbar mb-10 sm:mb-16 md:mb-20 prose md:prose-xl mx-auto">
-      <NavBar/>
-    </header>
-    <main class="px-5 sm:px-7 md:px-10">
-      <Page class="pb-10 sm:pb-16 md:pb-20 "/>
-    </main>
+  <div class="bg-gray-50 px-5 sm:px-7 md:px-10">
+    <div class="prose md:prose-xl prose-green mx-auto">
+      <header class="navbar mb-10 sm:mb-16 md:mb-20">
+        <NavBar/>
+      </header>
+      <main>
+        <Content class="pb-10 sm:pb-16 md:pb-20 "/>
+      </main>
+    </div>
   </div>
   <footer class="px-5 sm:px-7 md:px-10 text-center text-gray-400 text-sm my-5">
     <div class="text-center mb-5">
@@ -25,12 +27,34 @@
 
 <script>
 import NavBar from './components/NavBar.vue'
-import Page from './components/Page.vue'
+import { inject } from 'vue'
 
 export default {
   components: {
     NavBar,
-    Page,
+  },
+  setup() {
+    const zoom = inject('zoom')
+
+    return {
+      zoom
+    }
+  },
+  watch: {
+    $page: {
+      handler () {
+        if (this.zoom) {
+          setTimeout(() => {
+            this.zoom.listen('.prose img')
+          }, 500)
+        }
+        if (typeof document !== 'undefined') {
+          // @todo fix vitepress seo
+          document.querySelector('meta[name="description"]').setAttribute('content', this.$page.frontmatter.description);
+        }
+      },
+      immediate: true
+    }
   },
 }
 </script>

@@ -51,6 +51,9 @@ a:not(.unstyled):not(.header-anchor) {
 }
 
 .prose {
+  a {
+    color: rgb(7, 130, 97);
+  }
   iframe {
     width: 100%;
     height: auto;

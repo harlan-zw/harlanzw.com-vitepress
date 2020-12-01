@@ -15,3 +15,9 @@
 </template>
 
 <script src="./NavBarLink"></script>
+
+<style lang="scss" scoped>
+.nav-link {
+  color: rgb(55, 65, 81) !important;
+}
+</style>

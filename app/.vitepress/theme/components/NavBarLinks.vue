@@ -1,5 +1,5 @@
 <template>
-<nav class="nav-links px-5 sm:px-7 md:px-10">
+<nav class="nav-links">
   <div class="hidden md:block">
     <NavBarLink v-if="navData" v-for="item of navData" :item="item" class="inline-block ml-8"/>
   </div>
