@@ -27,11 +27,6 @@ recommendations for setting up Vite for yourself.
 
 Vite could the next best thing in tooling, currently, it's still in a pre-release stage though so be careful out there 🐛.
 
-**Table of contents**
-
-
-[[toc]]
-
 
 ## A Recap on Vite
 
