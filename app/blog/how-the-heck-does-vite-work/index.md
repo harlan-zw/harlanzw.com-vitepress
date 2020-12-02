@@ -29,7 +29,9 @@ Vite could the next best thing in tooling, currently, it's still in a pre-releas
 
 **Table of contents**
 
+
 [[toc]]
+
 
 ## A Recap on Vite
 
