@@ -30,7 +30,7 @@ Vite could the next best thing in tooling, currently, it's still in a pre-releas
 
 ## A Recap on Vite
 
-Vite is a framework-agnostic web dev build tool. It's an experimental new direction in how build tools can work with a greenfield ecosystem. 
+Vite is a web development build tool which supports Vue, React and Preact. It's an experimental new direction in how build tools can work with a greenfield ecosystem. 
 
 Vite's core functionality is similar to webpack + webpack-dev-server with some core improvements
 on developer experience:
@@ -406,11 +406,9 @@ If you like my blog (VitePress + TailwindCSS), then you're more than welcome to 
 
 
 
-## Final Thoughts
+## Follow me :)
 
+Thanks for reading. 
 
-A week ago I had zero knowledge of Vite, no knowledge about bundling, dev servers and modules. It has been a long, 
-rewarding week of learning. I wrote this article to cement my own learning and have some content for my new site. I've tried
-to be as factual as possible, but I may have overlooked something, so I'd appreciate your feedback
-
-Thanks for reading.
+If you like the technical side of Vue and Laravel, I'll be posting regular articles on this site. The best
+way to keep up to date is by following my Twitter [@harlan_zw](https://twitter.com/harlan_zw).
