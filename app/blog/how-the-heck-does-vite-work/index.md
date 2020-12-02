@@ -22,7 +22,8 @@ The unknown was the new project by Evan You: [⚡ Vite](https://github.com/vitej
 I'll be comparing how Vite works to the standard [webpack](https://github.com/webpack/webpack) config using [webpack-dev-server](https://github.com/webpack/webpack-dev-server), which all major Vue frameworks
 are using.
 
-We'll first understand how webpack works, how Vite works and finally the best way to get started with Vite. 
+We'll be looking at how Vite works, by first looking at how webpack works and what the difference is. Afterwards I'll give you some
+recommendations for setting up Vite for yourself. 
 
 Vite could the next best thing in tooling, currently, it's still in a pre-release stage though so be careful out there 🐛.
 
@@ -44,6 +45,10 @@ on developer experience:
 - 📜 Esbuild powered typescript / jsx (super quick)
 
 ### Speed Example
+
+To give you a quick idea on how much faster it is, the below comparison is for Vue CLI which uses webpack. The bigger your app
+is the more noticeable the speed difference will be.
+
 <figure>
 
 |   | Build Time        | Dev Server Start Time  | Page Load Time  |
@@ -56,18 +61,18 @@ on developer experience:
 
 ## Vite vs Webpack
 
-The main difference you'll notice with Vite and your webpack app, is how code is served in development and which modules are supported.
+The main functional difference you'll notice with Vite and your webpack app, is how code is served in development and which modules are supported.
 
 Don't worry if the below terms don't make sense to you, we'll be exploring these concepts below.
 
 ### Webpack (Nuxt.js / Vue CLI / etc) 
 - Supported Modules: [ES Modules](https://www.2ality.com/2014/09/es6-modules-final.html), [CommonJS](http://wiki.commonjs.org/) and [AMD Modules](https://github.com/amdjs/amdjs-api/wiki/AMD) 
-- Dev Server: Bundled modules served via webpack-dev-server using express.js web server
+- Dev Server: Bundled modules served via webpack-dev-server using [Express.js](https://expressjs.com/) web server
 - Production Build: Webpack
 
 ### Vite
 - Supported Modules: [ES Modules](https://www.2ality.com/2014/09/es6-modules-final.html)
-- Dev Server: Native-ES-Modules, served via Vite using a koa web server
+- Dev Server: Native-ES-Modules, served via Vite using a [Koa](https://github.com/koajs/koa) web server
 - Production build: [Rollup](https://github.com/rollup/rollup)
 
 ::: tip TIP
@@ -79,7 +84,7 @@ Check out Mozilla's <a href="https://hacks.mozilla.org/2018/03/es-modules-a-cart
 To understand how Vite works, it's best to look at how Webpack works first. Even with its popularly, understanding Webpack can be intimidating, so I'll try to keep it simple.
 
 Webpack is versatile in what you can do with it, but at it's core, it will:
-- Start with an entry file, build a graph of your dependency tree: all the imports, exports from your code/files (modules)
+- Starting with an entry file, build a tree of your dependencies: all the imports, exports from your code/files (modules)
 - Transform / compile modules: think transpiling js for older browsers, turning SCSS into CSS
 - Use algorithms to sort, rewrite and concatenate code
 - Optimise
@@ -87,9 +92,9 @@ Webpack is versatile in what you can do with it, but at it's core, it will:
 ### Webpack In Development
 
 Assuming you're using one of the main Vue frameworks, when you start your app in development, it is going to do a few things:
-1. Bundle all of your code as per the above list
-2. Start the webpack-dev-server which will serve the bundles
-3. Handle Hot Module Reloading using sockets
+1. Bundle all of your code
+2. Start the webpack-dev-server, the Express.js web server which will serve the bundled code
+3. Setup sockets which will handle the Hot Module Reloading
 
 As you may notice with your own apps, the bigger they grow, the longer you have to wait to start coding.
 
@@ -98,10 +103,10 @@ As you may notice with your own apps, the bigger they grow, the longer you have 
   <figcaption>The Nuxt logo is almost burnt into my monitor at this point.</figcaption>
 </figure>
 
-Bundling in development is quicker because you don't need to do as much with the code, however, it can
-still become painfully slow, especially on older machines. 
+Bundling in development is quicker because you don't need to do as much with the code, however, 
+as your app grows, it will become painfully slow, especially on older machines. 
 
-### Component Request Example
+### Webpack Component Example
 
 I created a default Vue 3 [Vue CLI](https://cli.vuejs.org/) project, which has an entry `App.vue` file using the `HelloWorld.vue` component. 
 Let's see how this component gets to my browser.
@@ -130,7 +135,7 @@ h1 {
 </style>
 ```
 
-When I start my app and visit localhost I get the following HTML document back.
+When I start my app and visit localhost I get the following HTML from the Express.js server.
 
 ```html
 <!DOCTYPE html>
@@ -148,7 +153,7 @@ When I start my app and visit localhost I get the following HTML document back.
 </html>
 ```
 
-You'll notice we have 2 script files there. On inspecting them you'd see a lot of gibberish looking code,
+You'll notice we have 2 script files there: `chunk-vendor.js` and `app.js`. On inspecting them you'd see a lot of gibberish looking code.
  it helps to use the [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer) to see how it works visually.
 
 #### chunk-vendors.js 
@@ -157,7 +162,7 @@ These are third-party modules, usually coming from node_modules. The two main li
 
 <figure>
   <img src="../../resources/vendor-chunk.png">
-  <figcaption>chunk-vendors.js</figcaption>
+  <figcaption>The two top libraries are Vue.js and Sock.js (For HMR)</figcaption>
 </figure>
 
 #### app.js
@@ -167,10 +172,13 @@ These are third-party modules, usually coming from node_modules. The two main li
 
 <figure>
   <img src="../../resources/app-chunk.png">
-  <figcaption>app-vendors.js</figcaption>
+  <figcaption>My app is two components, App.vue and HelloWorld.vue</figcaption>
 </figure>
 
-Taking a quick look at the app.js file, we can find our HelloWorld component code within it. Some really beautiful code.
+Taking a quick look at the `app.js` file, we can find some of the `HelloWorld` component code. As you can see in the above image,
+all parts of the SFC are separate modules: the wrapper, CSS, template, js. 
+
+The wrapper module is defining and importing the other models, some really beautiful code.
 
 ```js
 /***/ "./src/components/HelloWorld.vue":
@@ -184,21 +192,33 @@ Taking a quick look at the app.js file, we can find our HelloWorld component cod
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _HelloWorld_vue_vue_type_template_id_469af010_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HelloWorld.vue?vue&type=template&id=469af010&scoped=true */ \"./src/components/HelloWorld.vue?vue&type=template&id=469af010&scoped=true\");\n/* harmony import */ var _HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HelloWorld.vue?vue&type=script&lang=js */ \"./src/components/HelloWorld.vue?vue&type=script&lang=js\");\n/* empty/unused harmony star reexport *//* harmony import */ var _HelloWorld_vue_vue_type_style_index_0_id_469af010_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./HelloWorld.vue?vue&type=style&index=0&id=469af010&scoped=true&lang=css */ \"./src/components/HelloWorld.vue?vue&type=style&index=0&id=469af010&scoped=true&lang=css\");\n\n\n\n\n\n_HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].render = _HelloWorld_vue_vue_type_template_id_469af010_scoped_true__WEBPACK_IMPORTED_MODULE_0__[\"render\"]\n_HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].__scopeId = \"data-v-469af010\"\n/* hot reload */\nif (true) {\n  _HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].__hmrId = \"469af010\"\n  const api = __VUE_HMR_RUNTIME__\n  module.hot.accept()\n  if (!api.createRecord('469af010', _HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])) {\n    api.reload('469af010', _HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])\n  }\n  \n  module.hot.accept(/*! ./HelloWorld.vue?vue&type=template&id=469af010&scoped=true */ \"./src/components/HelloWorld.vue?vue&type=template&id=469af010&scoped=true\", function(__WEBPACK_OUTDATED_DEPENDENCIES__) { /* harmony import */ _HelloWorld_vue_vue_type_template_id_469af010_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HelloWorld.vue?vue&type=template&id=469af010&scoped=true */ \"./src/components/HelloWorld.vue?vue&type=template&id=469af010&scoped=true\");\n(() => {\n    api.rerender('469af010', _HelloWorld_vue_vue_type_template_id_469af010_scoped_true__WEBPACK_IMPORTED_MODULE_0__[\"render\"])\n  })(__WEBPACK_OUTDATED_DEPENDENCIES__); }.bind(this))\n\n}\n\n_HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].__file = \"src/components/HelloWorld.vue\"\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (_HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"]);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvY29tcG9uZW50cy9IZWxsb1dvcmxkLnZ1ZS5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9jb21wb25lbnRzL0hlbGxvV29ybGQudnVlPzc3NmEiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgcmVuZGVyIH0gZnJvbSBcIi4vSGVsbG9Xb3JsZC52dWU/dnVlJnR5cGU9dGVtcGxhdGUmaWQ9NDY5YWYwMTAmc2NvcGVkPXRydWVcIlxuaW1wb3J0IHNjcmlwdCBmcm9tIFwiLi9IZWxsb1dvcmxkLnZ1ZT92dWUmdHlwZT1zY3JpcHQmbGFuZz1qc1wiXG5leHBvcnQgKiBmcm9tIFwiLi9IZWxsb1dvcmxkLnZ1ZT92dWUmdHlwZT1zY3JpcHQmbGFuZz1qc1wiXG5cbmltcG9ydCBcIi4vSGVsbG9Xb3JsZC52dWU/dnVlJnR5cGU9c3R5bGUmaW5kZXg9MCZpZD00NjlhZjAxMCZzY29wZWQ9dHJ1ZSZsYW5nPWNzc1wiXG5zY3JpcHQucmVuZGVyID0gcmVuZGVyXG5zY3JpcHQuX19zY29wZUlkID0gXCJkYXRhLXYtNDY5YWYwMTBcIlxuLyogaG90IHJlbG9hZCAqL1xuaWYgKG1vZHVsZS5ob3QpIHtcbiAgc2NyaXB0Ll9faG1ySWQgPSBcIjQ2OWFmMDEwXCJcbiAgY29uc3QgYXBpID0gX19WVUVfSE1SX1JVTlRJTUVfX1xuICBtb2R1bGUuaG90LmFjY2VwdCgpXG4gIGlmICghYXBpLmNyZWF0ZVJlY29yZCgnNDY5YWYwMTAnLCBzY3JpcHQpKSB7XG4gICAgYXBpLnJlbG9hZCgnNDY5YWYwMTAnLCBzY3JpcHQpXG4gIH1cbiAgXG4gIG1vZHVsZS5ob3QuYWNjZXB0KFwiLi9IZWxsb1dvcmxkLnZ1ZT92dWUmdHlwZT10ZW1wbGF0ZSZpZD00NjlhZjAxMCZzY29wZWQ9dHJ1ZVwiLCAoKSA9PiB7XG4gICAgYXBpLnJlcmVuZGVyKCc0NjlhZjAxMCcsIHJlbmRlcilcbiAgfSlcblxufVxuXG5zY3JpcHQuX19maWxlID0gXCJzcmMvY29tcG9uZW50cy9IZWxsb1dvcmxkLnZ1ZVwiXG5cbmV4cG9ydCBkZWZhdWx0IHNjcmlwdCJdLCJtYXBwaW5ncyI6IkFBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./src/components/HelloWorld.vue\n");
 ```
 
-Webpack does let you chunk the bundles how you like, for Nuxt.js it chunks routes individually. But you may see the problem here,
-we have multiple monolith files that need to be generated anytime we want to use our app.
+The main takeaway here is that within the `app.js` file contains all modules for my app.
+
+Webpack does let you chunk the bundles how you like, for Nuxt.js it chunks routes individually. The more chunks though,
+the more requests and more potential blocking js.
+
+You may see the problem here, we have multiple monolith files that need to be generated anytime we want to use our app.
+When we change a file for HMR, we need to regenerate the entire file.
 
 ## Understanding Vite
 
-Vite, at its core, doesn't set out to be a new code bundler like webpack or Rollup. Rather, a specific tool built for the developer experience.
+Vite doesn't set out to be a new bundler. Rather, it's a pre-configured build environment using the Rollup
+bundler and a tool for local development.
 
 
 ### Vite In Development
 
-When you start Vite for the first time pre-optimisations will be done on your node_modules, then [Koa](https://github.com/koajs/koa), a light-weight node web server starts. 
-There is no bundling or compiling needed to start the dev server, so it's damn quick.
+Vite makes the assumption that developers are going to be using the latest browser versions, so it can safely rely on the
+latest JS functionality straight from the browser - in other words, no babel transpiling!
 
-When you open your Vite app, the browser is going look at your entry file as a native es module, meaning it will read the `export` and `import` statements from your code.
-It will transfer those lines into HTTP requests back to the server, where it will keep going your dependencies in a process until everything has been resolved.
+When you start Vite for the first time pre-optimisations will be done on your `node_modules`, then [Koa](https://github.com/koajs/koa),
+a light-weight node web server starts to serve your app.
+
+There is no bundling or compiling needed to start the dev server, so it's damn quick (< 300ms).
+
+When you open your Vite app you'll be served the `index.html` from the server. The browser is going to read the `index.html`
+and know how to parse the Native-ES-Module code. 
+
 
 ```html
 <script type="module">import "/vite/client"</script>
@@ -206,18 +226,21 @@ It will transfer those lines into HTTP requests back to the server, where it wil
 <script type="module" src="/@app/index.js"></script>
 ```
 
+Parsing the Native-ES-Module means it will read the `export` and `import` lines from your code. It will convert those
+lines into HTTP requests back to the server, where it will again read the `export` and `import` lines and make new requests.
+
+It will keep going through like this with your dependencies recursively, in a waterfall process, until everything has been resolved.
+
+
 <figure>
   <img src="../../resources/network-requests.png">
-  <figcaption>Network requests triggered from the entry.</figcaption>
+  <figcaption>Recursive network requests triggered from the entry - VitePress.</figcaption>
 </figure>
 
-Vite makes the assumption that developers are going to be using the latest browser versions, so it can safely rely on the
- latest JS functionality straight from the browser - in other words, no babel transpiling!
  
- 
-### Component Request Example
+### Vite Component Example
 
-Let's take a look at how these requests are working in the browser. Vite has sent me the following index.js file:
+Let's take a look at how these requests are working in the browser. After I open my app at `http://localhost:3000`, the browser has fetched the following `index.js` file from the web server:
 
 ```js{5}
 import '/@theme/styles/main.scss?import';
@@ -235,12 +258,14 @@ const theme = {
 export default theme;
 ```
 
-Normally, in webpack, you would have to transpile this code to something legacy browsers can understand. But new browsers know 
-what to do with it. 
+::: tip TIP
+Normally, in webpack, you would have to transpile this code to something legacy browsers can understand. Newer browsers know
+what to do with it: https://caniuse.com/es6-module-dynamic-import.
+:::
 
 Let's drill into that highlighted line which is requesting the CardPost SFC. The browser will turn that import into a request for `http://localhost:3000/@theme/components/CardPost.vue`.
 
-This is the CardPost.vue component in my code.
+This is the `CardPost.vue` component in my code.
 
 ```vue
 <template>
@@ -277,9 +302,9 @@ export default {
 Once the web server gets this request, it will need to compile the `CardPost.vue` file to javascript and send it back. Vite has many
 optimisations around the Vue compiling so this takes no time.
  
- Let's look at what comes through:
+Let's see what comes through:
 
-```js{22-23}
+```js
 import posts from '/.vitepress/posts.ts'
 
 const __script = {
@@ -316,7 +341,7 @@ will need separate requests to fetch. It hasn't bundled these imports into the S
 
 
 
-If you're curious, this is what the style component response looks like, it's pretty nifty.
+If you're curious, this is what the style component response looks like, some nifty for sure.
 
 ```js
 import {updateStyle} from "/vite/client"
@@ -333,6 +358,18 @@ Fortunately, there are optimisation to avoid this situation after the first load
 Unmodified HTTP Status code for modules which haven't changed, meaning they will use the browser's cached version of the file. 
  
 Vite scales well for any app size because it only needs to request the modules for the route you're on.
+
+## Production Builds
+
+Since Vite is using Rollup, pre-configured, you'd expect a similar output from Vite as Webpack. Vite does boast a quicker
+builder and potentially a smaller artifact size, as Rollup is a more efficient bundler than Webpack.
+
+The main gotcha is that Vite can still only support ES Modules in the production build, meaning you can't have any dependencies
+which don't have ES Module exports.
+
+Vite is also pre-configured to handle your build as a universal app. A universal app is built using a client (virtual browser)
+and a server (node). Allowing it to pre-render the HTML pages, so robot crawlers can fetch your page content without executing
+js and speeding up the initial load for users. That means SEO friendly static sites out of the box 🎉.
 
 ## Summary
 
@@ -362,8 +399,11 @@ You shouldn't be looking to replace Vue CLI or Webpack with Vite for existing pr
 
 The Vite ecosystem isn't that mature yet, the two main projects I'd recommend checking out are [VitePress](https://vitepress.vuejs.org/) and [Vitesse](https://github.com/antfu/vitesse). 
 
-If you are need of a documentation site then VitePress is really awesome, otherwise, I'd choose Vitesse as it's going to give you more flexible
-on customising your app.
+If you are in need of a documentation site then VitePress is really awesome, you can follow the VuePress documentation to fill in any gaps. VitePress abstracts away
+the Vite configuration, which will be limiting for non-documentation sites.
+
+Otherwise, I'd choose Vitesse as it's going to give you more flexible on customising your app. Vitesse offers a pre-configured `vite.config.js`, so you can easily
+strip anything out you don't need to add whatever you'd like to it.
 
 If you like my blog (VitePress + TailwindCSS), then you're more than welcome to [clone it](https://github.com/loonpwn/harlanzw.com).
 
@@ -373,7 +413,7 @@ If you like my blog (VitePress + TailwindCSS), then you're more than welcome to 
 
 
 A week ago I had zero knowledge of Vite, no knowledge about bundling, dev servers and modules. It has been a long, 
-rewarding week of learning. I wrote this article to cement my own learning and have some content for my new site. I'd love any and all feedback you have.
-
+rewarding week of learning. I wrote this article to cement my own learning and have some content for my new site. I've tried
+to be as factual as possible, but I may have overlooked something, so I'd appreciate your feedback
 
 Thanks for reading.
