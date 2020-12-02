@@ -22,7 +22,7 @@ The unknown was the new project by Evan You: [⚡ Vite](https://github.com/vitej
 I'll be comparing how Vite works to the standard [webpack](https://github.com/webpack/webpack) config using [webpack-dev-server](https://github.com/webpack/webpack-dev-server), which all major Vue frameworks
 are using.
 
-We'll be looking at how Vite works, by first looking at how webpack works and what the difference is. Afterwards I'll give you some
+We'll be looking at how Vite no-bundling works, by first looking at how webpack's bundling works and what the difference is. Afterwards I'll give you some
 recommendations for setting up Vite for yourself. 
 
 Vite could the next best thing in tooling, currently, it's still in a pre-release stage though so be careful out there 🐛.
@@ -155,7 +155,7 @@ You'll notice we have 2 script files there: `chunk-vendor.js` and `app.js`. On i
 
 #### chunk-vendors.js 
 
-These are third-party modules, usually coming from node_modules. The two main libraries in here are Vue itself and sockjs which is used for HMR.
+These are third-party modules, usually coming from `node_modules`. The two main libraries in here are Vue itself and sockjs which is used for HMR.
 
 <figure>
   <img src="../../resources/vendor-chunk.png">
