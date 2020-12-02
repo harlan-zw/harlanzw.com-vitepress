@@ -48,7 +48,7 @@ is the more noticeable the speed difference will be.
 
 <figure>
 
-|   | Build Time        | Dev Server Start Time  | Page Load Time  |
+|   | Build Time        | Dev Server Start Time  | Dev Page Load Time  |
 | ------------- |-------------:| -----:| -----:|
 | Vue CLI     | <span class="text-red-400">5.14s</span> | <span class="text-red-400">2568ms</span> | <span class="text-yellow-400">320ms</span> | 
 | Vite     | <span class="text-green-500">2.39s</span> | <span class="text-green-500">232ms</span>️ | <span class="text-yellow-500">379ms</span> |
@@ -60,7 +60,7 @@ is the more noticeable the speed difference will be.
 
 The main functional difference you'll notice with Vite and your webpack app, is how code is served in development and which modules are supported.
 
-Don't worry if the below terms don't make sense to you, we'll be exploring these concepts below.
+Don't worry if the below terms don't make sense to you, we'll be exploring them below.
 
 ### Webpack (Nuxt.js / Vue CLI / etc) 
 - Supported Modules: [ES Modules](https://www.2ality.com/2014/09/es6-modules-final.html), [CommonJS](http://wiki.commonjs.org/) and [AMD Modules](https://github.com/amdjs/amdjs-api/wiki/AMD) 
@@ -81,7 +81,7 @@ Check out Mozilla's <a href="https://hacks.mozilla.org/2018/03/es-modules-a-cart
 To understand how Vite works, it's best to look at how Webpack works first. Even with its popularly, understanding Webpack can be intimidating, so I'll try to keep it simple.
 
 Webpack is versatile in what you can do with it, but at it's core, it will:
-- Starting with an entry file, build a tree of your dependencies: all the imports, exports from your code/files (modules)
+- Starting with an entry file, build a tree of your dependencies: all the imports, exports, requires from your code/files
 - Transform / compile modules: think transpiling js for older browsers, turning SCSS into CSS
 - Use algorithms to sort, rewrite and concatenate code
 - Optimise
