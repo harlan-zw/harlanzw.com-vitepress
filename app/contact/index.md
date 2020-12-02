@@ -13,7 +13,7 @@ Get in touch, let's chat! :)
 
 ## Email me
 
-harlan@harlanzw.com
+<a href="mailto:harlan@harlanzw.com">harlan@harlanzw.com</a>
 
 ## Socials
 
