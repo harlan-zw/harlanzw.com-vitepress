@@ -7,6 +7,7 @@ import Layout from './Layout.vue';
 import NotFound from './NotFound.vue';
 import CardPost from './components/CardPost.vue';
 import Posts from './components/Posts.vue'
+import Newsletter from './components/Newsletter.vue'
 import Zooming from 'zooming'
 
 const theme = {
@@ -31,7 +32,7 @@ const theme = {
                 window.panelbear('config', { site: '9EWSXgG8txm', spaMode: 'history' });
             })
         }
-
+        app.component('Newsletter', Newsletter)
         app.component('CardPost', CardPost)
         app.component('Posts', Posts)
     }
