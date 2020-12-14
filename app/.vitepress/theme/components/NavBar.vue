@@ -9,7 +9,7 @@
         :aria-label="$site.title + ', back to home'"
         :href="$site.base"
     >
-      <span class="font-bold text-green-700">harlan</span>
+      <span class="font-bold font-header text-green-700">harlan</span>
     </a>
   </div>
   <div class="flex-grow"></div>

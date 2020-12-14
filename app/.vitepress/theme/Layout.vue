@@ -3,10 +3,10 @@
   <div class="bg-gray-50 px-5 sm:px-7 md:px-10">
     <div class="prose md:prose-xl prose-green mx-auto">
       <header class="navbar mb-10 sm:mb-16 md:mb-20">
-        <NavBar></NavBar>
+        <NavBar />
       </header>
-      <main>
-        <Content class="pb-10 sm:pb-16 md:pb-20 "/>
+      <main class="pb-10 sm:pb-16 md:pb-20">
+        <Content />
       </main>
     </div>
   </div>
