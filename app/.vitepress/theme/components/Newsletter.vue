@@ -54,27 +54,6 @@ export default {
       console.log(result)
       this.submitting = false
       this.email = ''
-
-      // $axios
-      //     .post(e.target.action, {
-      //       email: this.email,
-      //     })
-      //     .then(response => {
-      //       window.location = 'https://tailwindui.com/newsletter/thank-you'
-      //     })
-      //     .catch(error => {
-      //       this.submitting = false
-      //       this.error = dlv(
-      //           {
-      //             400: 'It looks like you made a mistake in your email address, please double-check it and try again.',
-      //             406: 'Please enter your email address.',
-      //             422: 'Please enter your email address.',
-      //             429: "We're receiving an unusually high amount of sign ups right now so we are rate limiting them as a precaution, please try again in a minute or two.",
-      //           },
-      //           error.response.status.toString(),
-      //           dlv(error.response, 'data.message', 'Sorry something went wrong, please refresh the page and try again shortly.')
-      //       )
-      //     })
     }
   }
 }
