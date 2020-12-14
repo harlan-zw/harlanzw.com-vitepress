@@ -1,7 +1,7 @@
 export default [
     {
         url: '/blog/how-the-heck-does-vite-work/',
-        title: 'How The Does Vite Work - A Comparison to Webpack',
+        title: 'How Does Vite Work - A Comparison to Webpack',
         published: '1st Dec 2020',
         excerpt: 'I used Vite to build a new blazing fast blog ⚡, find out what I learnt and why Vite is the next big thing.',
         status: 'published'
