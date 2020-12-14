@@ -42,7 +42,7 @@ I want to be able to motivate others to take the plunge having work-lifestyle th
 I'll be posting here, <a href="https://twitter.com/harlan_zw" target="_blank">Twitter</a> and <a href="https://www.indiehackers.com/harlanzw" target="_blank">IndieHackers</a> for now.
 
 
-### :money_with_wings: $0 MMR so far
+### :money_with_wings: $0 MRR so far
 
 Being transparent about how my journey is going is important to me. I want people to see what it really takes to move the needle.
 I plan to build my projects in public, you'll see my MMR be updated as I go along.
