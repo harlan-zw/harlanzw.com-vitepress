@@ -4,38 +4,38 @@ description: "I used Vite to build a new blazing fast blog ⚡, find out what I 
 publishDate: 1st Dec 2020
 head:
 - - meta
-- name: description
-  content: "I used Vite to build a new blazing fast blog ⚡, find out what I learnt and why Vite is the next big thing."
+  - name: description
+    content: "I used Vite to build a new blazing fast blog ⚡, find out what I learnt and why Vite is the next big thing."
 - - meta
-- property: "og:type"
-  content: "website"
+  - property: "og:type"
+    content: "website"
 - - meta
-- property: "og:url"
-  content: "https://harlanzw.com/blog/how-the-heck-does-vite-work/"
+  - property: "og:url"
+    content: "https://harlanzw.com/blog/how-the-heck-does-vite-work/"    
 - - meta
-- property: "og:title"
-  content: "How The Heck Does Vite Work - A comparison to Webpack"
+  - property: "og:title"
+    content: "How The Heck Does Vite Work - A comparison to Webpack"
 - - meta
-- property: "og:description"
-  content: "I used Vite to build a new blazing fast blog ⚡, find out what I learnt and why Vite is the next big thing."
+  - property: "og:description"
+    content: "I used Vite to build a new blazing fast blog ⚡, find out what I learnt and why Vite is the next big thing."    
 - - meta
-- property: "og:image"
-  content: "https://harlanzw.com/social/how-vite-works.png"
+  - property: "og:image"
+    content: "https://harlanzw.com/social/how-vite-works.png"
 - - meta
-- property: "twitter:card"
-  content: "summary_large_image"
+  - property: "twitter:card"
+    content: "summary_large_image"
 - - meta
-- property: "twitter:url"
-  content: "https://harlanzw.com/blog/how-the-heck-does-vite-work/"
+  - property: "twitter:url"
+    content: "https://harlanzw.com/blog/how-the-heck-does-vite-work/"
 - - meta
-- property: "twitter:title"
-  content: "How The Heck Does Vite Work - A comparison to Webpack"
+  - property: "twitter:title"
+    content: "How The Heck Does Vite Work - A comparison to Webpack"
 - - meta
-- property: "twitter:description"
-  content: "I used Vite to build a new blazing fast blog ⚡, find out what I learnt and why Vite is the next big thing."
+  - property: "twitter:description"
+    content: "I used Vite to build a new blazing fast blog ⚡, find out what I learnt and why Vite is the next big thing."
 - - meta
-- property: "twitter:image"
-  content: "https://harlanzw.com/social/how-vite-works.png"
+  - property: "twitter:image"
+    content: "https://harlanzw.com/social/how-vite-works.png"    
 ---
 
 # {{ $page.title }}
@@ -50,18 +50,18 @@ I'll be comparing how Vite works to the standard [webpack](https://github.com/we
 are using.
 
 We'll be looking at how Vite no-bundling works, by first looking at how webpack's bundling works and what the difference is. Afterwards I'll give you some
-recommendations for setting up Vite for yourself.
+recommendations for setting up Vite for yourself. 
 
 Vite could the next best thing in tooling, currently, it's still in a pre-release stage though so be careful out there 🐛.
 
 
 ## A Recap on Vite
 
-Vite is a web development build tool which supports Vue, React and Preact. It's an experimental new direction in how build tools can work with a greenfield ecosystem.
+Vite is a web development build tool which supports Vue, React and Preact. It's an experimental new direction in how build tools can work with a greenfield ecosystem. 
 
 Vite's core functionality is similar to webpack + webpack-dev-server with some core improvements
 on developer experience:
-
+ 
 - ⌛ Less time waiting for your app to start, regardless of app size
 - 🔥 Hot module reloading (HMR) that is basically instant, regardless of app size
 - 🔨 On-demand compilation
@@ -89,8 +89,8 @@ The main functional difference you'll notice with Vite and your webpack app, is 
 
 Don't worry if the below terms don't make sense to you, we'll be exploring them below.
 
-### Webpack (Nuxt.js / Vue CLI / etc)
-- Supported Modules: [ES Modules](https://www.2ality.com/2014/09/es6-modules-final.html), [CommonJS](http://wiki.commonjs.org/) and [AMD Modules](https://github.com/amdjs/amdjs-api/wiki/AMD)
+### Webpack (Nuxt.js / Vue CLI / etc) 
+- Supported Modules: [ES Modules](https://www.2ality.com/2014/09/es6-modules-final.html), [CommonJS](http://wiki.commonjs.org/) and [AMD Modules](https://github.com/amdjs/amdjs-api/wiki/AMD) 
 - Dev Server: Bundled modules served via webpack-dev-server using [Express.js](https://expressjs.com/) web server
 - Production Build: Webpack
 
@@ -127,21 +127,21 @@ As you may notice with your own apps, the bigger they grow, the longer you have 
   <figcaption>The Nuxt logo is almost burnt into my monitor at this point.</figcaption>
 </figure>
 
-Bundling in development is quicker because you don't need to do as much with the code, however,
-as your app grows, it will become painfully slow, especially on older machines.
+Bundling in development is quicker because you don't need to do as much with the code, however, 
+as your app grows, it will become painfully slow, especially on older machines. 
 
 ### Webpack Component Example
 
-I created a default Vue 3 [Vue CLI](https://cli.vuejs.org/) project, which has an entry `App.vue` file using the `HelloWorld.vue` component.
+I created a default Vue 3 [Vue CLI](https://cli.vuejs.org/) project, which has an entry `App.vue` file using the `HelloWorld.vue` component. 
 Let's see how this component gets to my browser.
 
 HelloWorld.vue component:
 
 ```vue
 <template>
-<div class="hello">
-  <h1>{{ msg }}</h1>
-</div>
+  <div class="hello">
+    <h1>{{ msg }}</h1>
+  </div>
 </template>
 
 <script>
@@ -164,23 +164,23 @@ When I start my app and visit localhost I get the following HTML from the Expres
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-</head>
-<body>
-<div id="app"></div>
-<script type="text/javascript" src="/js/chunk-vendors.js"></script>
-<script type="text/javascript" src="/js/app.js"></script>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="text/javascript" src="/js/chunk-vendors.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
+  </body>
 </html>
 ```
 
 You'll notice we have 2 script files there: `chunk-vendor.js` and `app.js`. On inspecting them you'd see a lot of gibberish looking code.
-it helps to use the [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer) to see how it works visually.
+ it helps to use the [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer) to see how it works visually.
 
-#### chunk-vendors.js
+#### chunk-vendors.js 
 
 These are third-party modules, usually coming from `node_modules`. The two main libraries in here are Vue itself and sockjs which is used for HMR.
 
@@ -191,8 +191,8 @@ These are third-party modules, usually coming from `node_modules`. The two main 
 
 #### app.js
 
-This is all the code for my application. It contains components, assets, etc. You'll notice that for a SFC it splits
-it into multiple modules.
+ This is all the code for my application. It contains components, assets, etc. You'll notice that for a SFC it splits
+ it into multiple modules.
 
 <figure>
   <img src="../../resources/app-chunk.png">
@@ -200,7 +200,7 @@ it into multiple modules.
 </figure>
 
 Taking a quick look at the `app.js` file, we can find some of the `HelloWorld` component code. As you can see in the above image,
-all parts of the SFC are separate modules: the wrapper, CSS, template, js.
+all parts of the SFC are separate modules: the wrapper, CSS, template, js. 
 
 The wrapper module is defining and importing the other models, some really beautiful code.
 
@@ -212,8 +212,8 @@ The wrapper module is defining and importing the other models, some really beaut
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-  "use strict";
-  eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _HelloWorld_vue_vue_type_template_id_469af010_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HelloWorld.vue?vue&type=template&id=469af010&scoped=true */ \"./src/components/HelloWorld.vue?vue&type=template&id=469af010&scoped=true\");\n/* harmony import */ var _HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HelloWorld.vue?vue&type=script&lang=js */ \"./src/components/HelloWorld.vue?vue&type=script&lang=js\");\n/* empty/unused harmony star reexport *//* harmony import */ var _HelloWorld_vue_vue_type_style_index_0_id_469af010_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./HelloWorld.vue?vue&type=style&index=0&id=469af010&scoped=true&lang=css */ \"./src/components/HelloWorld.vue?vue&type=style&index=0&id=469af010&scoped=true&lang=css\");\n\n\n\n\n\n_HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].render = _HelloWorld_vue_vue_type_template_id_469af010_scoped_true__WEBPACK_IMPORTED_MODULE_0__[\"render\"]\n_HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].__scopeId = \"data-v-469af010\"\n/* hot reload */\nif (true) {\n  _HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].__hmrId = \"469af010\"\n  const api = __VUE_HMR_RUNTIME__\n  module.hot.accept()\n  if (!api.createRecord('469af010', _HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])) {\n    api.reload('469af010', _HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])\n  }\n  \n  module.hot.accept(/*! ./HelloWorld.vue?vue&type=template&id=469af010&scoped=true */ \"./src/components/HelloWorld.vue?vue&type=template&id=469af010&scoped=true\", function(__WEBPACK_OUTDATED_DEPENDENCIES__) { /* harmony import */ _HelloWorld_vue_vue_type_template_id_469af010_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HelloWorld.vue?vue&type=template&id=469af010&scoped=true */ \"./src/components/HelloWorld.vue?vue&type=template&id=469af010&scoped=true\");\n(() => {\n    api.rerender('469af010', _HelloWorld_vue_vue_type_template_id_469af010_scoped_true__WEBPACK_IMPORTED_MODULE_0__[\"render\"])\n  })(__WEBPACK_OUTDATED_DEPENDENCIES__); }.bind(this))\n\n}\n\n_HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].__file = \"src/components/HelloWorld.vue\"\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (_HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"]);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvY29tcG9uZW50cy9IZWxsb1dvcmxkLnZ1ZS5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9jb21wb25lbnRzL0hlbGxvV29ybGQudnVlPzc3NmEiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgcmVuZGVyIH0gZnJvbSBcIi4vSGVsbG9Xb3JsZC52dWU/dnVlJnR5cGU9dGVtcGxhdGUmaWQ9NDY5YWYwMTAmc2NvcGVkPXRydWVcIlxuaW1wb3J0IHNjcmlwdCBmcm9tIFwiLi9IZWxsb1dvcmxkLnZ1ZT92dWUmdHlwZT1zY3JpcHQmbGFuZz1qc1wiXG5leHBvcnQgKiBmcm9tIFwiLi9IZWxsb1dvcmxkLnZ1ZT92dWUmdHlwZT1zY3JpcHQmbGFuZz1qc1wiXG5cbmltcG9ydCBcIi4vSGVsbG9Xb3JsZC52dWU/dnVlJnR5cGU9c3R5bGUmaW5kZXg9MCZpZD00NjlhZjAxMCZzY29wZWQ9dHJ1ZSZsYW5nPWNzc1wiXG5zY3JpcHQucmVuZGVyID0gcmVuZGVyXG5zY3JpcHQuX19zY29wZUlkID0gXCJkYXRhLXYtNDY5YWYwMTBcIlxuLyogaG90IHJlbG9hZCAqL1xuaWYgKG1vZHVsZS5ob3QpIHtcbiAgc2NyaXB0Ll9faG1ySWQgPSBcIjQ2OWFmMDEwXCJcbiAgY29uc3QgYXBpID0gX19WVUVfSE1SX1JVTlRJTUVfX1xuICBtb2R1bGUuaG90LmFjY2VwdCgpXG4gIGlmICghYXBpLmNyZWF0ZVJlY29yZCgnNDY5YWYwMTAnLCBzY3JpcHQpKSB7XG4gICAgYXBpLnJlbG9hZCgnNDY5YWYwMTAnLCBzY3JpcHQpXG4gIH1cbiAgXG4gIG1vZHVsZS5ob3QuYWNjZXB0KFwiLi9IZWxsb1dvcmxkLnZ1ZT92dWUmdHlwZT10ZW1wbGF0ZSZpZD00NjlhZjAxMCZzY29wZWQ9dHJ1ZVwiLCAoKSA9PiB7XG4gICAgYXBpLnJlcmVuZGVyKCc0NjlhZjAxMCcsIHJlbmRlcilcbiAgfSlcblxufVxuXG5zY3JpcHQuX19maWxlID0gXCJzcmMvY29tcG9uZW50cy9IZWxsb1dvcmxkLnZ1ZVwiXG5cbmV4cG9ydCBkZWZhdWx0IHNjcmlwdCJdLCJtYXBwaW5ncyI6IkFBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./src/components/HelloWorld.vue\n");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _HelloWorld_vue_vue_type_template_id_469af010_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HelloWorld.vue?vue&type=template&id=469af010&scoped=true */ \"./src/components/HelloWorld.vue?vue&type=template&id=469af010&scoped=true\");\n/* harmony import */ var _HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HelloWorld.vue?vue&type=script&lang=js */ \"./src/components/HelloWorld.vue?vue&type=script&lang=js\");\n/* empty/unused harmony star reexport *//* harmony import */ var _HelloWorld_vue_vue_type_style_index_0_id_469af010_scoped_true_lang_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./HelloWorld.vue?vue&type=style&index=0&id=469af010&scoped=true&lang=css */ \"./src/components/HelloWorld.vue?vue&type=style&index=0&id=469af010&scoped=true&lang=css\");\n\n\n\n\n\n_HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].render = _HelloWorld_vue_vue_type_template_id_469af010_scoped_true__WEBPACK_IMPORTED_MODULE_0__[\"render\"]\n_HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].__scopeId = \"data-v-469af010\"\n/* hot reload */\nif (true) {\n  _HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].__hmrId = \"469af010\"\n  const api = __VUE_HMR_RUNTIME__\n  module.hot.accept()\n  if (!api.createRecord('469af010', _HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])) {\n    api.reload('469af010', _HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])\n  }\n  \n  module.hot.accept(/*! ./HelloWorld.vue?vue&type=template&id=469af010&scoped=true */ \"./src/components/HelloWorld.vue?vue&type=template&id=469af010&scoped=true\", function(__WEBPACK_OUTDATED_DEPENDENCIES__) { /* harmony import */ _HelloWorld_vue_vue_type_template_id_469af010_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HelloWorld.vue?vue&type=template&id=469af010&scoped=true */ \"./src/components/HelloWorld.vue?vue&type=template&id=469af010&scoped=true\");\n(() => {\n    api.rerender('469af010', _HelloWorld_vue_vue_type_template_id_469af010_scoped_true__WEBPACK_IMPORTED_MODULE_0__[\"render\"])\n  })(__WEBPACK_OUTDATED_DEPENDENCIES__); }.bind(this))\n\n}\n\n_HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"].__file = \"src/components/HelloWorld.vue\"\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (_HelloWorld_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"]);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvY29tcG9uZW50cy9IZWxsb1dvcmxkLnZ1ZS5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9jb21wb25lbnRzL0hlbGxvV29ybGQudnVlPzc3NmEiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgcmVuZGVyIH0gZnJvbSBcIi4vSGVsbG9Xb3JsZC52dWU/dnVlJnR5cGU9dGVtcGxhdGUmaWQ9NDY5YWYwMTAmc2NvcGVkPXRydWVcIlxuaW1wb3J0IHNjcmlwdCBmcm9tIFwiLi9IZWxsb1dvcmxkLnZ1ZT92dWUmdHlwZT1zY3JpcHQmbGFuZz1qc1wiXG5leHBvcnQgKiBmcm9tIFwiLi9IZWxsb1dvcmxkLnZ1ZT92dWUmdHlwZT1zY3JpcHQmbGFuZz1qc1wiXG5cbmltcG9ydCBcIi4vSGVsbG9Xb3JsZC52dWU/dnVlJnR5cGU9c3R5bGUmaW5kZXg9MCZpZD00NjlhZjAxMCZzY29wZWQ9dHJ1ZSZsYW5nPWNzc1wiXG5zY3JpcHQucmVuZGVyID0gcmVuZGVyXG5zY3JpcHQuX19zY29wZUlkID0gXCJkYXRhLXYtNDY5YWYwMTBcIlxuLyogaG90IHJlbG9hZCAqL1xuaWYgKG1vZHVsZS5ob3QpIHtcbiAgc2NyaXB0Ll9faG1ySWQgPSBcIjQ2OWFmMDEwXCJcbiAgY29uc3QgYXBpID0gX19WVUVfSE1SX1JVTlRJTUVfX1xuICBtb2R1bGUuaG90LmFjY2VwdCgpXG4gIGlmICghYXBpLmNyZWF0ZVJlY29yZCgnNDY5YWYwMTAnLCBzY3JpcHQpKSB7XG4gICAgYXBpLnJlbG9hZCgnNDY5YWYwMTAnLCBzY3JpcHQpXG4gIH1cbiAgXG4gIG1vZHVsZS5ob3QuYWNjZXB0KFwiLi9IZWxsb1dvcmxkLnZ1ZT92dWUmdHlwZT10ZW1wbGF0ZSZpZD00NjlhZjAxMCZzY29wZWQ9dHJ1ZVwiLCAoKSA9PiB7XG4gICAgYXBpLnJlcmVuZGVyKCc0NjlhZjAxMCcsIHJlbmRlcilcbiAgfSlcblxufVxuXG5zY3JpcHQuX19maWxlID0gXCJzcmMvY29tcG9uZW50cy9IZWxsb1dvcmxkLnZ1ZVwiXG5cbmV4cG9ydCBkZWZhdWx0IHNjcmlwdCJdLCJtYXBwaW5ncyI6IkFBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./src/components/HelloWorld.vue\n");
 ```
 
 The main takeaway here is that within the `app.js` file contains all modules for my app.
@@ -241,7 +241,7 @@ a light-weight node web server starts to serve your app.
 There is no bundling or compiling needed to start the dev server, so it's damn quick (< 300ms).
 
 When you open your Vite app you'll be served the `index.html` from the server. The browser is going to read the `index.html`
-and know how to parse the Native-ES-Module code.
+and know how to parse the Native-ES-Module code. 
 
 
 ```html
@@ -261,7 +261,7 @@ It will keep going through like this with your dependencies recursively, in a wa
   <figcaption>Recursive network requests triggered from the entry - VitePress.</figcaption>
 </figure>
 
-
+ 
 ### Vite Component Example
 
 Let's take a look at how these requests are working in the browser. After I open my app at `http://localhost:3000`, the browser has fetched the following `index.js` file from the web server:
@@ -325,24 +325,24 @@ export default {
 
 Once the web server gets this request, it will need to compile the `CardPost.vue` file to javascript and send it back. Vite has many
 optimisations around the Vue compiling so this takes no time.
-
+ 
 Let's see what comes through:
 
 ```js
 import posts from '/.vitepress/posts.ts'
 
 const __script = {
-  props: {
-    postIndex: {
-      type: Number,
-      required: true,
+    props: {
+        postIndex: {
+            type: Number,
+            required: true,
+        }
+    },
+    computed: {
+        post() {
+            return posts[this.postIndex]
+        }
     }
-  },
-  computed: {
-    post() {
-      return posts[this.postIndex]
-    }
-  }
 }
 
 import "/@theme/components/CardPost.vue?type=style&index=0"
@@ -356,7 +356,7 @@ export default __script
 //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2hhcmxhbi9zaXRlcy9uZXcuaGFybGFuencuY29tL2FwcC8udml0ZXByZXNzL3RoZW1lL2NvbXBvbmVudHMvQ2FyZFBvc3QudnVlIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFpQkEsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7O0FBRTlCLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLEVBQUU7RUFDYixDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRTtJQUNMLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLEVBQUU7TUFDVCxDQUFDLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7TUFDWixDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDO0lBQ2hCO0VBQ0YsQ0FBQztFQUNELENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxFQUFFO0lBQ1IsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLEVBQUU7TUFDTixDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7SUFDN0I7RUFDRjtBQUNGIiwiZmlsZSI6Ii9ob21lL2hhcmxhbi9zaXRlcy9uZXcuaGFybGFuencuY29tL2FwcC8udml0ZXByZXNzL3RoZW1lL2NvbXBvbmVudHMvQ2FyZFBvc3QudnVlIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXNDb250ZW50IjpbIjx0ZW1wbGF0ZT5cbjxkaXYgY2xhc3M9XCJjYXJkLXBvc3QgLW14LTggbXktOCBob3ZlcjpzaGFkb3ctbGcgdHJhbnNpdGlvbi1hbGxcIj5cbiAgPGRpdiBjbGFzcz1cImNhcmQtcG9zdF9fZWZmZWN0XCI+PC9kaXY+XG4gIDxhIGNsYXNzPVwiY2FyZC1wb3N0X19saW5rIHVuc3R5bGVkXCIgOmhyZWY9XCJwb3N0LnVybFwiPjwvYT5cbiAgPGRpdiBjbGFzcz1cImNhcmQtcG9zdF9fY29udGVudFwiPlxuICAgICAgPGRpdiBjbGFzcz1cInAtOCBwcm9zZSBwcm9zZS14bFwiPlxuICAgICAgICA8aDMgc3R5bGU9XCJtYXJnaW4tdG9wOiAwICFpbXBvcnRhbnQ7XCI+PGEgOmhyZWY9XCJwb3N0LnVybFwiIGNsYXNzPVwidGV4dC0yeGxcIiBzdHlsZT1cImZvbnQtd2VpZ2h0OiBib2xkO1wiPnt7IHBvc3QudGl0bGUgfX08L2E+PC9oMz5cblxuICAgICAgICA8ZGl2IGNsYXNzPVwidGV4dC14cyB0ZXh0LWdyYXktNjAwXCI+PHRpbWU+e3sgcG9zdC5wdWJsaXNoZWQgfX08L3RpbWU+PC9kaXY+XG5cbiAgICAgICAgPHAgY2xhc3M9XCJ0ZXh0LW1kIHRleHQtZ3JheS02MDBcIj57eyBwb3N0LmV4Y2VycHQgfX08L3A+XG4gICAgICA8L2Rpdj5cbiAgPC9kaXY+XG48L2Rpdj5cbjwvdGVtcGxhdGU+XG5cbjxzY3JpcHQ+XG5pbXBvcnQgcG9zdHMgZnJvbSAnLi4vLi4vcG9zdHMnXG5cbmV4cG9ydCBkZWZhdWx0IHtcbiAgcHJvcHM6IHtcbiAgICBwb3N0SW5kZXg6IHtcbiAgICAgIHR5cGU6IE51bWJlcixcbiAgICAgIHJlcXVpcmVkOiB0cnVlLFxuICAgIH1cbiAgfSxcbiAgY29tcHV0ZWQ6IHtcbiAgICBwb3N0ICgpIHtcbiAgICAgIHJldHVybiBwb3N0c1t0aGlzLnBvc3RJbmRleF1cbiAgICB9XG4gIH1cbn1cbjwvc2NyaXB0PlxuXG48c3R5bGUgbGFuZz1cInNjc3NcIiBzY29wZWQ+XG4uY2FyZC1wb3N0IHtcblxuICBwb3NpdGlvbjogcmVsYXRpdmU7XG5cbiAgLnByb3NlIHtcbiAgICBtYXgtd2lkdGg6IDEwMCUgIWltcG9ydGFudDtcbiAgfVxuXG4gICZfX2xpbmsge1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICBsZWZ0OiAwO1xuICAgIHRvcDogMDtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBoZWlnaHQ6IDEwMCU7XG4gICAgY29udGVudDogJyAnO1xuICAgIHotaW5kZXg6IDE7XG4gIH1cblxuICAmX19jb250ZW50IHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgICB6LWluZGV4OiAxO1xuICB9XG5cbiAgJl9fZWZmZWN0IHtcbiAgICB6LWluZGV4OiAtMTtcbiAgICBjb250ZW50OiAnICc7XG4gICAgaGVpZ2h0OiAzMHB4O1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoNSwgMTUwLCAxMDUpO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gICAgb3BhY2l0eTogMDtcbiAgICB0b3A6IDMwcHg7XG4gIH1cblxuICAmOmhvdmVyIHtcbiAgICAuY2FyZC1wb3N0X19lZmZlY3Qge1xuICAgICAgdG9wOiAtNXB4O1xuICAgICAgb3BhY2l0eTogMTtcbiAgICAgIHRyYW5zZm9ybTogcm90YXRlKDAuMjVkZWcpO1xuICAgIH1cbiAgfVxufVxuPC9zdHlsZT5cbiJdfQ==
 ```
 
-Cool, so quite a bit going on here. The main thing to note here is how it's split up the SFC into different modules which
+Cool, so quite a bit going on here. The main thing to note here is how it's split up the SFC into different modules which 
 will need separate requests to fetch. It hasn't bundled these imports into the SFC or some other monolith file.
 
 - Dependencies: `/.vitepress/posts.ts`
@@ -375,12 +375,12 @@ export default css
 ```
 
 You can see how the above allows the Hot Module Replacement to work efficiently. When you have a module that is changed,
-say the styles within a component, instead of reloading the entire component tree, only the style module needs to be replaced.
+say the styles within a component, instead of reloading the entire component tree, only the style module needs to be replaced. 
 
 You can also imagine with the above, where Vite slows down. Imagine hundreds of HTTP requests which rely on nested HTTP requests, recursively.
 Fortunately, there are optimisation to avoid this situation after the first load. The server will return a 304
-Unmodified HTTP Status code for modules which haven't changed, meaning they will use the browser's cached version of the file.
-
+Unmodified HTTP Status code for modules which haven't changed, meaning they will use the browser's cached version of the file. 
+ 
 Vite scales well for any app size because it only needs to request the modules for the route you're on.
 
 ## Production Builds
@@ -397,12 +397,12 @@ js and speeding up the initial load for users. That means SEO friendly static si
 
 ## Summary
 
-While I haven't touched on a lot of the complexities of Vite and Webpack, I've tried to show you the main difference, how
-bundling and no-bundling look in action.
+While I haven't touched on a lot of the complexities of Vite and Webpack, I've tried to show you the main difference, how 
+bundling and no-bundling look in action. 
 
 Hopefully you've seen why Vite is promising alternative. There is so much potential in the ecosystem at the moment, watch this space, given 12-months we could see an explosion of Vite related projects.
 
-If you want to find out more about Vite, I'd watch Evan's talk on [Vite & VitePress](https://www.youtube.com/watch?v=xXrhg26VCSc&).
+If you want to find out more about Vite, I'd watch Evan's talk on [Vite & VitePress](https://www.youtube.com/watch?v=xXrhg26VCSc&).  
 
 
 ## Getting started with Vite
@@ -413,7 +413,7 @@ I'd recommend just spinning up bare-bones Vite to get a feel for it. It's really
 npm init vite-app
 ```
 
-Once you are sold, it's worth checking out [the ecosystem](https://github.com/vitejs/awesome-vite) before you build.
+Once you are sold, it's worth checking out [the ecosystem](https://github.com/vitejs/awesome-vite) before you build.  
 
 ### Recommendations
 
@@ -421,7 +421,7 @@ Once you are sold, it's worth checking out [the ecosystem](https://github.com/vi
 You shouldn't be looking to replace Vue CLI or Webpack with Vite for existing projects yet, but it may be worthwhile to check out for new smaller scoped projects.
 :::
 
-The Vite ecosystem isn't that mature yet, the two main projects I'd recommend checking out are [VitePress](https://vitepress.vuejs.org/) and [Vitesse](https://github.com/antfu/vitesse).
+The Vite ecosystem isn't that mature yet, the two main projects I'd recommend checking out are [VitePress](https://vitepress.vuejs.org/) and [Vitesse](https://github.com/antfu/vitesse). 
 
 If you are in need of a documentation site then VitePress is really awesome, you can follow the VuePress documentation to fill in any gaps. VitePress abstracts away
 the Vite configuration, which will be limiting for non-documentation sites.
@@ -436,5 +436,4 @@ If you like my blog (VitePress + TailwindCSS), then you're more than welcome to 
 ## Thanks for reading
 
 If you like the technical side of Vue and Laravel, I'll be posting regular articles on this site. The best
-way to keep up to date is by following me [@harlan_zw](https://twitter.com/harlan_zw) or subscribing to my newsletter.
-
+way to keep up to date is by following me [@harlan_zw](https://twitter.com/harlan_zw).

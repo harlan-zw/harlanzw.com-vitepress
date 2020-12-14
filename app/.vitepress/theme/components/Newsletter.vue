@@ -40,7 +40,7 @@ export default {
       this.submitting = true
       this.error = null
 
-      const result = await fetch(e.target.action, {
+      await fetch(e.target.action, {
         method: 'post',
         headers: {
           'Accept': 'application/json',
@@ -51,7 +51,6 @@ export default {
         })
       })
 
-      console.log(result)
       this.submitting = false
       this.email = ''
     }
