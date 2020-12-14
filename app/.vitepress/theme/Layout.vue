@@ -7,7 +7,6 @@
       </header>
       <main class="pb-10 sm:pb-16 md:pb-20">
         <Content />
-        <Newsletter />
       </main>
     </div>
   </div>
