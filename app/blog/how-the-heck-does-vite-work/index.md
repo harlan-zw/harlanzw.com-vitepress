@@ -1,5 +1,5 @@
 ---
-title: "How The Heck Does Vite Work - A comparison to Webpack"
+title: "How Does Vite Work - A Comparison to Webpack"
 description: "I used Vite to build a new blazing fast blog ⚡, find out what I learnt and why Vite is the next big thing."
 publishDate: 1st Dec 2020
 head:
