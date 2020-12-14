@@ -10,11 +10,10 @@ head:
     content: "https://harlanzw.com/social/home.png"    
 ---
 
+<h1><img src="./resources/me.png" width="80" height="80" loading="lazy" alt="Harlan Wilton" style="margin-top: 0 !important; margin-bottom: 0 !important;" class="inline rounded-full object-center md:h-20 md:w-20 h-12 w-12 object-cover"><span class="text-2xl ml-4">Hey, I'm Harlan 👋</span></h1>
 
 
-<h1><img src="./resources/me.png" width="80" height="80" loading="lazy" alt="Harlan Wilton" style="margin-top: 0 !important; margin-bottom: 0 !important;" class="inline rounded-full object-center md:h-20 md:w-20 h-12 w-12 object-cover"> Harlan Wilton</h1>
-
-Hey 👋 I'm working full-time for myself, trying to build profitable SaaS projects with Laravel & Vue. I'll be sharing my journey and learnings along the way. 🙂
+I'm self-employed, commited to personal and professional growth. Trying to learn new things with Laravel & Vue. I'll be sharing my journey and learnings along the way. 🙂
 
 ## Blog
 
