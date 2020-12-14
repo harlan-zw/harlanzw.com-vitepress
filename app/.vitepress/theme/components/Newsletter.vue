@@ -40,15 +40,12 @@ export default {
       this.submitting = true
       this.error = null
 
+      const formData = new FormData()
+      formData.append('email',  this.email)
+
       await fetch(e.target.action, {
         method: 'post',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: this.email
-        })
+        body: formData
       })
 
       this.submitting = false
