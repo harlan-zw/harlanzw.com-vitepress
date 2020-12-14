@@ -437,3 +437,5 @@ If you like my blog (VitePress + TailwindCSS), then you're more than welcome to 
 
 If you like the technical side of Vue and Laravel, I'll be posting regular articles on this site. The best
 way to keep up to date is by following me [@harlan_zw](https://twitter.com/harlan_zw).
+
+<Newsletter />

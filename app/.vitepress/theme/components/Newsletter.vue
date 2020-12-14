@@ -50,6 +50,7 @@ export default {
 
       this.submitting = false
       this.email = ''
+      this.success = true
     }
   }
 }
