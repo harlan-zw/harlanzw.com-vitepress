@@ -53,6 +53,7 @@ a:not(.unstyled):not(.header-anchor) {
 .prose {
   a {
     color: rgb(7, 130, 97);
+    font-weight: normal;
   }
   iframe {
     width: 100%;
@@ -63,9 +64,9 @@ a:not(.unstyled):not(.header-anchor) {
     padding: .25rem 0.5rem;
     font-size: 1.125rem;
     border-radius: .125rem;
-    background-color: #c7e5dd;
-    overflow-wrap: break-word;
-    word-break: break-all;
+    background-image: linear-gradient(rgb(174, 239, 221), rgb(240 245 242));
+    overflow-wrap: anywhere;
+    word-break: break-word;
     font-weight: normal;
     &:before {
       display: none;

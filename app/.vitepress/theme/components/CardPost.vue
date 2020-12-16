@@ -8,7 +8,7 @@
 
         <div class="text-xs text-gray-600"><time>{{ post.published }}</time></div>
 
-        <p class="text-md text-gray-600">{{ post.excerpt }}</p>
+        <p class="text-sm text-gray-600">{{ post.excerpt }}</p>
       </div>
   </div>
 </div>

@@ -1,7 +1,7 @@
 export default [
     {
         url: '/blog/the-future-of-vue-component-importing/',
-        title: 'The Future of Vue Component Importing: Magic',
+        title: 'The Future Of Vue: Automatic Component Imports',
         published: '5th Dec 2020',
         excerpt: 'Having component folders \'auto-magically\' imported into your app is the latest craze. How does it work and is it good?',
         status: 'published'
