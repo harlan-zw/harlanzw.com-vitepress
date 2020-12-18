@@ -1,9 +1,9 @@
 export default [
     {
         url: '/blog/vue-compile-time-component-imports/',
-        title: 'Vue Compile-Time Component Imports',
+        title: 'Building a Vue Automatic Compile-Time Importer: Trending DX',
         published: '20th Dec 2020',
-        excerpt: 'Having component folders \'auto-magically\' imported into your app is the latest craze. How does it work and is it good?',
+        excerpt: '**Work In Progress** Having component folders \'auto-magically\' imported into your app is the latest craze. How does it work and is it good?',
         status: 'published'
     },
     {

@@ -1,7 +1,7 @@
 ---
 title: "Building a Vue Automatic Compile-Time Importer: Trending DX"
 description: "Having component folders 'auto-magically' imported into your app is the latest craze. How does it work and is it good?"
-publishDate: 16th Dec 2020
+publishDate: 20th Dec 2020
 head:
 - - meta
   - name: description
@@ -39,6 +39,8 @@ head:
 ---
 
 # {{ $page.title }}
+
+**This Article is Still In Progress**
 
 <div class="text-xs text-gray-600"><time>{{ $page.frontmatter.publishDate }}</time></div>
 
