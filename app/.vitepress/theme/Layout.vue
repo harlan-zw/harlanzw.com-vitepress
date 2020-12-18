@@ -6,7 +6,7 @@
         <NavBar />
       </header>
       <main class="pb-10 sm:pb-16 md:pb-20">
-        <Content />
+        <Content class="animate-fadeIn"/>
       </main>
     </div>
   </div>
