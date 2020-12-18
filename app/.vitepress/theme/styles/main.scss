@@ -51,6 +51,9 @@ a:not(.unstyled):not(.header-anchor) {
 }
 
 .prose {
+  pre {
+    max-height: 85vh;
+  }
   a {
     color: rgb(7, 130, 97);
     font-weight: normal;
