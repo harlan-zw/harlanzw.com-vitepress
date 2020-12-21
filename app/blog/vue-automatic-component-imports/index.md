@@ -510,6 +510,29 @@ If you're after a more complete solution you should clone the repos listed befor
 Hopefully, you now have a better understanding of how auto component importing works. While working through that rough proof of
 concept, you may have foreseen some issues.
 
+### Performance Cost
+
+For automatic component imports to provide their magic, they need to parse the SFC and compile the template at compile time. If you recall,
+we are running our loader after the `vue-loader`, that means this compilation has already been completed and is happening again.
+
+This means that by using this feature, we are potentially **doubling our component build time**. Which affects the hot module
+replacement speed, the web-dev-server boot-time and the production build time.
+
+Saying that certain optimisations can and are made. Loader output can be cached with one line, so unless we change a file
+we don't need to recompile it.
+
+```js
+// imports-loaders.js
+// ... 
+module.exports = async function loader (source) {
+  this.cache()
+  // ...
+}
+```
+
+For Vue 3 there may be a new way to optimise this feature. I've based the proof of concept on how the existing Vue 2 plugins work.
+
+
 ### Static code only
 
 If you have a dynamic import then it's not going to work. I don't think this is a massive issue as you can
@@ -533,28 +556,6 @@ export default {
 
 For now, the automatic import of `ComponentA` and `ComponentB` is not possible.
 
-### Performance Cost
-
-For automatic component imports to provide their magic, they need to parse the SFC and compile the template at compile time. If you recall,
-we are running our loader after the `vue-loader`, that means this compilation has already been completed and is happening again.
-
-This means that by using this feature, we are potentially **doubling our component build time**. Which affects the hot module
-replacement speed, the web-dev-server boot-time and the production build time.
-
-Saying that certain optimisations can and are made. Loader output can be cached with one line, so unless we change a file
-we don't need to recompile it.
-
-```js
-// imports-loaders.js
-// ... 
-module.exports = async function loader (source) {
-  this.cache()
-  // ...
-}
-```
-
-For Vue 3 there may be a new way to optimise this feature. I've based the proof of concept on how the existing Vue 2 plugins work.
-
 ### Stricter component naming
 
 Due to the nature of mapping a file name to a component name, it sets a few requirements around how you name your components.
@@ -565,7 +566,7 @@ If you're going to adopt automatic component imports I'd recommend the following
 - Avoid non-unique component file names
 - Use nested folders to separate scopes
 
-## Future Of Automatic Compile-Time "Upgrades"
+## Other Compile-Time "Upgrades"
 
 ### Import Directive Support
 
