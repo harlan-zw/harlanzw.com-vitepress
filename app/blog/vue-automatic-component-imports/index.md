@@ -48,7 +48,7 @@ When first learning Vue, you are taught you need to import and add components to
 
 ```vue
 <template>
-  <HelloWorld/>
+  <HelloWorld />
 </template>
 <script>
 import HelloWorld from '@/components/HelloWorld.vue'
@@ -64,12 +64,10 @@ However, there's been a recent trend to "upgrade" the Vue developer experience (
 at compile-time.
 
 ```vue
-<template>
-<HelloWorld/>
-</template>
-<script>
 // justworks™
-</script>
+<template>
+  <HelloWorld />
+</template>
 ```
 
 In the wild, you can find auto component imports in most popular Vue frameworks, as part of the core or a plugin.
