@@ -11,11 +11,13 @@
 <script>
 import posts from '../../posts'
 import { filter } from 'lodash'
+import { useRoute } from 'vitepress'
 
 export default {
   computed: {
     posts () {
-      return filter(posts, p => p.url !== window.location.pathname && p.status === 'published')
+      const route = useRoute()
+      return filter(posts, p => p.url !== route.path && p.status === 'published')
     }
   }
 }
