@@ -205,7 +205,7 @@ is usually parsed to another loader such as [babel-loader](https://github.com/ba
 
 ## Building an Automatic Component Importer
 
-If you'd like to join me along while we build this, I'd recommend using [Vue CLI](https://cli.vuejs.org/) with the Vue 3 preset.
+If you have some spare time, I'd encourage you to join along. You can use [Vue CLI](https://cli.vuejs.org/) with the Vue 3 preset.
 
 ```shell
 vue create auto-component-importer -p __default_vue_3__
@@ -226,6 +226,17 @@ export default {
   name: 'App',
 }
 </script>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
 ```
 
 When we load our `App.vue`, the `HelloWorld` doesn't work, as expected. Our goal is to get it to work without touching the Vue code.
@@ -410,13 +421,20 @@ if (!matches.length) {
   return source
 }
 const newContent = `
-${matches.map(c => c.import).join('\\n')}
+${matches.map(c => c.import).join('\n')}
 script.components = Object.assign({ ${matches.map(c => c.name).join(', ')} }, script.components);
 `;
-return source + newContent
+const hotReload = source.indexOf('/* hot reload */')
+if (hotReload > -1) {
+  source = source.slice(0, hotReload) + newContent + '\n\n' + source.slice(hotReload)
+} else {
+  source += '\n\n' + newContent
+}
+return source
 ```
 
-Normally, you insert the new content before the HMR code, however the above will work for our proof of concept.
+We need to insert the new content before the HMR code if available, otherwise we need to restart our app to find
+new components.
 
 ### Putting it all together
 
@@ -467,10 +485,16 @@ module.exports = async function loader (source) {
     return source
   }
   const newContent = `
-${matches.map(c => c.import).join('\\n')}
+${matches.map(c => c.import).join('\n')}
 script.components = Object.assign({ ${matches.map(c => c.name).join(', ')} }, script.components);
 `;
-  return source + newContent
+  const hotReload = source.indexOf('/* hot reload */')
+  if (hotReload > -1) {
+    source = source.slice(0, hotReload) + newContent + '\n\n' + source.slice(hotReload)
+  } else {
+    source += '\n\n' + newContent
+  }
+  return source
 }
 ```
 
