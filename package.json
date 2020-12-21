@@ -18,5 +18,8 @@
     "dev": "export NODE_ENV=development; vitepress dev app",
     "build": "export NODE_ENV=production; vitepress build app",
     "serve": "vitepress serve app"
+  },
+  "dependencies": {
+    "lodash": "^4.17.20"
   }
 }

@@ -1,18 +1,21 @@
 <template>
 <div class="posts">
-  <template v-for="(post, key) in posts">
-    <CardPost  v-if="post.status === 'published'" :key="posts" :post="post" />
-  </template>
+  <CardPost
+      v-for="(post, key) in posts"
+      :key="key"
+      :post="post"
+  />
 </div>
 </template>
 
 <script>
 import posts from '../../posts'
+import { filter } from 'lodash'
 
 export default {
   computed: {
     posts () {
-      return posts
+      return filter(posts, p => p.url !== window.location.pathname && p.status === 'published')
     }
   }
 }
