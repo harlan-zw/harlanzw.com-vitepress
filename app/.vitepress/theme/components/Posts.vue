@@ -12,15 +12,12 @@
 import allPosts from '../../posts'
 import { filter } from 'lodash'
 import { useRoute } from 'vitepress'
-import { computed } from 'vue'
 
 export default {
   setup () {
     const route = useRoute()
-    const posts = computed(
-        // filter out any posts which match the current route and non-published posts
-        () => filter(allPosts, p => p.url !== route.path && p.status === 'published')
-    )
+    const path = route.path.replace('/index.html', '/')
+    const posts = filter(allPosts, p => p.url !== path && p.status === 'published')
     return {
       posts
     }
