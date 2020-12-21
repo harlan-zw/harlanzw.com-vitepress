@@ -77,8 +77,8 @@ In the wild, you can find auto component imports in most popular Vue frameworks,
 - [Vue CLI](https://github.com/loonpwn/vue-cli-plugin-import-components) (built by me)
 - [Vite](https://github.com/antfu/vite-plugin-components)
 
-This article, will look at: why automatic component imports exist, how you can easily build our own auto component importer using 
-a Webpack loader and what the performance cost of using them has on your app. 
+This article will look at: why automatic component imports exist, how you can easily build our own auto component importer using
+a Webpack loader and what the performance cost of using them has on your app.
 
 Finally, we'll look at some other compile-time DX upgrades that are possible.
 
@@ -118,7 +118,7 @@ to CommonJS modules (i.e `require`) for it to work.
 So how does all this relate to automatic component imports?
 
 With Vuetify handling the imports of your components (_[a la carte](https://vuetifyjs.com/en/features/treeshaking/)_ as they call it), they
-are able to ensure webpack optimisations are running out of the box for your app with their component library.
+can ensure webpack optimisations are running out of the box for your app with their component library.
 
 > The A la carte system enables you to pick and choose which components to import, drastically lowering your build size.
 
@@ -127,10 +127,9 @@ are able to ensure webpack optimisations are running out of the box for your app
 
 ## Fundamental: How Does Webpack Load Vue Files?
 
-Before we jump into building our own automatic component importer, we'll need to have a basic understand how Webpack loads Vue files.
+Before we jump into building our own automatic component importer, we'll need to have a basic understanding of how Webpack loads Vue files.
 
-When you request a resource (such as a file) in Webpack, it pushes the request through a pipeline of Webpack loaders to resolve the output. A Webpack
-loader is a piece of code which will transform a resource from one thing into another, it has an `input` and `output`.
+When you request a resource (such as a file) in Webpack, it pushes the request through a pipeline of Webpack loaders to resolve the output. A Webpack loader is a piece of code which will transform a resource from one thing into another, it has an `input` and `output`.
 
 For example, the [raw-loader](https://v4.webpack.js.org/loaders/raw-loader/) will read a file and give you the string contents.
 The `input` is a path to a file in your filesystem, the `output` is the string contents of the file.
@@ -320,7 +319,7 @@ Here we can now change anything about how our components work by modifying the v
 
 ### Step 2. Dumb Compile-Time Import
 
-As a proof of concept, let's try to import the `HelloWorld.vue` component so our [New App.vue](#new-app-vue) works. 
+As a proof of concept, let's try to import the `HelloWorld.vue` component so our [New App.vue](#new-app-vue) works.
 
 At this stage, we can just append the import code on to the `source`.
 
@@ -344,8 +343,8 @@ Note: This is a _dumb_ solution, as it will be modifying `HelloWorld.vue` to als
 
 ### Step 3. Making it smart
 
-Now we want to get the same functionality the existing libraries have, being able to add components to our component folder
-and use them straight away.
+A smarter solution would give us the ability to add components to our component folder and use them straight away without
+any imports.
 
 #### a. Scan components
 
@@ -369,7 +368,7 @@ const fileComponents = (await globby('*.vue', { cwd: base })).map(c => {
 
 #### b. Find the template tags
 
-To understand what components are being used, we need to have our new loader to compile the SFC `<template>` blocks. 
+To understand what components are being used, we need to have our new loader to compile the SFC `<template>` blocks.
 
 ```js
 // b. Find the template tags
@@ -495,7 +494,7 @@ code:
 
 ```vue
 <template>
-  <component :is="myComponent">
+  <component :is="myComponent" />
 </template>
 <script>
 export default {
@@ -508,7 +507,7 @@ export default {
 </script>
 ```
 
-For now the automatic import of `ComponentA` and `ComponentB` is not possible.
+For now, the automatic import of `ComponentA` and `ComponentB` is not possible.
 
 ### Performance Cost
 
@@ -530,7 +529,7 @@ module.exports = async function loader (source) {
 }
 ```
 
-For Vue 3 there may be a new ways to optimise this feature. I've based the proof of concept on how the existing Vue 2 plugins work.
+For Vue 3 there may be a new way to optimise this feature. I've based the proof of concept on how the existing Vue 2 plugins work.
 
 ### Stricter component naming
 
@@ -572,17 +571,17 @@ We could imagine that we could write some code which would inject the directive 
 
 We hook into the compiling again and replace the source of our images with compile-time low-resolution versions.
 
-**Input** 
+**Input**
 ```vue
 <template>
-  <v-img src="@/images/my-image">
+  <v-img src="@/images/my-image" />
 </template>
 ```
 
 **Output**
 ```vue
 <template>
-  <v-img placeholder="@/images/my-image-placeholder" src="@/images/my-image">
+  <v-img placeholder="@/images/my-image-placeholder" src="@/images/my-image" />
 </template>
 ```
 
@@ -596,7 +595,7 @@ This is useful for if you have heavy components that aren't above the fold.
 
 ## Conclusion
 
-Vue is already one of the most developer-friendly frontend frameworks around, with continued improvemenets in the dev experience
+Vue is already one of the most developer-friendly frontend frameworks around, with continued improvements in the dev experience
 Vue will continue to flourish.
 
 While these compile-time upgrades are not needed, they do make life easier. The possibilities
@@ -605,10 +604,11 @@ project to project.
 
 ## Thanks for reading
 
-Webpack and Vue internals are a challenging topic and if you made it all the way through, pat yourself on the back. 
+Webpack and Vue internals are a challenging topic and if you made it all the way through, pat yourself on the back.
 
 If you like the technical side of Vue and Laravel, I'll be posting regular articles on this site. The best
 way to keep up to date is by following me [@harlan_zw](https://twitter.com/harlan_zw) or signing up for the newsletter below.
+
 
 <Newsletter />
 
