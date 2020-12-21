@@ -2,6 +2,7 @@
 title: "How Does Vite Work - A Comparison to Webpack"
 description: "I used Vite to build a new blazing fast blog ⚡, find out what I learnt and why Vite is the next big thing."
 publishDate: 1st Dec 2020
+readTime: 10 min
 head:
 - - meta
   - name: description
@@ -40,7 +41,7 @@ head:
 
 # {{ $page.title }}
 
-<div class="text-xs text-gray-600"><time>{{ $page.frontmatter.publishDate }}</time></div>
+<div class="text-sm text-gray-500"><time>{{ $page.frontmatter.publishDate }}</time> - 🕒 {{ $page.frontmatter.readTime }}</div>
 
 In rebuilding my old Nuxt.js personal site, I wanted to challenge myself to learn the latest tech, the unknown.
 
