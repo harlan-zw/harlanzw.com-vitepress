@@ -64,7 +64,6 @@ However, there's been a recent trend to "upgrade" the Vue developer experience (
 at compile-time.
 
 ```vue
-// justworks™
 <template>
   <HelloWorld />
 </template>
@@ -78,7 +77,7 @@ In the wild, you can find auto component imports in most popular Vue frameworks,
 - [Vue CLI](https://github.com/loonpwn/vue-cli-plugin-import-components) (built by me)
 - [Vite](https://github.com/antfu/vite-plugin-components)
 
-In this article, we'll look at: why automatic component imports exist, how you can easily build our own auto component importer using 
+This article, will look at: why automatic component imports exist, how you can easily build our own auto component importer using 
 a Webpack loader and what the performance cost of using them has on your app. 
 
 Finally, we'll look at some other compile-time DX upgrades that are possible.
@@ -92,7 +91,7 @@ refactoring becomes easier and there's less code overall.
 The unintuitive but equally great advantage is found in the problem that this feature first solved.
 
 The UI framework [Vuetify](https://vuetifyjs.com/) is a huge library of over 80 components, coming in at [99.4KB](https://cdnjs.cloudflare.com/ajax/libs/vuetify/2.3.17/vuetify.js)
-for their scripts and as far as I know, was the first to introduce automatic component imports.
+for their scripts. As far as I know, they were the first to introduce automatic component imports.
 
 ### Problem: UI Framework Bloat
 
@@ -203,7 +202,7 @@ export default script
 Note: I've removed the Hot Module Reloading (HMR) code for simplicity here.
 
 The output of the loader isn't that important to understand, just know that the vue-loader has an in and out function. The output
-of the vue-loader is usually parsed to another loader such as [babel-loader](https://github.com/babel/babel-loader).
+is usually parsed to another loader such as [babel-loader](https://github.com/babel/babel-loader) before being chunked.
 
 ## Building an Automatic Component Importer
 
@@ -315,18 +314,20 @@ module.exports = function loader(source) {
 }
 ```
 
-The `console.log` would spit out the [Output: App.vue](#output-app-vue). We can now change anything about how our component works
-by modifying the `source`.
+The `source` variable is the output of the vue-loader, the [Output: App.vue](#output-app-vue).
+
+Here we can now change anything about how our components work by modifying the vue-loader output.
 
 ### Step 2. Dumb Compile-Time Import
 
-As a proof of concept, let's try to import the `HelloWorld.vue` component so our [New App.vue](#new-app-vue) works. At this stage, we could
-append the import code on to the `source`.
+As a proof of concept, let's try to import the `HelloWorld.vue` component so our [New App.vue](#new-app-vue) works. 
+
+At this stage, we can just append the import code on to the `source`.
 
 ```js
 // imports-loader.js
 module.exports = function loader (source) {
-  // only run for the non-query requests
+  // only run for the virtual SFC
   if (this.resourceQuery) {
     return source
   }
@@ -339,15 +340,18 @@ script.components = Object.assign({ HelloWorld }, script.components)
 
 Your `App.vue` now knows what the HelloWorld component is and works. Try it yourself.
 
-Note: This really is a _dumb_ solution, as it will be modifying `HelloWorld.vue` to also import itself.
+Note: This is a _dumb_ solution, as it will be modifying `HelloWorld.vue` to also import itself.
 
 ### Step 3. Making it smart
+
+Now we want to get the same functionality the existing libraries have, being able to add components to our component folder
+and use them straight away.
 
 #### a. Scan components
 
 The first step in making it smarter is we need to create a map of the components files we want to automatically import.
 
-This is fairly straight forward, we recursively iterate over the components folder and do some mapping.
+We recursively iterate over the components folder and do some mapping.
 
 ```js
 // a. Scan components
@@ -365,10 +369,7 @@ const fileComponents = (await globby('*.vue', { cwd: base })).map(c => {
 
 #### b. Find the template tags
 
-To understand what components are within the `<template>` block we need to compile it. This is where the code gets a little
-more complicated, but all we're doing is running the `App.vue` file through the vue compiler.
-
-Note: The implementation between Vue 2 and 3 is different. For simplicity, we'll be using Vue 3's compiler.
+To understand what components are being used, we need to have our new loader to compile the SFC `<template>` blocks. 
 
 ```js
 // b. Find the template tags
@@ -383,10 +384,12 @@ const componentTags = template.ast.components
 // [ 'HelloWorld' ]
 ```
 
+Note: For simplicity, we're using Vue 3's compiler. The above won't work for Vue 2.
+
 #### c. Matchmaking
 
-With our freshly compiled template, we need to match the `componentTags` with our mapped component files
-from step a.
+With our freshly compiled template, we need to match the components we found in our template with the mapped component files
+from [a. Scan Components](#a-scan-components).
 
 ```js
 // c. Match making
@@ -395,7 +398,12 @@ componentTags.forEach(tag => matches.push(first(filter(fileComponents, c => c.na
 //[ { name: 'HelloWorld', import: 'import HelloWorld from "@/components/HelloWorld.vue"' } ]
 ```
 
+If you wanted to match non-PascalCase names, you would modify this matcher function.
+
 #### d. Insert the new dynamic imports
+
+The final piece of the puzzle is appending the list of matched components and inserting the import line and assigning
+the components.
 
 ```js
 // d. Insert the new dynamic imports
@@ -408,6 +416,8 @@ script.components = Object.assign({ ${matches.map(c => c.name).join(', ')} }, sc
 `;
 return source + newContent
 ```
+
+Normally, you insert the new content before the HMR code, however the above will work for our proof of concept.
 
 ### Putting it all together
 
@@ -505,7 +515,7 @@ For now the automatic import of `ComponentA` and `ComponentB` is not possible.
 For automatic component imports to provide their magic, they need to parse the SFC and compile the template at compile time. If you recall,
 we are running our loader after the `vue-loader`, that means this compilation has already been completed and is happening again.
 
-This means that by adding this feature, we are could be **doubling our build time**. Which affects the hot module
+This means that by using this feature, we are potentially **doubling our component build time**. Which affects the hot module
 replacement speed, the web-dev-server boot-time and the production build time.
 
 Saying that certain optimisations can and are made. Loader output can be cached with one line, so unless we change a file
@@ -536,8 +546,8 @@ If you're going to adopt automatic component imports I'd recommend the following
 
 ### Import Directive Support
 
-Vuetify already has some support for this. The idea is that when compiling the template, we can also see when specific directives are used.
-If the directive is not globally registered, then we can do a compile-time import of it.
+When compiling the template, we can also see when specific directives are used.
+If the directive is not globally registered, then we can do an automatic compile-time import of it.
 
 ```vue
 <template>
@@ -560,32 +570,29 @@ We could imagine that we could write some code which would inject the directive 
 
 ### Progressive Images
 
-Once again, another vuetify-loader feature and one we could see become more popular is automatic progressive images.
-
-The idea is that we hook into the compiling again and replace the source of our images with compile-time low-resolution
-versions.
+We hook into the compiling again and replace the source of our images with compile-time low-resolution versions.
 
 **Input** 
 ```vue
 <template>
-<v-img src="@/images/my-image">
+  <v-img src="@/images/my-image">
 </template>
 ```
 
 **Output**
 ```vue
 <template>
-<v-img placeholder="@/images/my-image-placeholder" src="@/images/my-image">
+  <v-img placeholder="@/images/my-image-placeholder" src="@/images/my-image">
 </template>
 ```
 
-### Below-the-fold async imports
+### Async imports
 
-The `@nuxt/components` does offer this functionality as opt-in, but it would be interesting to see an 'automatic' version of it.
+The `@nuxt/components` package does offer this functionality as opt-in through a `Lazy` prefix on the component.
 
-The idea is that for any component which would be rendered below the fold, to load it asynchronously. When we load components
-async that are not in the main webpack chunk of that page. That means if you have a large page with lots of components,
-you could minimise the initial load significantly.
+It makes use Webpack's [Lazy Loading](https://webpack.js.org/guides/lazy-loading/) which bundles imports as their own dependency.
+This is useful for if you have heavy components that aren't above the fold.
+
 
 ## Conclusion
 
