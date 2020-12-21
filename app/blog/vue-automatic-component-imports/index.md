@@ -48,7 +48,7 @@ When first learning Vue, you are taught you need to import and add components to
 
 ```vue
 <template>
-<HelloWorld />
+  <HelloWorld />
 </template>
 <script>
 import HelloWorld from '@/components/HelloWorld.vue'
@@ -65,7 +65,7 @@ at compile-time.
 
 ```vue
 <template>
-<HelloWorld />
+  <HelloWorld />
 </template>
 ```
 
@@ -494,7 +494,7 @@ code:
 
 ```vue
 <template>
-  <component :is="myComponent">
+  <component :is="myComponent" />
 </template>
 <script>
 export default {
@@ -574,14 +574,14 @@ We hook into the compiling again and replace the source of our images with compi
 **Input**
 ```vue
 <template>
-  <v-img src="@/images/my-image">
+  <v-img src="@/images/my-image" />
 </template>
 ```
 
 **Output**
 ```vue
 <template>
-  <v-img placeholder="@/images/my-image-placeholder" src="@/images/my-image">
+  <v-img placeholder="@/images/my-image-placeholder" src="@/images/my-image" />
 </template>
 ```
 
