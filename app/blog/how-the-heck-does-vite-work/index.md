@@ -1,5 +1,5 @@
 ---
-title: "How Does Vite Work - A Comparison to Webpack"
+title: "How Does Vite Work - A Comparison to webpack"
 description: "I used Vite to build a new blazing fast blog ⚡, find out what I learnt and why Vite is the next big thing."
 publishDate: 1st Dec 2020
 readTime: 10 min
@@ -15,7 +15,7 @@ head:
     content: "https://harlanzw.com/blog/how-the-heck-does-vite-work/"    
 - - meta
   - property: "og:title"
-    content: "How The Heck Does Vite Work - A comparison to Webpack"
+    content: "How The Heck Does Vite Work - A Comparison to webpack"
 - - meta
   - property: "og:description"
     content: "I used Vite to build a new blazing fast blog ⚡, find out what I learnt and why Vite is the next big thing."    
@@ -84,16 +84,16 @@ is the more noticeable the speed difference will be.
 <figcaption>New Vue 3 project / 10 components / no Babel / 2nd run, in development.</figcaption>
 </figure>
 
-## Vite vs Webpack
+## Vite vs webpack
 
 The main functional difference you'll notice with Vite and your webpack app, is how code is served in development and which modules are supported.
 
 Don't worry if the below terms don't make sense to you, we'll be exploring them below.
 
-### Webpack (Nuxt.js / Vue CLI / etc) 
+### webpack (Nuxt.js / Vue CLI / etc) 
 - Supported Modules: [ES Modules](https://www.2ality.com/2014/09/es6-modules-final.html), [CommonJS](http://wiki.commonjs.org/) and [AMD Modules](https://github.com/amdjs/amdjs-api/wiki/AMD) 
 - Dev Server: Bundled modules served via webpack-dev-server using [Express.js](https://expressjs.com/) web server
-- Production Build: Webpack
+- Production Build: webpack
 
 ### Vite
 - Supported Modules: [ES Modules](https://www.2ality.com/2014/09/es6-modules-final.html)
@@ -104,17 +104,17 @@ Don't worry if the below terms don't make sense to you, we'll be exploring them 
 Check out Mozilla's <a href="https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/" target="_blank">article</a> on ES Modules if their new to you.
 :::
 
-## Understanding Webpack
+## Understanding webpack
 
-To understand how Vite works, it's best to look at how Webpack works first. Even with its popularly, understanding Webpack can be intimidating, so I'll try to keep it simple.
+To understand how Vite works, it's best to look at how webpack works first. Even with its popularly, understanding webpack can be intimidating, so I'll try to keep it simple.
 
-Webpack is versatile in what you can do with it, but at it's core, it will:
+webpack is versatile in what you can do with it, but at it's core, it will:
 - Starting with an entry file, build a tree of your dependencies: all the imports, exports, requires from your code/files
 - Transform / compile modules: think transpiling js for older browsers, turning SCSS into CSS
 - Use algorithms to sort, rewrite and concatenate code
 - Optimise
 
-### Webpack In Development
+### webpack In Development
 
 Assuming you're using one of the main Vue frameworks, when you start your app in development, it is going to do a few things:
 1. Bundle all of your code
@@ -131,7 +131,7 @@ As you may notice with your own apps, the bigger they grow, the longer you have 
 Bundling in development is quicker because you don't need to do as much with the code, however, 
 as your app grows, it will become painfully slow, especially on older machines. 
 
-### Webpack Component Example
+### webpack Component Example
 
 I created a default Vue 3 [Vue CLI](https://cli.vuejs.org/) project, which has an entry `App.vue` file using the `HelloWorld.vue` component. 
 Let's see how this component gets to my browser.
@@ -219,7 +219,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Hel
 
 The main takeaway here is that within the `app.js` file contains all modules for my app.
 
-Webpack does let you chunk the bundles how you like, for Nuxt.js it chunks routes individually. The more chunks though,
+webpack does let you chunk the bundles how you like, for Nuxt.js it chunks routes individually. The more chunks though,
 the more requests and more potential blocking js.
 
 You may see the problem here, we have multiple monolith files that need to be generated anytime we want to use our app.
@@ -386,8 +386,8 @@ Vite scales well for any app size because it only needs to request the modules f
 
 ## Production Builds
 
-Since Vite is using Rollup, pre-configured, you'd expect a similar output from Vite as Webpack. Vite does boast a quicker
-builder and potentially a smaller artifact size, as Rollup is a more efficient bundler than Webpack.
+Since Vite is using Rollup, pre-configured, you'd expect a similar output from Vite as webpack. Vite does boast a quicker
+builder and potentially a smaller artifact size, as Rollup is a more efficient bundler than webpack.
 
 The main gotcha is that Vite can still only support ES Modules in the production build, meaning you can't have any dependencies
 which don't have ES Module exports.
@@ -398,7 +398,7 @@ js and speeding up the initial load for users. That means SEO friendly static si
 
 ## Summary
 
-While I haven't touched on a lot of the complexities of Vite and Webpack, I've tried to show you the main difference, how 
+While I haven't touched on a lot of the complexities of Vite and webpack, I've tried to show you the main difference, how 
 bundling and no-bundling look in action. 
 
 Hopefully you've seen why Vite is promising alternative. There is so much potential in the ecosystem at the moment, watch this space, given 12-months we could see an explosion of Vite related projects.
@@ -419,7 +419,7 @@ Once you are sold, it's worth checking out [the ecosystem](https://github.com/vi
 ### Recommendations
 
 ::: warning TIP
-You shouldn't be looking to replace Vue CLI or Webpack with Vite for existing projects yet, but it may be worthwhile to check out for new smaller scoped projects.
+You shouldn't be looking to replace Vue CLI or webpack with Vite for existing projects yet, but it may be worthwhile to check out for new smaller scoped projects.
 :::
 
 The Vite ecosystem isn't that mature yet, the two main projects I'd recommend checking out are [VitePress](https://vitepress.vuejs.org/) and [Vitesse](https://github.com/antfu/vitesse). 
