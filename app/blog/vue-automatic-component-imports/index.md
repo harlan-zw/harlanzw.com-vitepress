@@ -105,9 +105,9 @@ Additionally, this component bloat can make import paths harder to work with and
 
 So, how do Vuetify and other UI frameworks overcome their inherent bloat?
 
-### Solution: Webpack Optimisations
+### Solution: webpack Optimisations
 
-As is the way, Webpack is here to magically solve our problems with [tree shaking](https://webpack.js.org/guides/tree-shaking/) and [code splitting](https://webpack.js.org/guides/code-splitting/) optimisations.
+As is the way, webpack is here to magically solve our problems with [tree shaking](https://webpack.js.org/guides/tree-shaking/) and [code splitting](https://webpack.js.org/guides/code-splitting/) optimisations.
 
 If tree shaking is new to you, you can think of it as an optimisation to remove code that isn't explicitly used. Banishing
 'dead' code to the shadow realm.
@@ -125,11 +125,11 @@ can ensure webpack optimisations are running out of the box for your app with th
 > This will also make code-splitting more effective, as webpack will only load the components required for that chunk to be displayed.
 
 
-## Fundamental: How Does Webpack Load Vue Files?
+## Fundamental: How Does webpack Load Vue Files?
 
-Before we jump into building our own automatic component importer, we'll need to have a basic understanding of how Webpack loads Vue files.
+Before we jump into building our own automatic component importer, we'll need to have a basic understanding of how webpack loads Vue files.
 
-When you request a resource (such as a file) in Webpack, it pushes the request through a pipeline of Webpack loaders to resolve the output. A Webpack loader is a piece of code which will transform a resource from one thing into another, it has an `input` and `output`.
+When you request a resource (such as a file) in webpack, it pushes the request through a pipeline of webpack loaders to resolve the output. A webpack loader is a piece of code which will transform a resource from one thing into another, it has an `input` and `output`.
 
 For example, the [raw-loader](https://v4.webpack.js.org/loaders/raw-loader/) will read a file and give you the string contents.
 The `input` is a path to a file in your filesystem, the `output` is the string contents of the file.
@@ -241,7 +241,7 @@ export default {
 
 When we load our `App.vue`, the `HelloWorld` doesn't work, as expected. Our goal is to get it to work without touching the Vue code.
 
-### Step 1. Modify the Webpack Configuration
+### Step 1. Modify the webpack Configuration
 
 We need to make sure the loader we'll be making is going to run after the vue-loader.
 
@@ -304,7 +304,7 @@ module.exports = {
 }
 ```
 ::: tip Hint
-Normally a Webpack would handle this configuration changing for you.
+Normally a webpack would handle this configuration changing for you.
 :::
 </details>
 
@@ -614,7 +614,7 @@ We hook into the compiling again and replace the source of our images with compi
 
 The `@nuxt/components` package does offer this functionality as opt-in through a `Lazy` prefix on the component.
 
-It makes use Webpack's [Lazy Loading](https://webpack.js.org/guides/lazy-loading/) which bundles imports as their own dependency.
+It makes use webpack's [Lazy Loading](https://webpack.js.org/guides/lazy-loading/) which bundles imports as their own dependency.
 This is useful for if you have heavy components that aren't above the fold.
 
 
@@ -629,7 +629,7 @@ project to project.
 
 ## Thanks for reading
 
-Webpack and Vue internals are a challenging topic and if you made it all the way through, pat yourself on the back.
+webpack and Vue internals are a challenging topic and if you made it all the way through, pat yourself on the back.
 
 If you like the technical side of Vue and Laravel, I'll be posting regular articles on this site. The best
 way to keep up to date is by following me [@harlan_zw](https://twitter.com/harlan_zw) or signing up for the newsletter below.
