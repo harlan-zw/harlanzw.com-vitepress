@@ -17,7 +17,18 @@
 </div>
 </template>
 
-<script src="./NavBar"></script>
+<script>
+import { withBase } from '../utils';
+import NavBarLinks from './NavBarLinks.vue';
+export default {
+  components: {
+    NavBarLinks
+  },
+  setup() {
+    return { withBase };
+  }
+};
+</script>
 
 <style lang="scss">
 .blob {
