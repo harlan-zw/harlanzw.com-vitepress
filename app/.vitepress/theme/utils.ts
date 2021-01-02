@@ -1,4 +1,4 @@
-import { useSiteData, Route } from 'vitepress'
+import { useSiteData } from 'vitepress/dist/client/app/composables/siteData'
 
 export const hashRE = /#.*$/
 export const extRE = /(index)?\.(md|html)$/
@@ -21,7 +21,7 @@ export function isExternal(path: string): boolean {
   return outboundRE.test(path)
 }
 
-export function isActive(route: Route, path?: string): boolean {
+export function isActive(route, path?: string): boolean {
   if (path === undefined) {
     return false
   }

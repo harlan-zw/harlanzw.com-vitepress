@@ -11,7 +11,7 @@
 <script>
 import allPosts from '../../posts'
 import { filter } from 'lodash'
-import { useRoute } from 'vitepress'
+import { useRoute } from 'vitepress/dist/client/app/router';
 
 export default {
   setup () {
