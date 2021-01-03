@@ -28,11 +28,8 @@ Like fashion, everyone has their own style when they architecture an app. This i
 The official Vue.js style guide is _the best_ starting point for application architecture.
 The style guide should be required reading for anyone jumping into Vue or Vue developers who somehow have missed it.
 
-Let's quickly jump into what the style guide says for components. 
-
-Note: If you are using a Vue linter with ESlint, then you are likely already following most of the 
-recommended rules.
-
+I won't go directly into what the style guide recommends because it can explain itself better, just know
+that my recommendations are built off of the style guide. 
 
 
 ## app / shared folder
