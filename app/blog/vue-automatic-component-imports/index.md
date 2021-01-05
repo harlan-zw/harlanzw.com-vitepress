@@ -39,11 +39,6 @@ head:
     content: "https://harlanzw.com/social/vue-automatic-component-imports.png"
 ---
 
-# {{ $page.title }}
-
-<div class="text-sm text-gray-500"><time>{{ $page.frontmatter.publishDate }}</time> - 🕒 {{ $page.frontmatter.readTime }}</div>
-
-
 When first learning Vue, you are taught you need to import and add components to `components` in the script block.
 
 ```vue

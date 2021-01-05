@@ -6,6 +6,11 @@
         <NavBar />
       </header>
       <main class="pb-10 sm:pb-16 md:pb-20">
+        <template v-if="post">
+        <h1>{{ post.title }}</h1>
+        <div class="text-sm text-gray-500"><time class="mr-3">{{ post.publishDate }}</time> 🕒 {{ post.readMins }}min</div>
+        <PostTags :post="post" class="mt-5" />
+        </template>
         <Content class="animate-fadeIn"/>
       </main>
     </div>
@@ -27,23 +32,30 @@
 
 <script>
 import NavBar from './components/NavBar.vue'
-import { inject } from 'vue'
+import PostTags from './components/PostTags.vue'
+import { inject, computed } from 'vue'
+import { postForPath } from './utils'
+import { useRoute } from 'vitepress/dist/client/app/router';
 
 export default {
   components: {
+    PostTags,
     NavBar,
   },
   setup() {
     const zoom = inject('zoom')
+    const route = useRoute()
+    const post = computed(() => postForPath(route.path))
 
     return {
-      zoom
+      zoom,
+      post
     }
   },
   watch: {
     $page: {
       handler () {
-        if (this.zoom) {
+        if (this.zoom && this.$page.relativePath !== 'index.md') {
           setTimeout(() => {
             this.zoom.listen('.prose img')
           }, 500)
