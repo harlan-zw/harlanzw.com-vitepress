@@ -5,7 +5,7 @@ publishDate: 22nd Dec 2020
 readTime: 10 min
 ---
 
-When first embarking on my Vue.js journey for a full on [ production app](https://kintell.com), I spent a lot of time researching 
+When first embarking on my Vue.js journey for a full on [production app](https://kintell.com), I spent a lot of time researching 
 scalability of Vue apps.
 
 There are plenty of articles on the design of your Vuex store, 
@@ -19,42 +19,100 @@ Like spaces or tabs, everyone has their own opinion on architecture. This is _my
 
 ## The first rule of Vue club
 
-The [official Vue.js style](https://v3.vuejs.org/style-guide/) guide is _the best_ starting point for all Vue developers.
-It gives you clear concise descriptions or what you should and shouldn't do.
+The [official Vue.js style](https://v3.vuejs.org/style-guide/) guide is _the best_ starting point for all Vue developers and is required reading.
+It gives you clear, concise instructions on what you should and shouldn't do.
 
-I won't be going over the style guide directly because it can explain itself better, just know
-that my recommendations are built off of the style guide. You should read it first before proceeding.
+My tips are built off of the "Strongly Recommended" guidelines.
+
+## Naming components
+
+The bane of developers lives: how to name something. 
+
+Having an easy to follow playbook on how to name a component and where to put it will give you the biggest leverage in scaling.
+
+### Choose a Component Prefix
+
+Applicable when you are using a third-party UI library (like Vuetify or Chakra) or one-off components (like algolia or google maps) then namespacing your components is the easiest way to keep your
+components clean, avoid conflicts and easily setup auto-loading.
+
+The style guide recommends a prefix of `Base`, `App` or `V` for base components, however I believe a short namespace for _all_ your
+components is going to save you effort in the long run. You should use something which relates to your app, for example I use `h` as the prefix
+because my site is harlanzw.com.
+
+```vue
+<template>
+  <p>Please enter your email to subscribe</p>
+  <!-- Vuetify components use a V prefix -->
+  <v-text-field label="Your Email"></v-text-field>
+  <!-- H is the prefix for my components -->
+  <h-button>Submit</h-button>
+</template>
+```
+
+## Namespaces within your component names
+
+> Component names should start with the highest-level (often most general) words and end with descriptive modifying words.
+
+> Child components that are tightly coupled with their parent should include the parent component name as a prefix.
+
+> Component names should prefer full words over abbreviations.
 
 
-## Create a UI Kit
 
-The first step in taming your components is to define a separation of scope for "shared" (or "common") components
-and "app" (or "business") components.
+## Where to put components
 
+## Separate component scopes
 
-If you've used a framework like Vuetify or Bootstrap you should intuitively know when you have a component which has
-shared functionality.
+Creating distinct scopes for how components behave will guide you in staying DRY - not creating duplicate components with minor differences.
+A scope for "base" (a.k.a. presentational, dumb, or pure components) components and "app" (a.k.a single-instance) components is a good starting point.
 
-There are multiple ways to set this up, the easiest and quickest is just to make two folders within your component folder.
-If you know that your app may be split up into separate projects at some point, it may be worth creating an npm package just
-for your shared components.
+There are multiple ways to set this up. I like making two folders within the component folder, below I have the
+"app" folder and "shared" folder for base components. You can also pull out your base components into their own npm package if you're game.
 
 ```
--| components
----| app
----| shared
+components/
+|- app
+|- shared
 ```
 
-### Choosing which folder
+This forces you to think about component scopes when creating them and how code can be re-used.
 
-To the best of your ability, you should be trying to pull out "abstract" components which don't contain any app specific
-logic or data into this separate directory. 
-
-You can follow the below decision graph for that:
+It's common that you'll create a component with application logic coupled in, where it can easily be pulled out with a prop or scoped slot.
+Props and slots are cheap in comparison to adding new components. 
 
 <img src="../../resources/component-folder-flow.svg" class="block mx-auto">
 
-Let's run through some examples.
+
+### "Shared" Folder - Base Components
+
+Base components are inherently re-usable and include components like: form inputs, buttons, dialogs, modals, etc. They should never contain application logic or state data.
+
+When you are using a UI library, you are using base components, think [VueStrap](https://yuche.github.io/vue-strap/), [Vuetify](https://vuetifyjs.com/), [Tailwind UI](https://tailwindui.com/), etc. 
+
+What you should be aiming to do is building your own "ui kit" from your base components.
+
+```
+components/
+|- app/
+|- shared/
+|-- Alert
+|--- HAlertInfo.vue
+|--- HAlertSuccess.vue
+|--- HAlertWarn.vue
+|-- Button/
+|--- HButton.vue
+```
+
+### "App" Folder - App components
+
+App components, or as the vue style guide calls them, "single-instance components" do contain application logic and state data. 
+I believe app components should be able to have multiple-instances on a page, there are use cases. 
+
+
+
+## Examples
+
+Let's see some examples of what we'd like to build and how you would setup the components.
 
 #### Example 1. Phone Number Field with Custom Validation
 
@@ -62,16 +120,22 @@ Let's run through some examples.
 
 #### Example 3. Call to action
 
-### Make a demo page
 
+## Extra tips
 
+## Use An Automatic Component Importer
 
-## Component File Directory and Names
 
 ## The one job principal
 
+## Create a brand guidelines demo
 
-## use a component 'magic' loader
+Using a package like [Storybook](https://storybook.js.org/) is a great idea, but it can come with some extra overhead
+and when you're starting out it can be a bit overkill.
+
+As a starting point I'd recommend you just create some pages under a `/brand` prefix and throwing your components in there.
+The idea is to have an easy way to discover the components (and classes) that are available.
+
 
 
 ## Offload work to composables
