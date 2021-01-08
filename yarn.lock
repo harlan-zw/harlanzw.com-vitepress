@@ -212,10 +212,10 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.6.tgz#f4c7ec43e81b319a9815115031709f26987891f0"
   integrity sha512-3c+yGKvVP5Y9TYBEibGNR+kLtijnj7mYrXRg+WpFb2X9xm04g/DXYkfg4hmzJQosc9snFNUPkbYIhu+KAm6jJw==
 
-"@vitejs/plugin-vue@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue/-/plugin-vue-1.0.2.tgz#46da003df81c5ef74cec6d59c16fa13c34bd8108"
-  integrity sha512-qtmVCJ3MfGebpbRIK/UFydlEuvDrz5Z4caARXDWWy23bM6nFq7wIV6/tW4LRdmSHxFdyvogctQ1+zl4brJg1og==
+"@vitejs/plugin-vue@^1.0.3":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue/-/plugin-vue-1.0.4.tgz#124b06b185a8b536210bdb00948c17e52ab589fe"
+  integrity sha512-VaXpbmriAOeCdstHKjw3L8/8GZ33fcshBbWlN6IocKQW+GOGV4Xm8Vp0Oa/VpPVCSTHMcqvKyQ4gGEBpDHdWHg==
 
 "@vue/compiler-core@3.0.5":
   version "3.0.5"
@@ -2780,25 +2780,26 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-vite@^2.0.0-alpha.5:
-  version "2.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-2.0.0-beta.1.tgz#a2d41ea12b6203a0cbec311a7a258fc9c236ad9c"
-  integrity sha512-Rycsi2cfNVhONUvzX5gdBR4Rdsg0LH13a5Yz0LHTDwhAyZHefvYo+m90oj/bKHhHR5iIk6h73lvd+8GCo0hbEw==
+vite@^2.0.0-beta.8:
+  version "2.0.0-beta.8"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-2.0.0-beta.8.tgz#3578e94bcba69f0d89808fd665c293570b22c70d"
+  integrity sha512-fl9cDM2KxgpMtU2+xUGLgVmDITpDNEEk1KhDPC+LwjrSvCV7Z84zt3ihvymyjeRmPH7jBWsvuyIPys76gidBWA==
   dependencies:
     esbuild "^0.8.26"
     postcss "^8.2.1"
+    resolve "^1.19.0"
     rollup "^2.35.1"
   optionalDependencies:
     fsevents "~2.1.2"
 
-vitepress@^0.10.4:
-  version "0.10.4"
-  resolved "https://registry.yarnpkg.com/vitepress/-/vitepress-0.10.4.tgz#65b5a6be2503ea492fd79082d576bd73725abc25"
-  integrity sha512-VvSANRPGNsUlsieruktRacdtG1P/jsQdMcY6NEs/lc7k/YwW1np7wLSQChk0DPgUdEnLDu/pOXQq+iTuOarTdA==
+vitepress@^0.10.7:
+  version "0.10.7"
+  resolved "https://registry.yarnpkg.com/vitepress/-/vitepress-0.10.7.tgz#53ce1f735cf765fc50ed07cb0a7d5ae4fb92ef29"
+  integrity sha512-6ZnH3WIYL58E5ddKCDzihI2UKUOD24e15jfi2YEbiMI3Eb6cZwfFehiZUoSVFQ38sJ6/Vh9p8SzH92w+OlXXFQ==
   dependencies:
     "@docsearch/css" "^1.0.0-alpha.28"
     "@docsearch/js" "^1.0.0-alpha.28"
-    "@vitejs/plugin-vue" "^1.0.2"
+    "@vitejs/plugin-vue" "^1.0.3"
     "@vue/compiler-sfc" "^3.0.5"
     "@vue/server-renderer" "^3.0.5"
     chalk "^4.1.0"
@@ -2821,7 +2822,7 @@ vitepress@^0.10.4:
     prismjs "^1.20.0"
     sirv "^1.0.10"
     slash "^3.0.0"
-    vite "^2.0.0-alpha.5"
+    vite "^2.0.0-beta.8"
     vue "^3.0.5"
 
 vue@^3.0.5:

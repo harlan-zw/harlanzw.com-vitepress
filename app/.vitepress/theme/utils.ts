@@ -1,4 +1,6 @@
 import { useSiteData } from 'vitepress/dist/client/app/composables/siteData'
+import { Post } from '../types'
+import allPosts from '../posts'
 
 export const hashRE = /#.*$/
 export const extRE = /(index)?\.(md|html)$/
@@ -84,4 +86,8 @@ export function ensureEndingSlash(path: string): string {
  */
 export function removeExtention(path: string): string {
   return path.replace(/(index)?(\.(md|html))?$/, '') || '/'
+}
+
+export function postForPath (path: string) : Post {
+  return allPosts.filter(p => p.url === path)[0]
 }

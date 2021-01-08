@@ -9,7 +9,6 @@
       :aria-label="item.ariaLabel"
   >
     {{ item.text }}
-    <OutboundLink v-if="isExternalLink" />
   </a>
 </div>
 </template>
@@ -18,7 +17,6 @@
 import { defineComponent, computed } from 'vue';
 import { useRoute } from 'vitepress/dist/client/app/router';
 import { withBase, isExternal } from '../utils';
-import OutboundLink from './icons/OutboundLink.vue';
 const normalizePath = (path) => {
   path = path
       .replace(/#.*$/, '')
@@ -30,9 +28,6 @@ const normalizePath = (path) => {
   return path;
 };
 export default defineComponent({
-  components: {
-    OutboundLink
-  },
   props: {
     item: {
       type: Object,

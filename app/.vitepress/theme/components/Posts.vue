@@ -17,7 +17,7 @@ export default {
   setup () {
     const route = useRoute()
     const path = route.path.replace('/index.html', '/')
-    const posts = filter(allPosts, p => p.url !== path && p.status === 'published')
+    const posts = filter(allPosts, p => p.url !== path && (p.status === 'published' || import.meta.env.MODE !== 'production'))
     return {
       posts
     }

@@ -19,7 +19,7 @@ const theme = {
             const zooming = new Zooming()
             zooming.config({
                 scaleBase: 0.75,
-                bgOpacity: 0.75,
+                bgOpacity: 0,
             })
             app.provide('zoom', zooming)
 

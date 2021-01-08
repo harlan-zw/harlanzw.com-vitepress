@@ -39,10 +39,6 @@ head:
     content: "https://harlanzw.com/social/how-vite-works.png"    
 ---
 
-# {{ $page.title }}
-
-<div class="text-sm text-gray-500"><time>{{ $page.frontmatter.publishDate }}</time> - 🕒 {{ $page.frontmatter.readTime }}</div>
-
 In rebuilding my old Nuxt.js personal site, I wanted to challenge myself to learn the latest tech, the unknown.
 
 The unknown was the new project by Evan You: [⚡ Vite](https://github.com/vitejs/vite) (/veet/). Called Fast, for the 🇫🇷 Frenchies.
@@ -437,9 +433,3 @@ If you like my blog (VitePress + TailwindCSS), then you're more than welcome to 
 
 If you like the technical side of Vue and Laravel, I'll be posting regular articles on this site. The best
 way to keep up to date is by following me [@harlan_zw](https://twitter.com/harlan_zw) or signing up for the newsletter below.
-
-<Newsletter />
-
-## Other Vue Articles
-
-<Posts/>
