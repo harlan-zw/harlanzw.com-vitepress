@@ -41,8 +41,19 @@ module.exports = {
               color: 'rgb(55, 70, 60)',
               fontFamily: theme('fontFamily.header'),
             },
+            h4: {
+              color: 'rgb(55, 70, 60)',
+              fontWeight: '600',
+              fontSize: '1.5rem',
+              lineHeight: '2rem',
+              fontFamily: theme('fontFamily.header'),
+              textDecoration: 'underline'
+            },
             a: {
               textDecoration: 'initial',
+            },
+            blockquote: {
+              fontWeight: '400',
             }
           },
         },

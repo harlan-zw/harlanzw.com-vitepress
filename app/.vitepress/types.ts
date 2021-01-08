@@ -1,4 +1,4 @@
-export interface Post {
+export type Post = {
     url: string
     title: string
     published: string

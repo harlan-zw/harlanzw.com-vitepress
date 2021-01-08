@@ -32,7 +32,7 @@ export default defineComponent({
       type: Object as PropType<Post>,
       required: true
     }
-  }
+  },
 })
 </script>
 

@@ -3,11 +3,11 @@ import { Post } from 'types'
 export default [
     {
         url: '/blog/vue-scaling-your-components/',
-        title: 'Scaling Your Vue Components for Mid-Large Size Apps',
-        publishDate: '7th Jan 2021',
-        excerpt: 'Having component folders \'auto-magically\' imported into your app is the latest craze. How does it work and is it good?',
-        status: 'draft',
-        readMins: 10,
+        title: 'WIP: Scaling Your Vue Components for Mid-Large Size Apps',
+        publishDate: '10th Jan 2021',
+        excerpt: 'Working on a mid-large size app usually means hundreds of components. How do you make sure these components will scale?',
+        status: 'published',
+        readMins: 8,
         tags: ['vue']
     },
     {

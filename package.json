@@ -11,7 +11,7 @@
     "sass": "^1.32.0",
     "sass-loader": "^10.1.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.1",
-    "vitepress": "^0.10.6",
+    "vitepress": "^0.10.7",
     "zooming": "^2.1.1"
   },
   "scripts": {

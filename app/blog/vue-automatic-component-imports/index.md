@@ -629,10 +629,3 @@ webpack and Vue internals are a challenging topic and if you made it all the way
 If you like the technical side of Vue and Laravel, I'll be posting regular articles on this site. The best
 way to keep up to date is by following me [@harlan_zw](https://twitter.com/harlan_zw) or signing up for the newsletter below.
 
-
-<Newsletter />
-
-
-## Other Vue Articles
-
-<Posts/>
