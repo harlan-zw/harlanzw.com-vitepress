@@ -3,20 +3,20 @@ title: "Scaling Your Vue Components for Mid-Large Size Apps"
 description: "Working on a mid-large size app usually means hundreds of components. How do you make sure these components will scale?"
 ---
 
-Leading the development of a new project which you know needs to last for many years can be challenging.
+One of the aspects of scaling that is seldom discussed is component architecture. 
 
-Your job is to answer the question: how will I make this scale?
+- How are components named?
+- What folder hierarchy should you use? 
+- How component scope is addressed?
 
-I have asked myself this question regularly for a few years now. As the tech lead at my last company, a startup, growing pains were always being felt. Pivots, design changes and new features were the norm.
+These may sound like beginner questions but once you are approaching a few hundred components the cost of not thinking about it grows exponentially. 
 
-There are many pieces of the scaling a Vue app puzzle. Here I'll be specifically talking about scaling components and what worked for the projects I've worked on.
-
-Your team and app will have their own requirements. I'd encourage you to think about what will work best for you before implementing any of my recommendations.
+As the tech lead at my last company, a startup, growing pains were always being felt. Pivots, design changes and new features were the norm. All pushing
+our total component count up. My below suggestions are what I formulated for solving _our_ scaling issues. Your project will have it's own requirements.
 
 ## 100+ component club
 
-Let's assume once you hit 100+ components, then you may be feeling some pain from your components. More developers
-is more problems, so feel free to subtract from that.
+Let's assume once you hit 100+ components, then you are a mid-size app and you will be feeling your own growth pains.
 
 Are you in the club? Run the following in your component folder:
 
@@ -42,7 +42,10 @@ These are some pain points you may hit once you have a lot of components:
 Good code adheres to a set of rules. You either follow existing rules (syntax and conventions) or create
 new ones and make sure others follow them (documentation and code reviews).
 
-My rules are no substitute for good continuous delivery practices, documentation and communication within your team. 
+### Rule 0. Have good dev processes
+
+There is no substitute for good development process in your team: continuous delivery practices, documentation and clear communication. 
+The rest of the rules will not help you if you are not functioning as a well oiled machine.
 
 ### Rule 1. Know the style guide
 
@@ -97,6 +100,25 @@ You should use something which relates to your app, for example I use `h` as the
 </template>
 ```
 
+Feel free to implement multiple prefixes for your components if you'd like to use it for scoping.
+
+```vue
+<template>
+<!-- 'the' as a prefix for layout components -->
+<the-header>
+  <!-- 'v' prefix for vuetify components -->
+  <v-img src="logo.png" />
+  <!-- 'h' prefix for our branded components -->
+  <h-button>Sign In</h-button>
+</the-header>
+<main>
+  <the-sidebar />
+  <the-content v-html="content" />
+</main>
+<the-footer />
+</template>
+```
+
 #### Namespace
 
 This is an interpretation of two recommendations from the style guide:
@@ -105,7 +127,7 @@ This is an interpretation of two recommendations from the style guide:
 
 > Child components that are tightly coupled with their parent should include the parent component name as a prefix.
 
-While the style guide recommends a parent component, a more flexible rule is thinking of it as a _namespace_.
+While the style guide recommends starting with the parent component, it's more flexible to start with a _namespace_.
 
 We want namespaces to avoid conflicts within our own components, improve IDE autocompletion and define the scope
 of the component from the get go.
@@ -130,28 +152,30 @@ namespace should follow. For example these components should have a `value` prop
 
 #### Class (optional)
 
-The final part of the component name template, is in fact the name of the component. Thinking of it as a class name makes the 
-distinction between namespace easier.
+The final part of the convention, is in fact the name of the component. Thinking of it as a class name makes the 
+distinction between the namespace easier.
 
-Classes should be optional though, namespaces can provide a default component to reduce inherit naming bloat.
+Classes should be optional, namespaces can provide a default component to reduce inherit naming bloat.
 
 Let's imagine we have a project with a few buttons. Most of the time we want to use the default button, we shouldn't 
-need to spell out that fact.
+need to use bloated component names.
 
 ```shell
 components/
 |- Button/ # namespace
 |--- HButton.vue # The namespaces default component 
-|--- KButtonCallToAction.vue # A call to action button
-|--- KButtonSubmitForm.vue # A button to submit forms
+|--- HButtonCallToAction.vue # A call to action button
+|--- HButtonSubmitForm.vue # A button to submit forms
 ```
 
 Recommendations on naming the class:
 - Describe the application specific function of the component, rather than what it looks like.
-    - ✅ KButtonCallToAction.vue
-    - ❌ KButtonRainbowFlashing.vue
+  - ❌ HButtonRainbowFlashing.vue
+  - ✅ HButtonCallToAction.vue
 - Choose to be verbose if it adds clarity to the scope.
-- Prefer full words over abbreviations. (from the style guide)
+  - ❌ HProfileUsers.vue
+  - ✅ HProfileAuthenticatedUsers.vue
+- Prefer full words over abbreviations - from the [style guide](https://v3.vuejs.org/style-guide/#full-word-component-names-strongly-recommended).
 
 ### Rule 3. Separate component scopes
 
