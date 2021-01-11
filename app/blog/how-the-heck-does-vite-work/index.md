@@ -1,8 +1,6 @@
 ---
 title: "How Does Vite Work - A Comparison to webpack"
 description: "I used Vite to build a new blazing fast blog ⚡, find out what I learnt and why Vite is the next big thing."
-publishDate: 1st Dec 2020
-readTime: 10 min
 head:
 - - meta
   - name: description

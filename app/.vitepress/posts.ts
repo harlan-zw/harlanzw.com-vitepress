@@ -2,9 +2,9 @@ import { Post } from 'types'
 
 export default [
     {
-        url: '/blog/vue-scaling-your-components/',
-        title: 'WIP: Scaling Your Vue Components for Mid-Large Size Apps',
-        publishDate: '10th Jan 2021',
+        url: '/blog/scale-your-vue-components/',
+        title: 'Scaling Your Vue Components for Mid-Large Size Apps',
+        publishDate: '12th Jan 2021',
         excerpt: 'Working on a mid-large size app usually means hundreds of components. How do you make sure these components will scale?',
         status: 'published',
         readMins: 8,
