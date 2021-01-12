@@ -129,7 +129,7 @@ You should use something which relates to your app, for example, I use `h` as th
 </template>
 ```
 
-You can use many prefixes for your components to help you with scoping code. Make sure you separate the scopes into different folders.
+You can use many prefixes for your components to help you with scoping code.
 
 ```vue
 <template>
@@ -152,7 +152,7 @@ You can use many prefixes for your components to help you with scoping code. Mak
 
 > Child components that are tightly coupled with their parent should include the parent component name as a prefix.
 
-The style guide recommends starting the component name with the parent component. I've found using a _namespace_ after our prefix instead is more flexible.
+The style guide recommends starting the component name with the parent component. I've found using a _namespace_ after the prefix instead is more flexible.
 
 Namespaces avoid conflicts, improve IDE autocompletion and define the scope of the component.
 
@@ -203,9 +203,8 @@ Recommendations on naming the class:
 ### Rule 3. Separate component scopes
 
 Defining scopes for how components behave will guide you in staying DRY.
-A good starting point is a scope for "shared" (a.k.a. base, presentational or dumb) components and "app" (a.k.a single-instance).
 
-There are many ways to set this up. I like making two folders within the component folder. You could also pull out your "shared" components into their own npm package.
+There are many ways to set this up. A good starting point is a scope for "shared" (a.k.a. base, presentational or dumb) components and "app" (a.k.a single-instance).
 
 ```shell
 components/
@@ -213,9 +212,9 @@ components/
 |- shared
 ```
 
-When creating new components it's natural to couple application logic in. With this setup, you need you to think about component scopes and how code can be re-used.
+You could also pull out your "shared" components into their own npm package.
 
-A component you are making could be a split into a shared component and an app component using props and/or slots.
+When creating new components it's natural to couple application logic in. With this setup, you'll think about component scopes more and how code can be re-used.
 
 <img src="../../resources/component-folder-flow.svg" class="block mx-auto">
 
@@ -235,7 +234,7 @@ If you were to copy+paste an app component into a new project, it should not wor
 
 ## Example: Newsletter Sign Up
 
-This exists as two "app" components, they contain logic for validation and posting to an API. Comprising of "shared" components.
+This exists as two "app" components, they contain logic for validation and posting to an API. They both contain "shared" components.
 
 <figure>
 <img src="../../resources/newsletter-example.png" class="block mx-auto" alt="Newsletter component example">
@@ -433,7 +432,7 @@ This one should be pretty obvious and there are enough articles elsewhere on usi
 
 You want to pull out common logic from components and put them in either mixins or composables.
 
-Check out the [vueuse](https://github.com/antfu/vueuse) for some ideas on what that could look like.
+Check out [vueuse](https://github.com/antfu/vueuse) for some ideas on what that could look like.
 
 
 ## Thanks for reading
