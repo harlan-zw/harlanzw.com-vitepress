@@ -208,8 +208,8 @@ There are many ways to set this up. A good starting point is a scope for "shared
 
 ```shell
 components/
-|- app # Contain application logic
-|- shared # Do not contain application logic
+|- app # Contains application logic
+|- shared # Does not contain application logic
 ```
 
 You could also pull out your "shared" components into their own npm package.
