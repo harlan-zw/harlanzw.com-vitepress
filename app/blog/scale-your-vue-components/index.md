@@ -60,9 +60,7 @@ Are you in the club? Run the following in your component folder:
 COMPONENTS=$(ls -lR **/*.vue | wc -l) && echo -e "You have ${COMPONENTS} components."
 ```
 
-### Perks of the club
-
-These are some issues you may come across once you have so many components:
+### Problems you may have
 
 - Difficult to remember which component to use where
 - Code is being repeated
@@ -102,7 +100,7 @@ module.exports = {
 
 The bane of developers lives: how to name something.
 
-You can address that by having an easy-to-follow convention on how to name a component. The convention will also tell you where to put the component in your folder hierarchy.
+You can address that by having an easy-to-follow convention on how to name a component. The convention also tells you where to put the component in your folder hierarchy.
 
 <div class="language- px-4 py-2 text-white">
 <span class="text-yellow-400">{prefix}</span>-<span class="text-blue-400">{namespace}</span><span class="text-pink-400">{?-class}</span>
@@ -217,7 +215,7 @@ components/
 
 When creating new components it's natural to couple application logic in. With this setup, you need you to think about component scopes and how code can be re-used.
 
-A component you are making could be a split into a shared component and an app component using props and/or slots. are cheap in comparison to adding new components.
+A component you are making could be a split into a shared component and an app component using props and/or slots.
 
 <img src="../../resources/component-folder-flow.svg" class="block mx-auto">
 
@@ -270,8 +268,8 @@ components/
 <!-- HNewsletterForm.vue -->
 <h-form @submit="submit">
   <h-field-email
-          label="Enter your email"
-          v-model="email"
+    label="Enter your email"
+    v-model="email"
   />
   <h-button type="submit">Subscribe</h-button>
 </h-form>
@@ -285,11 +283,11 @@ components/
   <div class="pl-3">
     <h2>Keep up to date</h2>
     <h-newsletter-form
-            v-if="!success"
-            @submit="success = true"
+      v-if="!success"
+      @submit="success = true"
     />
     <h-alert-success
-            v-else
+      v-else
     >
       Thanks for signing up :)
     </h-alert-success>
@@ -338,9 +336,9 @@ components/
 <template>
 <!-- FThread.vue -->
 <f-thread-post
-        v-for="posts as post"
-        :key="post.id"
-        :post="post"
+  v-for="posts as post"
+  :key="post.id"
+  :post="post"
 />
 <f-thread-reply @submit="addPost" />
 </template>
@@ -358,9 +356,9 @@ components/
   <div class="p-3 border-b-2 border-gray-500 prose" v-html="post.content"></div>
   <div class="p-3">
     <f-button-upvote
-            @click="upvote"
-            :upvotes="post.upvotes"
-            class="border-r-2 border-gray-500 pr-3"
+      @click="upvote"
+      :upvotes="post.upvotes"
+      class="border-r-2 border-gray-500 pr-3"
     />
   </div>
 </f-card>
@@ -372,7 +370,7 @@ components/
 <!-- FThreadFormReply.vue -->
 <f-form @submit="submitComment">
   <f-field-comment
-          label="Write a reply"
+    label="Write a reply"
   />
   <div class="flex">
     <p>Please make sure you've read our Forum Rules before replying.</p>
@@ -410,13 +408,11 @@ export default defineComponent({
 </script>
 ```
 
-The IDE support can be a little shaky as this is the new syntax in Vue 3, but it's going to be an improvement regardless.
-
 ### Components have "one job"
 
 > Every component should have one job, any code in the component that isn't achieving that job shouldn't be there.
 
-You should be thinking when you create a component what the scope of it will be. What is its purpose?
+You should be thinking when you create a component what it's one core function is.
 
 You can limit yourself with this mindset but it's worth keeping in mind as you go.
 
@@ -424,8 +420,8 @@ You can limit yourself with this mindset but it's worth keeping in mind as you g
 
 Using a package like [Storybook](https://storybook.js.org/) is a great idea, but it comes with overhead and when you're starting out it can be a bit overkill.
 
-As a starting point, you can create pages under a `/demo` prefix and throw your components in.
-The idea is to have an easy way to discover the components (and classes) that are available for your team.
+As a starting point, you can create pages under a `/demo` prefix and throw your components on it.
+You want an easy way to find components and classes that are available.
 
 Here is a rough demo page as an example: [Massive Monster UI Demo](https://massivemonster.co/demo). Keep it as basic as you want.
 
@@ -441,9 +437,6 @@ Check out the [vueuse](https://github.com/antfu/vueuse) for some ideas on what t
 
 
 ## Thanks for reading
-
-This was a challenging topic for me when I started Vue over 3 years ago, I hope I have given at least one person some
-guidance in scaling their components.
 
 If you like the technical side of Vue and Laravel, I'll be posting regular articles on this site. The best
 way to keep up to date is by following me [@harlan_zw](https://twitter.com/harlan_zw) or signing up for the newsletter below.
