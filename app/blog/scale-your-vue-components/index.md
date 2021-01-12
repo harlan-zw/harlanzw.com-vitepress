@@ -178,7 +178,7 @@ You can then create conventions that components in a namespace should follow. Fo
 The final part of the convention is, in fact, the name of the component. Thinking of it as a class name makes the distinction between the namespace easier. You still want to follow the above style guide rule, our class names should be
 general to descriptive.
 
-The class should be optional. Namespaces can provide a default component to reduce the name of common components..
+The class should be optional. Namespaces can provide a default component to reduce the name of common components.
 
 Imagine you have a project with a few buttons. Most of the time you want to use the default button, you shouldn't
 need to name it `HButtonDefault.vue`.
