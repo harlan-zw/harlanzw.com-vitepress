@@ -156,7 +156,7 @@ The style guide recommends starting the component name with the parent component
 
 Namespaces avoid conflicts, improve IDE autocompletion and define the scope of the component.
 
-You should map namespaces to a folder, this way you can group components, making them easier to find and use. I would recommend not nesting namespaces, to begin with.
+You should map namespaces to a folder, this way you can group components, making them easier to find and use.
 
 An example of a namespace is `Field`, for all our field components (text field, textarea, search, etc.).
 
@@ -178,7 +178,7 @@ You can then create conventions that components in a namespace should follow. Fo
 The final part of the convention is, in fact, the name of the component. Thinking of it as a class name makes the distinction between the namespace easier. You still want to follow the above style guide rule, our class names should be
 general to descriptive.
 
-The class should be optional. Namespaces can provide a default component to reduce naming bloat.
+The class should be optional. Namespaces can provide a default component to reduce the name of common components..
 
 Imagine you have a project with a few buttons. Most of the time you want to use the default button, you shouldn't
 need to name it `HButtonDefault.vue`.
@@ -208,8 +208,8 @@ There are many ways to set this up. A good starting point is a scope for "shared
 
 ```shell
 components/
-|- app
-|- shared
+|- app # Contain application logic
+|- shared # Do not contain application logic
 ```
 
 You could also pull out your "shared" components into their own npm package.
