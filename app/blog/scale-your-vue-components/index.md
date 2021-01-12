@@ -116,7 +116,7 @@ A short prefix for _all_ your components is preferable to the above.
 
 Using a prefix avoids conflicts with HTML tags and third-party components. It also gives you scoped IDE autocompletion and more reusable components.
 
-It's important when working with a component library ([Vuetify](https://vuetifyjs.com/), [VueStrap](https://yuche.github.io/vue-strap/), etc) or third-party components
+Prefixing becomes especially important when working with a component library ([Vuetify](https://vuetifyjs.com/), [VueStrap](https://yuche.github.io/vue-strap/), etc) or third-party components
 ([algolia](https://github.com/algolia/vue-instantsearch), [google maps](https://github.com/xkjyeah/vue-google-maps), etc).
 
 You should use something which relates to your app, for example, I use `h` as the prefix because my site is harlanzw.com.
@@ -154,7 +154,7 @@ You can use many prefixes for your components to help you with scoping code. Mak
 
 > Child components that are tightly coupled with their parent should include the parent component name as a prefix.
 
-The style guide recommends starting with the parent component, it's more flexible to use a _namespace_ after our prefix.
+The style guide recommends starting the component name with the parent component. I've found using a _namespace_ after our prefix instead is more flexible.
 
 Namespaces avoid conflicts, improve IDE autocompletion and define the scope of the component.
 
@@ -175,7 +175,6 @@ components/
 You can then create conventions that components in a namespace should follow. For example these components should all have a `:value` prop and `$emit('input', value)`.
 
 #### Class (optional)
-
 > Component names should start with the highest-level (often most general) words and end with descriptive modifying words.
 
 The final part of the convention is, in fact, the name of the component. Thinking of it as a class name makes the distinction between the namespace easier. You still want to follow the above style guide rule, our class names should be
@@ -195,7 +194,7 @@ components/
 ```
 
 Recommendations on naming the class:
-- Describe the application-specific function of the component, rather than what it looks like.
+- Describe the application function of the component, rather than what it looks like.
   - ❌ `HButtonRainbowFlashing.vue`
   - ✅ `HButtonCallToAction.vue`
 - Choose to be verbose if it adds clarity to the scope.
@@ -206,7 +205,7 @@ Recommendations on naming the class:
 ### Rule 3. Separate component scopes
 
 Defining scopes for how components behave will guide you in staying DRY.
-A scope for "base" (a.k.a. presentational, dumb, or pure components) components and "app" (a.k.a single-instance) components is a good starting point.
+A good starting point is a scope for "shared" (a.k.a. base, presentational or dumb) components and "app" (a.k.a single-instance).
 
 There are many ways to set this up. I like making two folders within the component folder. You could also pull out your "shared" components into their own npm package.
 
@@ -216,97 +215,184 @@ components/
 |- shared
 ```
 
-This forces you to think about component scopes when creating them and how code can be re-used.
+When creating new components it's natural to couple application logic in. With this setup, you need you to think about component scopes and how code can be re-used.
 
-When creating a component it's common application logic is coupled in. You can pull this logic out usually with a prop or scoped slot.
-Props and slots are cheap in comparison to adding new components.
+A component you are making could be a split into a shared component and an app component using props and/or slots. are cheap in comparison to adding new components.
 
 <img src="../../resources/component-folder-flow.svg" class="block mx-auto">
 
 
 #### "Shared" Folder - Base Components
+These components are re-usable and include form inputs, buttons, dialogues and modals. They should never contain application logic or state data.
 
-Base components are re-usable and include components like form inputs, buttons, dialogues, modals, etc. They should never contain application logic or state data.
+You should be aiming to build your own "UI kit" from these components.
 
-When you are using a UI library, you are using base components, think [VueStrap](https://yuche.github.io/vue-strap/), [Vuetify](https://vuetifyjs.com/), [Tailwind UI](https://tailwindui.com/), etc.
-
-What you should be aiming to do is building your own "ui kit" from your base components.
-
-```shell
-components/
-|- shared/
-|-- Alert/
-|--- HAlertInfo.vue
-|--- HAlertSuccess.vue
-|--- HAlertWarn.vue
-|-- Button/
-|--- HButton.vue
-```
-
-If you were to copy+paste your shared folder into a new project, it should work out of the box - assuming npm / util dependencies are
-addressed.
+Copy-pasting your shared folder into a new project should work out of the box (assuming you handle dependencies).
 
 #### "App" Folder - App components
 
-App components do contain application logic and state data. Commonly, these will be single instance per page
-but giving yourself this restriction is not worth the effort.
+App components do contain application logic and state data.
 
 If you were to copy+paste an app component into a new project, it should not work.
 
-## Example: Component Structure for a Forum
+## Example: Newsletter Sign Up
 
-To put the above into practice, let's imagine you want to build a forum thread page where a user can see comments, interact with comments and post their own comment.
+This exists as two "app" components, they contain logic for validation and posting to an API. Comprising of "shared" components.
 
-<img src="../../resources/forum-example.png" class="block mx-auto" alt="Laravel.io Forum Example">
+<figure>
+<img src="../../resources/newsletter-example.png" class="block mx-auto" alt="Newsletter component example">
+<figcaption>HNewsletterCard.vue</figcaption>
+</figure>
 
-Using `F` as our component prefix, let's look at what is needed.
+```shell 
+components/
+# application component scope
+|- app/ 
+|-- Newsletter # namespace
+|--- HNewsletterForm.vue # validates and posts data
+|--- HNewsletterCard.vue # handles successful form post
+# shared component scope
+|- shared/ 
+|-- Alert/
+|--- HAlertSuccess.vue
+|-- Button/ 
+|--- HButton.vue 
+|-- Card/
+|--- HCard.vue
+|-- Form
+|--- HForm.vue
+|-- Field/
+|--- HFieldEmail.vue
+```
 
-**App Components**
+```vue
+<template>
+<!-- HNewsletterForm.vue -->
+<h-form @submit="submit">
+  <h-field-email
+          label="Enter your email"
+          v-model="email"
+  />
+  <h-button type="submit">Subscribe</h-button>
+</h-form>
+</template>
+```
 
-```shell
-components/app/
-|- Thread/
-|-- FThread # Wraps the entire thread
-|-- FThreadPost # A single post / reply
-|-- FThreadTag # A single thread tag
-|- Field/
-|-- FFieldComment.vue # Comment box for posts
-|- Button/
-|-- FButtonLike.vue # The thumbs up button
+```vue
+<template>
+<!-- HNewsletterCard.vue -->
+<h-card>
+  <div class="pl-3">
+    <h2>Keep up to date</h2>
+    <h-newsletter-form
+            v-if="!success"
+            @submit="success = true"
+    />
+    <h-alert-success
+            v-else
+    >
+      Thanks for signing up :)
+    </h-alert-success>
+  </div>
+</h-card>
+</template>
 ```
 
 
-**Shared Components**
+## Example: Forum Thread
 
-```shell
-components/shared/
-|- Img/
-|-- FImgAvatar.vue # Users photos
-|- Field/
-|-- FFieldWYSIWYG.vue # Comment box for posts
-|- Card/
-|-- FCard.vue # Gives posts a 'card' look
-|-- FCardSpacing.vue # Gives posts consistent spacing
-|- Button/
-|-- FButtonSubmit.vue # Reply button for the post box
-|- Chip/
-|-- FChip.vue # For the thread tags
+Now imagine you want to build a forum thread page. A user can see comments, upvote comments and post their own comment.
+
+<figure>
+<img src="../../resources/forum-example.png" class="block mx-auto" alt="Laravel.io Forum Example">
+<figcaption>Laravel.io Forum Thread</figcaption>
+</figure>
+
+Using `F` as our component prefix, let's look at what you need.
+
+```shell 
+components/
+# application component scope
+|- app/ 
+|-- Thread # namespace
+|--- FThread.vue # Wraps the entire thread
+|--- FThreadPost.vue # A single post / reply
+|--- FThreadFormReply.vue # Form to submit a reply
+|-- Field/
+|--- FFieldComment.vue # Comment box for posts
+|-- Button/
+|--- FButtonUpvote.vue # The thumbs up button
+# shared component scope
+|- shared/ 
+|-- Img/
+|--- FImgAvatar.vue # Users photos
+|-- Field/
+|--- FFieldWYSIWYG.vue # Comment box for posts
+|-- Card/
+|--- FCard.vue # Gives posts a 'card' look
+|-- Button/
+|--- FButton.vue # Reply button for the post box
+```
+
+```vue
+<template>
+<!-- FThread.vue -->
+<f-thread-post
+        v-for="posts as post"
+        :key="post.id"
+        :post="post"
+/>
+<f-thread-reply @submit="addPost" />
+</template>
+```
+
+```vue
+<template>
+<!-- FThreadPost.vue -->
+<f-card>
+  <div class="p-3 border-b-2 border-gray-500 flex">
+    <f-img-avatar :src="post.author.avatar" />
+    <span>{{ post.author.name }}</span>
+    <span>{{ post.publishedAgo }}</span>
+  </div>
+  <div class="p-3 border-b-2 border-gray-500 prose" v-html="post.content"></div>
+  <div class="p-3">
+    <f-button-upvote
+            @click="upvote"
+            :upvotes="post.upvotes"
+            class="border-r-2 border-gray-500 pr-3"
+    />
+  </div>
+</f-card>
+</template>
+```
+
+```vue
+<template>
+<!-- FThreadFormReply.vue -->
+<f-form @submit="submitComment">
+  <f-field-comment
+          label="Write a reply"
+  />
+  <div class="flex">
+    <p>Please make sure you've read our Forum Rules before replying.</p>
+    <f-button type="submit">Reply</f-button>
+  </div>
+</f-form>
+</template>
 ```
 
 ## Extra and optional rules
 
 ### Use An Automatic Component Importer
 
-Once you have a few hundred components, being tied to the import paths of components will slow
-you down when you are building and refactoring.
+Being tied to import paths once you have a few hundred components is going to slow you down.
 
-You will strip a huge amount of code and free yourself to tinker with the directory structure of your components however
-you see fit by using an [automatic component imports](/blog/vue-automatic-component-imports/).
+Using an  [automatic component imports](/blog/vue-automatic-component-imports/) will clean up your code. You'll be free to tinker with the directory structure of your components in any way you want.
 
 ### Typescript Components
 
-Typescript can be a bit of a commitment and add some overhead. However, the power of typing can't be understated
-when you're working with objects.
+The value of types, when you're working with objects is too good to pass up. Will save you hours down the line in developer experience. As a starting point, I'd try and get your shared components using Typescript.
 
 ```vue
 <script lang="ts">
@@ -330,26 +416,18 @@ The IDE support can be a little shaky as this is the new syntax in Vue 3, but it
 
 > Every component should have one job, any code in the component that isn't achieving that job shouldn't be there.
 
-You should be thinking when you create a component what the scope of it will be. What is its purpose? Is its sole purpose
-to pass the butter?
+You should be thinking when you create a component what the scope of it will be. What is its purpose?
 
-Imagine you have a form and how that could be broken down:
-- `HFieldText`: Store a text value from the user
-- `HFormSubmitter`: Handle XHR form submission
-- `HFormFields`: Get all validated values from the user
-- `HButtonSubmitForm`: Submit a form button
-
-This mindset can be limiting so don't force this mindset on your components, but consider it.
+You can limit yourself with this mindset but it's worth keeping in mind as you go.
 
 ### Create component demo pages
 
-Using a package like [Storybook](https://storybook.js.org/) is a great idea, but it comes with overhead
-and when you're starting out it can be a bit overkill.
+Using a package like [Storybook](https://storybook.js.org/) is a great idea, but it comes with overhead and when you're starting out it can be a bit overkill.
 
 As a starting point, you can create pages under a `/demo` prefix and throw your components in.
 The idea is to have an easy way to discover the components (and classes) that are available for your team.
 
-It doesn't need to be complicated, here is a rough demo page as an example: [Massive Monster UI Demo](https://massivemonster.co/demo).
+Here is a rough demo page as an example: [Massive Monster UI Demo](https://massivemonster.co/demo). Keep it as basic as you want.
 
 <img src="../../resources/brand-demo.png" class="block mx-auto" alt="Massive Monster Demo Page">
 
@@ -359,7 +437,7 @@ This one should be pretty obvious and there are enough articles elsewhere on usi
 
 You want to pull out common logic from components and put them in either mixins or composables.
 
-Check out the [vueuse](https://github.com/antfu/vueuse) for some ideas on what could look like.
+Check out the [vueuse](https://github.com/antfu/vueuse) for some ideas on what that could look like.
 
 
 ## Thanks for reading
