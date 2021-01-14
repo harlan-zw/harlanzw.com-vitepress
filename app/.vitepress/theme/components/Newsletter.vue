@@ -36,9 +36,11 @@ export default {
   },
   methods: {
     async submit (e) {
+      if (this.submitting) {
+        return
+      }
 
       this.submitting = true
-      this.error = null
 
       const formData = new FormData()
       formData.append('email',  this.email)
@@ -47,6 +49,9 @@ export default {
         method: 'post',
         body: formData
       })
+
+      // track subscriptions
+      window.panelbear('track', 'SubscribedNewsletter');
 
       this.submitting = false
       this.email = ''
