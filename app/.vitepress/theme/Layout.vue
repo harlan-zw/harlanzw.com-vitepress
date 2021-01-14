@@ -30,7 +30,7 @@
       </a>
     </div>
     <p class="mb-3">© 2021 Harlan Wilton, All rights reserved.</p>
-    <p><a href="/open/">Open blog</a></p>
+    <p><a href="/open-blogging/">Open blog</a></p>
   </footer>
   <Debug />
 </div>
