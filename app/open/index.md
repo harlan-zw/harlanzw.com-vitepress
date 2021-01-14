@@ -1,7 +1,36 @@
-# Open Blog
+# Open Blogging
 
-This website is open, that means all code and data will be publicly available (minus newsletter subscriber emails).
+I'm practicing "Open Blogging". I'll be sharing all of my code and data, including analytics and newsletter subscriber counts.
 
-- Blog code is on Github: [harlanzw.com](https://github.com/loonpwn/harlanzw.com)
-- Analytics powered by Panelbear: [see data](https://app.panelbear.com/share/4fDa4dnKGsyhrVn2JdgP48/)
-- Newsletter powered by [EmailOctopus](https://emailoctopus.com/) - 7 subs 
+## Articles
+
+- 3 Articles published
+- 28 minutes
+- 7341 words
+
+## Code
+
+### Blog
+
+Code is open source under the MIT license. See on Github: [harlanzw.com](https://github.com/loonpwn/harlanzw.com)
+
+### Open Source Projects
+
+- https://github.com/loonpwn/vue-cli-plugin-import-components
+
+## Analytics
+
+Powered by Panelbear.
+
+[Open Pabelbear](https://app.panelbear.com/share/4fDa4dnKGsyhrVn2JdgP48/)
+
+## Newsletter
+
+Powered by EmailOctopus.
+
+[Open EmailOctopus - Referral Link](https://emailoctopus.com/?urli=Lz6tl)
+
+<figure>
+<img src="../resources/subscribers.png" alt="Email Subscribers">
+<figcaption>EmailOctopus Subscribers</figcaption>
+</figure>

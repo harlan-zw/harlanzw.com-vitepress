@@ -20,6 +20,14 @@ export default [
         tags: ['webpack', 'vue']
     },
     {
+        url: 'https://github.com/loonpwn/vue-cli-plugin-import-components',
+        link: true,
+        publishDate: '12th Dec 2020',
+        title: 'Vue-CLI Plugin: Import Components',
+        excerpt: 'I created a Vue-CLI plugin to automatically import your components in your Vue CLI app with tree shaking, supporting Vue 2 and 3.',
+        tags: ['vue', 'github']
+    },
+    {
         url: '/blog/how-the-heck-does-vite-work/',
         title: 'How Does Vite Work - A Comparison to Webpack',
         publishDate: '1st Dec 2020',
