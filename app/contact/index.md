@@ -1,10 +1,40 @@
 ---
-title: Contact
-description: "Get in touch, I'm always happy to chat about anything"
+title: Contact Harlan
+description: "Hey, this is Harlan Wilton. Please feel free to get in touch with me."
 head:
 - - meta
   - name: description
-    content: "Get in touch, I'm always happy to chat about anything"
+    content: "Hey, this is Harlan Wilton. Please feel free to get in touch with me."
+- - meta
+  - property: "og:type"
+    content: "website"
+- - meta
+  - property: "og:url"
+    content: "https://harlanzw.com/contact/"
+- - meta
+  - property: "og:title"
+    content: "Contact Harlan Wilton"
+- - meta
+  - property: "og:description"
+    content: "Hey, this is Harlan Wilton. Please feel free to get in touch with me."
+- - meta
+  - property: "og:image"
+    content: "https://harlanzw.com/social/home.png"
+- - meta
+  - property: "twitter:card"
+    content: "summary_large_image"
+- - meta
+  - property: "twitter:url"
+    content: "https://harlanzw.com/contact/"
+- - meta
+  - property: "twitter:title"
+    content: "Contact Harlan Wilton"
+- - meta
+  - property: "twitter:description"
+    content: "Hey, this is Harlan Wilton. Please feel free to get in touch with me."
+- - meta
+  - property: "twitter:image"
+    content: "https://harlanzw.com/social/home.png"
 ---
 
 # {{ $page.title }}
