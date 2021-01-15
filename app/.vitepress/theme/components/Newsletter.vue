@@ -5,7 +5,7 @@
     <p class="mt-2 max-w-2xl text-base text-gray-500">
       I'll be posting new articles every couple of weeks about what I'm working on. Sign up for below and I'll email you when I post something new.
     </p>
-    <form v-if="!success" class="mt-6" @submit.prevent="submit($event)" action="https://hooks.zapier.com/hooks/catch/3750603/ocopz6c" method="POST">
+    <form v-if="!success" class="mt-6" @submit.prevent="submit($event)" :action="import.meta.env.VITE_NEWSLETTER_SUBMIT_URL" method="POST">
       <div class="sm:flex">
         <input v-model="email" type="email" autocomplete="email" required="" placeholder="Enter your email" class="block sm:max-w-xs w-full px-4 py-3 text-base appearance-none border border-gray-300 shadow-none bg-white rounded-md placeholder-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300">
         <button class="mt-4 relative sm:mt-0 sm:h-auto sm:ml-4 block w-full sm:w-auto border border-transparent px-6 py-3 text-base font-semibold leading-snug bg-green-700 text-white rounded-md shadow-md hover:bg-green-900 focus:outline-none focus:bg-green-900 transition ease-in-out duration-150" :class="{ 'opacity-50 pointer-events-none': submitting, 'hover:bg-green-600': !submitting }" :disabled="submitting">
