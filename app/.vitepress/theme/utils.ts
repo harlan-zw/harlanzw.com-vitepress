@@ -89,5 +89,6 @@ export function removeExtention(path: string): string {
 }
 
 export function postForPath (path: string) : Post {
+  path = removeExtention(path)
   return allPosts.filter(p => p.url === path)[0]
 }
