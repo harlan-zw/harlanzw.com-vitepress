@@ -25,8 +25,15 @@
 </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { inject, defineComponent } from 'vue'
+
+export default defineComponent({
+  setup () {
+    return {
+      analytics: inject('analytics')
+    }
+  },
   data () {
     return {
       email: '',
@@ -51,12 +58,12 @@ export default {
       })
 
       // track subscriptions
-      window.panelbear('track', 'SubscribedNewsletter');
+      this.analytics.track('SubscribedNewsletter');
 
       this.submitting = false
       this.email = ''
       this.success = true
     }
   }
-}
+})
 </script>
