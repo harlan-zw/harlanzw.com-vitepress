@@ -4,14 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
-    "@tailwindcss/typography": "^0.3.1",
+    "@tailwindcss/typography": "^0.4.0",
     "autoprefixer": "^9",
     "node-sass": "^5.0.0",
     "postcss": "^7",
     "sass": "^1.32.0",
     "sass-loader": "^10.1.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.1",
-    "vitepress": "^0.10.8",
+    "vitepress": "^0.11.3",
     "zooming": "^2.1.1"
   },
   "scripts": {
@@ -20,6 +20,9 @@
     "serve": "vitepress serve app"
   },
   "dependencies": {
+    "feed": "^4.2.1",
+    "globby": "^11.0.2",
+    "gray-matter": "^4.0.2",
     "@panelbear/panelbear-js": "^1.1.0",
     "lodash": "^4.17.20"
   }

@@ -11,7 +11,7 @@
         <div class="text-sm text-gray-500"><time class="mr-3">{{ post.publishDate }}</time> 🕒 {{ post.readMins }}min</div>
         <PostTags :post="post" class="mt-5" />
         </template>
-        <Content class="animate-fadeIn"/>
+        <Content class="content animate-fadeIn"/>
         <template v-if="post">
         <Newsletter />
         <h2>Other Vue Articles</h2>
