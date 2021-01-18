@@ -32,6 +32,7 @@ getPosts().forEach((post) => {
     link: `${url}${post.url}`,
     description: post.excerpt,
     content: content[1],
+    image: post.image,
     author: [
       {
         name: 'Harlan Wilton',
