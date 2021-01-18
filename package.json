@@ -23,6 +23,7 @@
     "feed": "^4.2.1",
     "globby": "^11.0.2",
     "gray-matter": "^4.0.2",
+    "@panelbear/panelbear-js": "^1.1.0",
     "lodash": "^4.17.20"
   }
 }
