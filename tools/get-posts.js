@@ -1,0 +1,85 @@
+const fs = require('fs')
+const path = require('path')
+const matter = require('gray-matter')
+const globby = require('globby')
+const postMetas =
+  [
+    {
+      url: '/blog/scale-your-vue-components/',
+      title: 'Scaling Your Vue Components for Mid-Large Size Apps',
+      publishDate: '12th Jan 2021',
+      date: '2021-01-12',
+      excerpt: 'Working on a mid-large size app usually means hundreds of components. How do you make sure these components will scale?',
+      status: 'published',
+      readMins: 8,
+      tags: ['vue']
+    },
+    {
+      url: '/blog/vue-automatic-component-imports/',
+      title: 'Building a Vue Auto Component Importer - A Better Dev Experience',
+      publishDate: '22nd Dec 2020',
+      date: '2020-12-22',
+      excerpt: 'Having component folders \'auto-magically\' imported into your app is the latest craze. How does it work and is it good?',
+      status: 'published',
+      readMins: 10,
+      tags: ['webpack', 'vue']
+    },
+    {
+      url: 'https://github.com/loonpwn/vue-cli-plugin-import-components',
+      link: true,
+      publishDate: '12th Dec 2020',
+      date: '2020-12-12',
+      status: 'published',
+      title: 'Vue-CLI Plugin: Import Components',
+      excerpt: 'I created a Vue-CLI plugin to automatically import your components in your Vue CLI app with tree shaking, supporting Vue 2 and 3.',
+      tags: ['vue', 'github']
+    },
+    {
+      url: '/blog/how-the-heck-does-vite-work/',
+      title: 'How Does Vite Work - A Comparison to Webpack',
+      publishDate: '1st Dec 2020',
+      date: '2020-12-01',
+      excerpt: 'I used Vite to build a new blazing fast blog ⚡, find out what I learnt and why Vite is the next big thing.',
+      status: 'published',
+      readMins: 10,
+      tags: ['webpack', 'vue']
+    },
+  ]
+
+exports.getPosts = function getPosts() {
+  const cwd = path.resolve(__dirname, '../app/blog')
+  const posts = globby.sync(['**/*.md'], { cwd })
+  return posts
+    .map(file => {
+      const src = fs.readFileSync(path.join(cwd, file), 'utf-8')
+      const { content } = matter(src)
+
+      // match file to post definition
+      const url = '/blog/' + file.replace('index.md', '')
+      console.log(url)
+      const postMeta = postMetas.filter(p => p.url === url)[0]
+
+      console.log(file, postMeta)
+      return {
+        title: postMeta.title,
+        date: formatDate(postMeta.date),
+        ...postMeta,
+        content
+      }
+    })
+    .sort((a, b) => b.date.time - a.date.time)
+}
+
+function formatDate(date) {
+  date = new Date(date)
+  console.log(date)
+  date.setUTCHours(12)
+  return {
+    time: +date,
+    string: date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    })
+  }
+}
