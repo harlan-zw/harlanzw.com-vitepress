@@ -16,7 +16,7 @@
   },
   "scripts": {
     "dev": "export NODE_ENV=development; vitepress dev app",
-    "build": "export NODE_ENV=production; vitepress build app",
+    "build": "export NODE_ENV=production; vitepress build app && node ./tools/generate-feed.js",
     "serve": "vitepress serve app"
   },
   "dependencies": {
