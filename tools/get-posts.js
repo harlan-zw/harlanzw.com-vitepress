@@ -59,10 +59,8 @@ exports.getPosts = function getPosts() {
 
       // match file to post definition
       const url = '/blog/' + file.replace('index.md', '')
-      console.log(url)
       const postMeta = postMetas.filter(p => p.url === url)[0]
 
-      console.log(file, postMeta)
       return {
         title: postMeta.title,
         date: formatDate(postMeta.date),
@@ -75,7 +73,6 @@ exports.getPosts = function getPosts() {
 
 function formatDate(date) {
   date = new Date(date)
-  console.log(date)
   date.setUTCHours(12)
   return {
     time: +date,
