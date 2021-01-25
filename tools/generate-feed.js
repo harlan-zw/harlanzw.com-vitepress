@@ -24,7 +24,6 @@ getPosts().forEach((post) => {
   const content = rendered.match(
     /<div class="content .*?">([\s\S]*)<\/div>/m
   )
-  console.log(rendered)
 
   feed.addItem({
     title: post.title,
