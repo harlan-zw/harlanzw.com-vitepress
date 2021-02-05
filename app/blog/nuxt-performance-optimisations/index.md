@@ -31,7 +31,8 @@ build: {
 }
 ```
 
-## Nuxt out of the box optimisations
+
+## Nuxt.js config
 
 ### Cache
 
@@ -85,6 +86,10 @@ build: {
 ```
 
 Result: **~40% babel-loader speed increase** (on cold starts)
+
+## Fast Saas Loader
+
+## Swap out url-loader
 
 
 ## Related articles
