@@ -1,5 +1,15 @@
 export default [
     {
+        url: '/blog/nuxt-performance-optimisations/',
+        title: 'Speed up your Nuxt.js builds: Webpack Optimisations',
+        publishDate: '6th Feb 2021',
+        date: '2021-02-06',
+        excerpt: 'Working on a mid-large size app usually means hundreds of components. How do you make sure these components will scale?',
+        status: 'published',
+        readMins: 8,
+        tags: ['vue']
+    },
+    {
         url: '/blog/scale-your-vue-components/',
         title: 'Scaling Your Vue Components for Mid-Large Size Apps',
         publishDate: '12th Jan 2021',
@@ -11,7 +21,7 @@ export default [
     },
     {
         url: '/blog/vue-automatic-component-imports/',
-        title: 'Building a Vue Auto Component Importer - A Better Dev Experience',
+        title: 'Building a Vue Auto Component Importer: A Better Dev Experience',
         publishDate: '22nd Dec 2020',
         date: '2020-12-22',
         excerpt: 'Having component folders \'auto-magically\' imported into your app is the latest craze. How does it work and is it good?',
@@ -31,7 +41,7 @@ export default [
     },
     {
         url: '/blog/how-the-heck-does-vite-work/',
-        title: 'How Does Vite Work - A Comparison to Webpack',
+        title: 'How Does Vite Work: A Comparison to Webpack',
         publishDate: '1st Dec 2020',
         date: '2020-12-01',
         excerpt: 'I used Vite to build a new blazing fast blog ⚡, find out what I learnt and why Vite is the next big thing.',

@@ -32,6 +32,7 @@ const theme = {
         app.provide('zoom', zooming)
 
         // analytics
+        console.log('dev', import.meta.env.DEV)
         app.provide('analytics', Panelbear)
         Panelbear.load(import.meta.env.VITE_PANELBEAR_ID, {
             spaMode: 'history',

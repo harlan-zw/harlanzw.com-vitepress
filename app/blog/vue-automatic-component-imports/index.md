@@ -1,5 +1,5 @@
 ---
-title: "Building a Vue Auto Component Importer - A Better Dev Experience"
+title: "Building a Vue Auto Component Importer: A Better Dev Experience"
 description: "Components magically being imported into your app is the latest developer experience trend in Vue. Why does it exist and how does it work?"
 head:
 - - meta
