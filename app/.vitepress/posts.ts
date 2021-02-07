@@ -7,7 +7,7 @@ export default [
         excerpt: 'Working on a mid-large size app usually means hundreds of components. How do you make sure these components will scale?',
         status: 'published',
         readMins: 8,
-        tags: ['vue']
+        tags: ['vue', 'nuxt', 'webpack']
     },
     {
         url: '/blog/scale-your-vue-components/',

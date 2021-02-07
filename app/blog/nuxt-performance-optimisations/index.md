@@ -5,17 +5,19 @@ description: "Components magically being imported into your app is the latest de
 
 ## Why is your Nuxt.js slow?
 
-Nuxt is an abstraction layer on top of webpack. You don't need to understand webpack to use Nuxt and that is the beauty of it.
+Nuxt.js is a high level abstraction layer on top of webpack. You don't need to understand webpack to use Nuxt.
 
-Once your app starts to grow though, you may notice things start to get sluggish. While Nuxt does a good job
-of optimising, you can squeeze even more performance out of it with some trade-offs.
+While Nuxt does optimise the webpack build for you, you may notice things start to get sluggish as your app grows.
 
-## Measure
+I can't give you the solution to every performance problem, but I'll go over some performance improvements that
+all Nuxt apps could benefit from.
 
-Since all Nuxt apps are going to look different, it's important you are testing the speed changes yourself to make sure
-that the changes are worth it.
+Every app is different and are going to have their own bottlenecks. That's why we'll start with measuring your app
+and see what's taking the most time.
 
-speed-measure-webpack-plugin
+### Speed Measure Webpack
+
+The speed-measure-webpack-plugin is a tool to diagnose 
 
 ```shell
 yarn add -D speed-measure-webpack-plugin
@@ -80,7 +82,7 @@ and will give you a significant 'hot' speed increase.
 parallel: true
 
 
-## Modern builds with babel
+## Transpiling Javascript
 
 Nuxt provides `modern: boolean` option, when enabled it creates a separate bundle for 'modern' browsers.
 This modern package is good, it's quicker to build and has a smaller output.
@@ -175,9 +177,21 @@ build: {
 }
 ```
 
+## Misc tips
 
-## Sources
+### Don't compress images on build
+
+Use git commit hook to run the process and commit the compressed image.
+
+```js
+  "lint-staged": {
+    "*.{png,jpeg,jpg,gif,svg}": "imagemin-lint-staged"
+  }
+```
+
+## Further reading
 
 - https://webpack.js.org/guides/build-performance/
 - https://web.dev/serve-modern-code-to-modern-browsers/
 - https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-build
+- https://slack.engineering/keep-webpack-fast-a-field-guide-for-better-build-performance/
