@@ -32,9 +32,12 @@ const smp = new SpeedMeasurePlugin({
   granularLoaderData: true
 });
 
-build: {
-  extend(config) {
-    smp.wrap(config)
+export default {
+  // ...
+  build: {
+    extend(config) {
+      smp.wrap(config)
+    }
   }
 }
 ```
@@ -173,7 +176,8 @@ build: {
 ```
 
 
-## Related articles
+## Sources
 
 - https://webpack.js.org/guides/build-performance/
 - https://web.dev/serve-modern-code-to-modern-browsers/
+- https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-build
