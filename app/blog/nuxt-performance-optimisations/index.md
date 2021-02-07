@@ -1,11 +1,19 @@
 ---
-title: "Speed up your Nuxt.js builds: Webpack Optimisations"
+title: "Speed up your dev Nuxt.js builds: Webpack Optimisations"
 description: "Components magically being imported into your app is the latest developer experience trend in Vue. Why does it exist and how does it work?"
 ---
 
 ## Why is your Nuxt.js slow?
 
+Nuxt is an abstraction layer on top of webpack. You don't need to understand webpack to use Nuxt and that is the beauty of it.
+
+Once your app starts to grow though, you may notice things start to get sluggish. While Nuxt does a good job
+of optimising, you can squeeze even more performance out of it with some trade-offs.
+
 ## Measure
+
+Since all Nuxt apps are going to look different, it's important you are testing the speed changes yourself to make sure
+that the changes are worth it.
 
 speed-measure-webpack-plugin
 
@@ -32,22 +40,44 @@ build: {
 ```
 
 
-## Nuxt.js config
+## Nuxt.js build config
+
+There are a number of optimisations already built into Nuxt, but because they have some trade offs, they are marked as
+"experimental" and disabled by default.
+
+```js
+build: {
+  // ...
+  // Enable cache of terser-webpack-plugin and cache-loader
+  // see: https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-build#cache
+  cache: true,
+  // Enables the HardSourceWebpackPlugin for improved caching
+  // see: https://github.com/mzgoddard/hard-source-webpack-plugin
+  hardSource: process.env.NODE_ENV === 'development',
+  // Enable thread-loader in webpack building
+  // see: https://github.com/webpack-contrib/thread-loader#thread-loader  
+  parallel: true,
+}
+```
 
 ### Cache
 
-cache: true
+When you enable cache it will inject `cache-loader` into your webpack config and turn on the cache for terser-webpack-plugin (minifies javascript).
+
+The out-of-the-box Webpack loader `cache-loader` sits in front of other loaders, and caching
+whatever the output is. The loader is deprecated in webpack 5, but Nuxt is still on webpack 4.
+
+By default, Nuxt does not use this loader and marks it as experimental. However, from my experience is fairly safe to use 
+and will give you a significant 'hot' speed increase.
+
+### Hard Source
 
 ### Parallel 
 
 parallel: true
 
-### Hard Source
 
-### Disable optimisations
-
-
-## Modern builds
+## Modern builds with babel
 
 Nuxt provides `modern: boolean` option, when enabled it creates a separate bundle for 'modern' browsers.
 This modern package is good, it's quicker to build and has a smaller output.
@@ -63,7 +93,7 @@ The main change is setting the babel `targets` to only the latest chrome version
 build: {
   // ...
   babel: {
-    presets({ isDev }) {
+    presets({ isDev, isServer }) {
       return [
         [
           '@nuxt/babel-preset-app',
@@ -74,7 +104,7 @@ build: {
             corejs: 3,
             // use only latest chrome for development
             ignoreBrowserslistConfig: isDev,
-            targets: isDev ? { chrome: 88 } : undefined,
+            targets: isDev && !isServer ? { chrome: 88 } : undefined,
             // decreases overall package size. See: https://babeljs.io/docs/en/babel-preset-env#bugfixes
             bugfixes: true,
           },
@@ -87,9 +117,60 @@ build: {
 
 Result: **~40% babel-loader speed increase** (on cold starts)
 
-## Fast Saas Loader
+## webpack config
+
+These are small flags that webpack recommends. 
+
+The functional change of each of these flags I'd recommend you check the webpack docs and make sure it will work for your application.
+
+```js
+// custom webpack optimisations
+config.resolve.symlinks = false
+config.resolve.cacheWithContext = false
+if (process.env.NODE_ENV === 'development') {
+  // dev env optimisations. See:https://webpack.js.org/guides/build-performance/
+  config.optimization.removeAvailableModules = false
+  config.optimization.removeEmptyChunks = false
+  config.optimization.splitChunks = false
+  config.optimization.runtimeChunk = false
+  config.output.pathinfo = false
+}
+```
+
 
 ## Swap out url-loader
+
+```js
+build: {
+  // ...
+  extend() {
+    // remove the current image loader
+    config.module.rules = config.module.rules.filter(
+      r => r.test && r.test.toString() !== '/\\.(png|jpe?g|gif|svg|webp)$/i'
+    )
+    // inject our new image loader
+    config.module.rules.push({
+      test: /\.(png|jpe?g|gif|svg|webp)$/i,
+      use: [
+        // we swap out the url-loader with a file-loader in the dev environment for speed
+        // large images and files really slow it down
+        isDev ? {
+          loader: 'file-loader',
+          options: {
+            name: '[path][name].[ext]',
+          },
+        } : {
+          loader: 'url-loader',
+          options: {
+            limit: 1000,
+            name: '[path][name].[ext]',
+          }
+        }
+      ]
+    })
+  }
+}
+```
 
 
 ## Related articles
