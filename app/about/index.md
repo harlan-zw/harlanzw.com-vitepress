@@ -45,7 +45,7 @@ I'll be posting here, <a href="https://twitter.com/harlan_zw" target="_blank">Tw
 ### :money_with_wings: $0 MRR so far
 
 Being transparent about how my journey is going is important to me. I want people to see what it really takes to move the needle.
-I plan to build my projects in public, you'll see my MMR be updated as I go along.
+I plan to build my projects in public, you'll see my MRR be updated as I go along.
 
 
 ## My Freelance Clients
