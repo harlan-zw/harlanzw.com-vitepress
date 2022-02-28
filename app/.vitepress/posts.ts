@@ -1,5 +1,15 @@
 export default [
     {
+        url: '/blog/building-unlighthouse/',
+        title: 'Building Unlighthouse: Open-Source Package For Site-wide Google Lighthouse scans',
+        publishDate: '28 Feb 2022',
+        date: '2022-02-28',
+        excerpt: 'Going into detail of what goes into making a modern open-source package.',
+        status: 'published',
+        readMins: 6,
+        tags: ['vue']
+    },
+    {
         url: '/blog/scale-your-vue-components/',
         title: 'Scaling Your Vue Components for Mid-Large Size Apps',
         publishDate: '12th Jan 2021',
