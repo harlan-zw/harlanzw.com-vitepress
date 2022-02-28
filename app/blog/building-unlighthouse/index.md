@@ -1,0 +1,270 @@
+---
+title: "Building Unlighthouse: Open-Source Package For Site-wide Google Lighthouse scans"
+description: "Going into detail of what goes into making a modern open-source package."
+head:
+- - meta
+- name: description
+  content: "Going into detail of what goes into making a modern open-source package."
+- - meta
+- property: "og:type"
+  content: "website"
+- - meta
+- property: "og:url"
+  content: "https://harlanzw.com/blog/building-unlighthouse/"
+- - meta
+- property: "og:title"
+  content: "Building Unlighthouse: Open-Source Package For Site-wide Google Lighthouse scans"
+- - meta
+- property: "og:description"
+  content: "Going into detail of what goes into making a modern open-source package."
+- - meta
+- property: "og:image"
+  content: "https://next.unlighthouse.dev/og.png"
+- - meta
+- property: "twitter:card"
+  content: "summary_large_image"
+- - meta
+- property: "twitter:url"
+  content: "https://harlanzw.com/blog/building-unlighthouse/"
+- - meta
+- property: "twitter:title"
+  content: "Building Unlighthouse: Open-Source Package For Site-wide Google Lighthouse scans"
+- - meta
+- property: "twitter:description"
+  content: "Going into detail of what goes into making a modern open-source package."
+- - meta
+- property: "twitter:image"
+  content: "https://next.unlighthouse.dev/og.png"
+---
+
+# Building Unlighthouse: Open-Source Package For Site-wide Google Lighthouse scans
+
+## Introduction
+
+[Unlighthouse](https://github.com/harlan-zw/unlighthouse) is an open-source package to scan your entire site using Google Lighthouse. Featuring a modern UI, minimal config and smart sampling.
+
+## Why build it
+
+As a freelancer I need to keep on top of my clients organic growth, which I do using Google Search Console.
+
+Looking at the dashboard one day I saw the worst: page position was in free falling. Less organic traffic was less money for their business, I wanted to keep trust high and fix this as soon as possible.
+
+![Trending down Google Search Console](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/n4ajn7qv5iir7kmido0p.png)
+
+The issue was that it wasn't easy to isolate the problem. Yes the site had issues, but which was causing the problem. I needed to go through every single page and figure out what was going on. It was days of manual auditing and testing of all pages. Fixing an issue and hoping it would change things.
+
+After weeks of fixing small issues, things started turning around.
+
+I was able to invert the graph. Organic growth doubled in the next few months. Client was happy and even gave me a bonus.
+
+![Trending up Google Search Console](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/wh6s6kjiy5y8ilv8pzeq.png)
+
+This prompted me to want to have a dead-easy way to audit sites using Google's own tools: Google Lighthouse, without all of manual steps.
+
+This is why I built the open-source tool Unlighthouse. Find and fix accessibility, SEO and performance issues for an entire site without the effort.
+
+## Starting the build
+
+I'm a Laravel / Vue developer primarily. Javascript moves quickly, but I try and stay on top of the latest trends, tools and packages.
+
+When it came time to actually put Unlighthouse together, I knew I wanted to build it with Typescript. There were also a myriad of nifty packages that were coming out of the [UnJS](https://github.com/unjs) ecosystem that I wanted to play with.
+
+## The architecture
+
+### Vue 3 / Vite client
+
+The beloved [Vite](https://github.com/vitejs/vite) was to be used to make the development of the client as easy and fast as possible.
+
+Vue 3 used to make use of the vast collection of utilities available at [VueUse](https://vueuse.org/).
+
+### Lighthouse binary
+
+Unlighthouse wouldn't be possible of Google hadn't published Lighthouse as it's own [NPM binary](https://github.com/GoogleChrome/lighthouse).
+
+To make Unlighthouse fast, we combined this lighthouse binary with the package [puppeteer-cluster](https://github.com/thomasdondorf/puppeteer-cluster), which allows for multi-threaded lighthouse scans.
+
+### PNPM Monorepo
+
+[PNPM](https://pnpm.io/) is new kid on the block of node package managers and has gained a large following quickly, for good reason. It is the most performant and has first class support for monorepos.
+
+There are many benefits to using a monorepo for a package. My personal favourite is it allows me to easily isolate logic and dependencies for your package, letting you write simpler code. Allowing end users to pull any specific part of your package that they want to use.
+
+![Unlighthouse monorepo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/3hfzz5ik3fa9qtzmmmz9.png)
+
+### Vitest Testing
+
+[Vitest](https://vitest.dev/) is also the new kid on the block of testing. It's original aim was to be a testing framework specifically for Vite, but it has ended up being a possible replacement for Jest entirely.
+
+Vitest makes writing your logic and tests a breeze and I'd recommend checking it out for any project.
+
+## The packages
+
+### [unbuild](https://github.com/unjs/unbuild)
+
+This package is described as a "A unified javascript build system".
+
+In reality, it's a minimal config way to build your complex application code. One of the amazing features of unbuild is stubbing. This means you can run code from your dist folder and have it compile just in time.
+
+This allows you to completely cut out the build step when you're iterating and testing integrations on your package.
+
+It's as simple as `unbuild --stub`.
+
+```ts
+import { defineBuildConfig } from 'unbuild'
+
+export default defineBuildConfig({
+  entries: [
+    { input: 'src/index' },
+    { input: 'src/process', outDir: 'dist/process', builder: 'mkdist', declaration: false },
+  ],
+})
+```
+
+### [unctx](https://github.com/unjs/unctx)
+
+It's amazing that a simple pattern like Singletons have evaded Node packages for so long. With the introduction of Vue 3, composition became cool again, and with that the reintroduction of singleton patterns around context.
+
+unctx allows you define a scope where there's only a single instance of something that is globally accessible. This is incredibly useful for building packages, as you no longer need to be juggling core state. You can build your logic out as composables that interact with the core.
+
+```ts
+import { createContext } from 'unctx'
+
+const engineContext = createContext<UnlighthouseContext>()
+
+export const useUnlighthouse = engineContext.use as () => UnlighthouseContext
+
+export const createUnlighthouse = async(userConfig: UserConfig, provider?: Provider) => {
+  // ...
+  engineContext.set(ctx, true)
+}
+```
+
+### [unrouted](https://github.com/harlan-zw/unrouted)
+
+I needed an API for the client to communicate with the Node server to fetch the status of the scan and submit re-scans.
+
+The current JS offerings were a bit lackluster. I wanted something that just worked and had a nice way to use it.
+
+I ended up building unrouted as a way to solve that.
+
+```ts
+ group('/api', () => {
+      group('/reports', () => {
+        post('/rescan', () => {
+          const { worker } = useUnlighthouse()
+
+          const reports = [...worker.routeReports.values()]
+          logger.info(`Doing site rescan, clearing ${reports.length} reports.`)
+          worker.routeReports.clear()
+          reports.forEach((route) => {
+            const dir = route.artifactPath
+            if (fs.existsSync(dir))
+              fs.rmSync(dir, { recursive: true })
+          })
+          worker.queueRoutes(reports.map(report => report.route))
+          return true
+        })
+
+        post('/:id/rescan', () => {
+          const report = useReport()
+          const { worker } = useUnlighthouse()
+
+          if (report)
+            worker.requeueReport(report)
+        })
+      })
+
+      get('__launch', () => {
+        const { file } = useQuery<{ file: string }>()
+        if (!file) {
+          setStatusCode(400)
+          return false
+        }
+        const path = file.replace(resolvedConfig.root, '')
+        const resolved = join(resolvedConfig.root, path)
+        logger.info(`Launching file in editor: \`${path}\``)
+        launch(resolved)
+      })
+
+      get('ws', req => ws.serve(req))
+
+      get('reports', () => {
+        const { worker } = useUnlighthouse()
+
+        return worker.reports().filter(r => r.tasks.inspectHtmlTask === 'completed')
+      })
+
+      get('scan-meta', () => createScanMeta())
+    })
+```
+
+### [hookable](https://github.com/unjs/hookable)
+
+For Nuxt.js users, you might be familiar with the concept of frameworks hooks. A way for you to modify or do something with the internal logic of Nuxt.
+
+Building a package, I knew that this was a useful feature, not just for end-users, but for me as a way to organise logic.
+
+Having a core which is hookable means you can avoid baking logic in that may be better suited else where.
+
+For example, I wanted to make sure that Unlighthouse didn't start for integrations until they visited the page.
+
+I simply set a hook for it to start only when they visit the client.
+
+```ts
+     hooks.hookOnce('visited-client', () => {
+        ctx.start()
+      })
+```
+
+### [unconfig](https://github.com/antfu/unconfig)
+
+Unconfig is a universal solution for loading configurations. This let me allow the package to load in a configuration from `unlighthouse.config.ts` or a custom path, with barely any code.
+
+```ts
+import { loadConfig } from 'unconfig'
+
+  const configDefinition = await loadConfig<UserConfig>({
+    cwd: userConfig.root,
+    sources: [
+      {
+        files: [
+          'unlighthouse.config',
+          // may provide the config file as an argument
+          ...(userConfig.configFile ? [userConfig.configFile] : []),
+        ],
+        // default extensions
+        extensions: ['ts', 'js'],
+      },
+    ],
+  })
+  if (configDefinition.sources?.[0]) {
+    configFile = configDefinition.sources[0]
+    userConfig = defu(configDefinition.config, userConfig)
+  }
+```
+
+### [ufo](https://github.com/unjs/ufo)
+
+> URL utils for humans
+
+Dealing with URLs in Node isn't very nice. For Unlighthouse I needed to deal with many URLS, I needed to make sure they were standardised no matter how they were formed.
+
+This meant using the ufo package heavily. The slash trimming came in very handy and the origin detection.
+
+```ts
+export const trimSlashes = (s: string) => withoutLeadingSlash(withoutTrailingSlash(s))
+```
+
+```ts
+  const site = new $URL(url).origin
+```
+
+## Putting it together - coming soon
+
+Part 2 of this article will be coming soon where I go over some of the technical feats in putting together the above packages.
+
+## Conclusion
+
+Thanks for reading Part 1. I hope you at least found it interesting or some of the links useful.
+
+You can follow me [@harlan_zw](https://twitter.com/harlan_zw) to keep up to date.
