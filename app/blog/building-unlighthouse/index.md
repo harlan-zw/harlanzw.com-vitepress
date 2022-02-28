@@ -41,49 +41,53 @@ head:
 
 [Unlighthouse](https://github.com/harlan-zw/unlighthouse) is an open-source package to scan your entire site using Google Lighthouse. Featuring a modern UI, minimal config and smart sampling.
 
-## Why build it
+## The Journey To An Idea
 
-As a freelancer I need to keep on top of my clients organic growth, which I do using Google Search Console.
+As a freelancer I  keep on top of my clients organic growth with Google Search Console.
 
-Looking at the dashboard one day I saw the worst: page position was in free falling. Less organic traffic was less money for their business, I wanted to keep trust high and fix this as soon as possible.
+Was a day like any other, looking at one of my clients' dashboard. Seemingly out of nowhere, I saw the trend of page position, clicks and page views in free fall. My clients' income was based on organic traffic, not good.
 
 ![Trending down Google Search Console](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/n4ajn7qv5iir7kmido0p.png)
 
-The issue was that it wasn't easy to isolate the problem. Yes the site had issues, but which was causing the problem. I needed to go through every single page and figure out what was going on. It was days of manual auditing and testing of all pages. Fixing an issue and hoping it would change things.
+Isolating the reason for the falling page rank wasn't easy. The site had issues, but what was causing the free fall. There was no way to know.
 
-After weeks of fixing small issues, things started turning around.
+To diagnose the issue, I used Google Lighthouse. I went through all pages of the site, fixing all reported issues.
 
-I was able to invert the graph. Organic growth doubled in the next few months. Client was happy and even gave me a bonus.
+What happened next? Things started turning around. I was able to invert the graph. Organic growth doubled in the next few months. Happy client.
 
 ![Trending up Google Search Console](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/wh6s6kjiy5y8ilv8pzeq.png)
 
-This prompted me to want to have a dead-easy way to audit sites using Google's own tools: Google Lighthouse, without all of manual steps.
+Now that was out of the way, how could I make it easier to stay on top of the health of the sites I manage?
 
-This is why I built the open-source tool Unlighthouse. Find and fix accessibility, SEO and performance issues for an entire site without the effort.
+## Starting The Build
 
-## Starting the build
+So I know I wanted to build something that would run Google Lighthouse on an entire site with just the home page URL.
 
-I'm a Laravel / Vue developer primarily. Javascript moves quickly, but I try and stay on top of the latest trends, tools and packages.
+When it came time to put something together, I had a rough idea of the stack. Typescript, Vue, Vite, etc.
 
-When it came time to actually put Unlighthouse together, I knew I wanted to build it with Typescript. There were also a myriad of nifty packages that were coming out of the [UnJS](https://github.com/unjs) ecosystem that I wanted to play with.
+There were also a myriad of nifty packages that were coming out of the [UnJS](https://github.com/unjs) ecosystem that I wanted to play with.
 
-## The architecture
+With that, the package would be known as **Un** (inspired by Unjs) **Lighthouse**.
+
+## Unlighthouse Architecture
+
+The code that what went into building the package.
 
 ### Vue 3 / Vite client
 
 The beloved [Vite](https://github.com/vitejs/vite) was to be used to make the development of the client as easy and fast as possible.
 
-Vue 3 used to make use of the vast collection of utilities available at [VueUse](https://vueuse.org/).
+Vue v3 used to make use of the vast collection of utilities available at [VueUse](https://vueuse.org/).
 
-### Lighthouse binary
+### Lighthouse Binary
 
-Unlighthouse wouldn't be possible of Google hadn't published Lighthouse as it's own [NPM binary](https://github.com/GoogleChrome/lighthouse).
+Unlighthouse wouldn't be possible if Google hadn't published Lighthouse as its own [NPM binary](https://github.com/GoogleChrome/lighthouse).
 
-To make Unlighthouse fast, we combined this lighthouse binary with the package [puppeteer-cluster](https://github.com/thomasdondorf/puppeteer-cluster), which allows for multi-threaded lighthouse scans.
+To make Unlighthouse fast, I combined the binary with the package [puppeteer-cluster](https://github.com/thomasdondorf/puppeteer-cluster), which allows for multi-threaded lighthouse scans.
 
 ### PNPM Monorepo
 
-[PNPM](https://pnpm.io/) is new kid on the block of node package managers and has gained a large following quickly, for good reason. It is the most performant and has first class support for monorepos.
+[PNPM](https://pnpm.io/) is the new kid on the block of node package managers and has gained a large following quickly, for good reason. It is the most performant package manager and has first class support for monorepos.
 
 There are many benefits to using a monorepo for a package. My personal favourite is it allows me to easily isolate logic and dependencies for your package, letting you write simpler code. Allowing end users to pull any specific part of your package that they want to use.
 
@@ -95,13 +99,13 @@ There are many benefits to using a monorepo for a package. My personal favourite
 
 Vitest makes writing your logic and tests a breeze and I'd recommend checking it out for any project.
 
-## The packages
-
 ### [unbuild](https://github.com/unjs/unbuild)
 
 This package is described as a "A unified javascript build system".
 
-In reality, it's a minimal config way to build your complex application code. One of the amazing features of unbuild is stubbing. This means you can run code from your dist folder and have it compile just in time.
+In reality, it's a minimal config way to build your package code to ESM and CJS.
+
+One of the amazing features of unbuild is stubbing. This allows you can run source code from your dist folder, meaning it transpiles just-in-time.
 
 This allows you to completely cut out the build step when you're iterating and testing integrations on your package.
 
@@ -120,7 +124,9 @@ export default defineBuildConfig({
 
 ### [unctx](https://github.com/unjs/unctx)
 
-It's amazing that a simple pattern like Singletons have evaded Node packages for so long. With the introduction of Vue 3, composition became cool again, and with that the reintroduction of singleton patterns around context.
+It's amazing that a simple pattern like composition has evaded Node packages for so long.
+
+With the introduction of Vue 3, composition became cool. And with that, unctx is composition for your own package.
 
 unctx allows you define a scope where there's only a single instance of something that is globally accessible. This is incredibly useful for building packages, as you no longer need to be juggling core state. You can build your logic out as composables that interact with the core.
 
@@ -202,7 +208,7 @@ For Nuxt.js users, you might be familiar with the concept of frameworks hooks. A
 
 Building a package, I knew that this was a useful feature, not just for end-users, but for me as a way to organise logic.
 
-Having a core which is hookable means you can avoid baking logic in that may be better suited else where.
+Having a core which is hookable means you can avoid baking logic in that may be better suited elsewhere.
 
 For example, I wanted to make sure that Unlighthouse didn't start for integrations until they visited the page.
 
@@ -257,12 +263,11 @@ export const trimSlashes = (s: string) => withoutLeadingSlash(withoutTrailingSla
   const site = new $URL(url).origin
 ```
 
-## Putting it together - coming soon
+## Putting It Together - Part 2
 
-Part 2 of this article will be coming soon where I go over some of the technical feats in putting together the above packages.
+Part 2 of this article will be coming soon where I go over some technical feats in putting together the above packages.
 
 ## Conclusion
 
 Thanks for reading Part 1. I hope you at least found it interesting or some of the links useful.
 
-You can follow me [@harlan_zw](https://twitter.com/harlan_zw) to keep up to date.
