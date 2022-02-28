@@ -14,9 +14,10 @@
 </template>
 
 <script>
-import { defineComponent, computed } from 'vue';
-import { useRoute } from 'vitepress/dist/client/app/router';
-import { withBase, isExternal } from '../utils';
+import { computed } from 'vue';
+import { useRoute, withBase, } from 'vitepress';
+import { isExternal } from '../utils';
+
 const normalizePath = (path) => {
   path = path
       .replace(/#.*$/, '')
@@ -27,7 +28,7 @@ const normalizePath = (path) => {
   }
   return path;
 };
-export default defineComponent({
+export default {
   props: {
     item: {
       type: Object,
@@ -71,7 +72,7 @@ export default defineComponent({
       rel
     };
   }
-});
+}
 </script>
 
 <style lang="scss" scoped>

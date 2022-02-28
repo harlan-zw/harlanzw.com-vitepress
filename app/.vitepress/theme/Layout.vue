@@ -1,3 +1,47 @@
+<script>
+import NavBar from './components/NavBar.vue'
+import PostTags from './components/PostTags.vue'
+import { inject, computed } from 'vue'
+import { postForPath } from './utils'
+import { useRoute } from 'vitepress'
+
+export default {
+  components: {
+    PostTags,
+    NavBar,
+  },
+  setup() {
+    const zoom = inject('zoom')
+    const route = useRoute()
+    const post = computed(() => postForPath(route.path))
+
+    return {
+      zoom,
+      post
+    }
+  },
+  watch: {
+    $page: {
+      handler () {
+        const route = useRoute()
+        if (this.zoom && route !== '/') {
+          setTimeout(() => {
+            this.zoom.listen('.prose img')
+          }, 500)
+        }
+      },
+      immediate: true
+    }
+  },
+}
+</script>
+
+<style>
+.theme {
+  min-height: calc(100vh - 80px);
+}
+</style>
+
 <template>
 <div class="theme">
   <div class="bg-gray-50 px-5 sm:px-7 md:px-10">
@@ -35,50 +79,3 @@
   <Debug />
 </div>
 </template>
-
-<script>
-import NavBar from './components/NavBar.vue'
-import PostTags from './components/PostTags.vue'
-import { inject, computed } from 'vue'
-import { postForPath } from './utils'
-import { useRoute } from 'vitepress/dist/client/app/router';
-
-export default {
-  components: {
-    PostTags,
-    NavBar,
-  },
-  setup() {
-    const zoom = inject('zoom')
-    const route = useRoute()
-    const post = computed(() => postForPath(route.path))
-
-    return {
-      zoom,
-      post
-    }
-  },
-  watch: {
-    $page: {
-      handler () {
-        if (this.zoom && this.$page.relativePath !== 'index.md') {
-          setTimeout(() => {
-            this.zoom.listen('.prose img')
-          }, 500)
-        }
-        if (typeof document !== 'undefined') {
-          // @todo fix vitepress seo
-          document.querySelector('meta[name="description"]').setAttribute('content', this.$page.frontmatter.description);
-        }
-      },
-      immediate: true
-    }
-  },
-}
-</script>
-
-<style>
-.theme {
-  min-height: calc(100vh - 80px);
-}
-</style>

@@ -1,3 +1,36 @@
+<script>
+import { useData } from "vitepress";
+import NavBarLink from "./NavBarLink.vue";
+
+export default {
+  components: {
+    NavBarLink
+  },
+  data () {
+    return {
+      menuOpen: false,
+    }
+  },
+  watch: {
+    $page() {
+      this.menuOpen = false
+    }
+  },
+  setup() {
+    const { theme } = useData()
+    return {
+      navData: theme.value.nav
+    }
+  },
+  computed: {
+    menuClasses () {
+      return this.menuOpen ?
+          ['opacity-100', 'scale-100', 'duration-200', 'ease-out'] :
+          ['opacity-0', 'scale-95', 'duration-100', 'ease-in', 'pointer-events-none']
+    }
+  }
+}
+</script>
 <template>
 <nav class="nav-links">
   <div class="hidden md:block">
@@ -29,36 +62,6 @@
 </div>
 </template>
 
-<script>
-import NavBarLink from './NavBarLink.vue'
-
-export default {
-  components: {
-    NavBarLink,
-  },
-  data () {
-    return {
-      menuOpen: false,
-    }
-  },
-  watch: {
-    $page() {
-      this.menuOpen = false
-    }
-  },
-  computed: {
-    navData () {
-      return this.$site.themeConfig.nav
-    },
-    menuClasses () {
-      return this.menuOpen ?
-          ['opacity-100', 'scale-100', 'duration-200', 'ease-out'] :
-          ['opacity-0', 'scale-95', 'duration-100', 'ease-in', 'pointer-events-none']
-    }
-  }
-}
-
-</script>
 
 <style>
 .nav-links {

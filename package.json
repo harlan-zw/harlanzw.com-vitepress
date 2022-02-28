@@ -4,14 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
-    "@tailwindcss/typography": "^0.4.0",
-    "autoprefixer": "^10.2.3",
-    "node-sass": "^5.0.0",
-    "postcss": "^7",
+    "feed": "^4.2.2",
+    "globby": "^11.0.2",
+    "gray-matter": "^4.0.2",
     "sass": "^1.32.5",
-    "sass-loader": "^10.1.1",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.1",
-    "vitepress": "^0.12.0",
+    "vite-plugin-windicss": "^1.8.1",
+    "vitepress": "^0.22.3",
+    "windicss": "^3.5.0",
     "zooming": "^2.1.1"
   },
   "scripts": {
@@ -21,9 +20,11 @@
   },
   "dependencies": {
     "@panelbear/panelbear-js": "^1.2.0",
-    "feed": "^4.2.2",
-    "globby": "^11.0.2",
-    "gray-matter": "^4.0.2",
-    "lodash": "^4.17.20"
+    "@unlighthouse/vite": "^0.3.3",
+    "lodash": "^4.17.20",
+    "unplugin-icons": "^0.13.2",
+    "unplugin-vue-components": "^0.17.21",
+    "vite": "^2.8.4",
+    "vue": "^3.2.31"
   }
 }

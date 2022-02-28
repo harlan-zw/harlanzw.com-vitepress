@@ -6,8 +6,12 @@ head:
   - name: description
     content: "My name's Harlan Wilton. I am a full stack developer living and working out of Sydney, Australia."
 ---
+<script setup>
+import { useData } from 'vitepress'
+const { page } = useData()
+</script>
 
-# {{ $page.title }}
+# {{ page.title }}
 
 Hey! My name is Harlan Wilton. Thank you for checking out my site 😊
 

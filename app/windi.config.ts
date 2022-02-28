@@ -1,14 +1,10 @@
-module.exports = {
-  purge: {
-    enabled: process.env.NODE_ENV === 'production',
-    content: [
-      './app/.vitepress/**/*.vue',
-      './app/.vitepress/**/*.js',
-      './app/.vitepress/**/*.ts',
-      './app/**/*.md',
-      './app/*.md',
-    ],
-  },
+import { defineConfig } from 'windicss/helpers'
+
+export default defineConfig({
+  plugins: [
+    require('windicss/plugin/forms'),
+    require('windicss/plugin/typography'),
+  ],
   theme: {
     extend: {
       animation: {
@@ -27,6 +23,9 @@ module.exports = {
       typography: (theme) => ({
         DEFAULT: {
           css: {
+            a: {
+              textDecoration: 'none'
+            },
             h1: {
               color: 'rgb(55, 70, 60)',
               fontWeight: '600',
@@ -67,7 +66,4 @@ module.exports = {
       }),
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-  ],
-}
+})

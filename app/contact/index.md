@@ -37,7 +37,12 @@ head:
     content: "https://harlanzw.com/social/home.png"
 ---
 
-# {{ $page.title }}
+<script setup>
+import { useData } from 'vitepress'
+const { page } = useData()
+</script>
+
+# {{ page.title }}
 
 Get in touch, let's chat! :)
 

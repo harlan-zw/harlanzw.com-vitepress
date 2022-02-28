@@ -1,23 +1,9 @@
-import { useSiteData } from 'vitepress/dist/client/app/composables/siteData'
 import { Post } from '../types'
 import allPosts from '../posts'
 
 export const hashRE = /#.*$/
 export const extRE = /(index)?\.(md|html)$/
-export const endingSlashRE = /\/$/
 export const outboundRE = /^[a-z]+:/i
-
-export function isNullish(value: any): value is null | undefined {
-  return value === null || value === undefined
-}
-
-export function isArray(value: any): value is any[] {
-  return Array.isArray(value)
-}
-
-export function withBase(path: string) {
-  return (useSiteData().value.base + path).replace(/\/+/g, '/')
-}
 
 export function isExternal(path: string): boolean {
   return outboundRE.test(path)

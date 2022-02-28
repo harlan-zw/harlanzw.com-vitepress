@@ -30,6 +30,11 @@
         <priority>0.80</priority>
     </url>
     <url>
+        <loc>https://harlanzw.com/blog/building-unlighthouse/</loc>
+        <lastmod>2022-02-28T05:04:08+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
         <loc>https://harlanzw.com/blog/how-the-heck-does-vite-work/</loc>
         <lastmod>2020-12-22T05:04:08+00:00</lastmod>
         <priority>0.80</priority>

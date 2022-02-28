@@ -5,6 +5,16 @@ const globby = require('globby')
 const postMetas =
   [
     {
+      url: '/blog/building-unlighthouse/',
+      title: 'Building Unlighthouse: Open-Source Package For Site-wide Google Lighthouse scans',
+      publishDate: '28 Feb 2022',
+      date: '2022-02-28',
+      excerpt: 'Going into detail of what goes into making a modern open-source package.',
+      status: 'published',
+      readMins: 6,
+      tags: ['vue']
+    },
+    {
       url: '/blog/scale-your-vue-components/',
       title: 'Scaling Your Vue Components for Mid-Large Size Apps',
       publishDate: '12th Jan 2021',
@@ -52,6 +62,7 @@ const postMetas =
 exports.getPosts = function getPosts() {
   const cwd = path.resolve(__dirname, '../app/blog')
   const posts = globby.sync(['**/*.md'], { cwd })
+  console.log('globby posts', posts, cwd)
   return posts
     .map(file => {
       const src = fs.readFileSync(path.join(cwd, file), 'utf-8')
@@ -59,16 +70,16 @@ exports.getPosts = function getPosts() {
 
       // match file to post definition
       const url = '/blog/' + file.replace('index.md', '')
-      const postMeta = postMetas.filter(p => p.url === url)[0]
+      const postMeta = postMetas.find(p => p.url.endsWith(url))
 
       return {
-        title: postMeta.title,
-        date: formatDate(postMeta.date),
+        title: postMeta?.title,
+        date: formatDate(postMeta?.date),
         ...postMeta,
         content
       }
     })
-    .sort((a, b) => b.date.time - a.date.time)
+    .sort((a, b) => b?.date.time - a?.date.time)
 }
 
 function formatDate(date) {

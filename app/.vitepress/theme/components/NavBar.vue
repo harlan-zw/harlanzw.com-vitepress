@@ -1,3 +1,19 @@
+<script>
+import NavBarLinks from './NavBarLinks.vue';
+import { withBase, useData } from 'vitepress'
+export default {
+  components: {
+    NavBarLinks
+  },
+  setup() {
+    const { site } = useData();
+    return {
+      site,
+      withBase,
+    }
+  }
+}
+</script>
 <template>
 <div class="w-full flex items-center justify-between border-b-2 border-gray-100 py-3 md:py-6">
   <div class="relative ml-2 md:ml-0">
@@ -6,8 +22,8 @@
     </svg>
     <a
         class="logo"
-        :aria-label="$site.title + ', back to home'"
-        :href="$site.base"
+        :aria-label="site.title + ', back to home'"
+        :href="withBase('/')"
     >
       <span class="font-bold font-header text-green-700">harlan</span>
     </a>
@@ -17,18 +33,6 @@
 </div>
 </template>
 
-<script>
-import { withBase } from '../utils';
-import NavBarLinks from './NavBarLinks.vue';
-export default {
-  components: {
-    NavBarLinks
-  },
-  setup() {
-    return { withBase };
-  }
-};
-</script>
 
 <style lang="scss">
 .blob {

@@ -19,12 +19,12 @@ const feed = new Feed({
 })
 
 getPosts().forEach((post) => {
-  const file = path.join(dist, `${post.url}/index.html`)
+  const file = path.join(dist, path.join(post.url, '/index.html'))
   const rendered = fs.readFileSync(file, 'utf-8')
-  const content = rendered.match(
-    /<div class="content .*?">([\s\S]*)<\/div>/m
-  )
 
+  const content = rendered.match(
+    /<div.*?class="content.*?">([\s\S]*)<\/div>/m
+  )
   feed.addItem({
     title: post.title,
     id: `${url}${post.url}`,

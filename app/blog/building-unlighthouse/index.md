@@ -3,41 +3,39 @@ title: "Building Unlighthouse: Open-Source Package For Site-wide Google Lighthou
 description: "Going into detail of what goes into making a modern open-source package."
 head:
 - - meta
-- name: description
-  content: "Going into detail of what goes into making a modern open-source package."
+  - name: description
+    content: "Going into detail of what goes into making a modern open-source package."
 - - meta
-- property: "og:type"
-  content: "website"
+  - property: "og:type"
+    content: "website"
 - - meta
-- property: "og:url"
-  content: "https://harlanzw.com/blog/building-unlighthouse/"
+  - property: "og:url"
+    content: "https://harlanzw.com/blog/building-unlighthouse/"
 - - meta
-- property: "og:title"
-  content: "Building Unlighthouse: Open-Source Package For Site-wide Google Lighthouse scans"
+  - property: "og:title"
+    content: "Building Unlighthouse: Open-Source Package For Site-wide Google Lighthouse scans"
 - - meta
-- property: "og:description"
-  content: "Going into detail of what goes into making a modern open-source package."
+  - property: "og:description"
+    content: "Going into detail of what goes into making a modern open-source package."
 - - meta
-- property: "og:image"
-  content: "https://next.unlighthouse.dev/og.png"
+  - property: "og:image"
+    content: "https://next.unlighthouse.dev/og.png"
 - - meta
-- property: "twitter:card"
-  content: "summary_large_image"
+  - property: "twitter:card"
+    content: "summary_large_image"
 - - meta
-- property: "twitter:url"
-  content: "https://harlanzw.com/blog/building-unlighthouse/"
+  - property: "twitter:url"
+    content: "https://harlanzw.com/blog/building-unlighthouse/"
 - - meta
-- property: "twitter:title"
-  content: "Building Unlighthouse: Open-Source Package For Site-wide Google Lighthouse scans"
+  - property: "twitter:title"
+    content: "Building Unlighthouse: Open-Source Package For Site-wide Google Lighthouse scans"
 - - meta
-- property: "twitter:description"
-  content: "Going into detail of what goes into making a modern open-source package."
+  - property: "twitter:description"
+    content: "Going into detail of what goes into making a modern open-source package."
 - - meta
-- property: "twitter:image"
-  content: "https://next.unlighthouse.dev/og.png"
+  - property: "twitter:image"
+    content: "https://next.unlighthouse.dev/og.png"
 ---
-
-# Building Unlighthouse: Open-Source Package For Site-wide Google Lighthouse scans
 
 ## Introduction
 
