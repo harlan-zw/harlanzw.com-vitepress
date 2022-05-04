@@ -37,6 +37,8 @@ head:
     content: "https://harlanzw.com/social/how-vite-works.png"    
 ---
 
+<SchemaOrgArticle date-published="2020-12-01" />
+
 In rebuilding my old Nuxt.js personal site, I wanted to challenge myself to learn the latest tech, the unknown.
 
 The unknown was the new project by Evan You: [⚡ Vite](https://github.com/vitejs/vite) (/veet/). Called Fast, for the 🇫🇷 Frenchies.

@@ -12,15 +12,24 @@ import Newsletter from './components/Newsletter.vue'
 import Zooming from 'zooming'
 import * as Panelbear from '@panelbear/panelbear-js'
 import DefaultTheme from 'vitepress/theme'
+import { installSchemaOrg } from '@vueuse/schema-org-vite/vitepress'
 
 const theme = DefaultTheme
 
 theme.Layout = Layout
 theme.NotFound = NotFound
-theme.enhanceApp = ({ app }) => {
+theme.enhanceApp = (ctx) => {
+    const { app } = ctx
     app.component('Newsletter', Newsletter)
     app.component('CardPost', CardPost)
     app.component('Posts', Posts)
+
+    installSchemaOrg(ctx, {
+        // set to your production domain
+        canonicalHost: 'https://harlanzw.com',
+        // change to your default language
+        defaultLanguage: 'en-AU',
+    })
 
     // if we're in a server context then we exit out here
     if (typeof document === 'undefined' || typeof window === 'undefined') {

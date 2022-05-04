@@ -4,9 +4,11 @@ import PostTags from './components/PostTags.vue'
 import { inject, computed } from 'vue'
 import { postForPath } from './utils'
 import { useRoute } from 'vitepress'
+import { SchemaOrgInspector, useSchemaOrg, defineWebPagePartial, defineWebSite, definePerson } from "@vueuse/schema-org";
 
 export default {
   components: {
+    SchemaOrgInspector,
     PostTags,
     NavBar,
   },
@@ -14,6 +16,22 @@ export default {
     const zoom = inject('zoom')
     const route = useRoute()
     const post = computed(() => postForPath(route.path))
+
+    useSchemaOrg([
+      defineWebSite({
+        name: 'Harlan Wilton\'s Blog',
+      }),
+      definePerson({
+        name: 'Harlan Wilton',
+        image: '/me.png',
+        sameAs: [
+          'https://harlanzw.com',
+          'https://twitter.com/harlan_zw',
+          'https://github.com/harlan-zw',
+        ]
+      }),
+      defineWebPagePartial(),
+    ])
 
     return {
       zoom,

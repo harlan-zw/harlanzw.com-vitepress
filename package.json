@@ -7,10 +7,10 @@
     "feed": "^4.2.2",
     "globby": "^11.0.2",
     "gray-matter": "^4.0.2",
-    "sass": "^1.32.5",
-    "vite-plugin-windicss": "^1.8.1",
+    "sass": "^1.51.0",
+    "vite-plugin-windicss": "^1.8.4",
     "vitepress": "^0.22.3",
-    "windicss": "^3.5.0",
+    "windicss": "^3.5.1",
     "zooming": "^2.1.1"
   },
   "scripts": {
@@ -20,11 +20,15 @@
   },
   "dependencies": {
     "@panelbear/panelbear-js": "^1.2.0",
-    "@unlighthouse/vite": "^0.3.3",
+    "@unlighthouse/vite": "^0.3.26",
+    "@vueuse/head": "^0.7.6",
+    "@vueuse/schema-org": "^0.4.4",
+    "@vueuse/schema-org-vite": "^0.4.4",
     "lodash": "^4.17.20",
-    "unplugin-icons": "^0.13.2",
-    "unplugin-vue-components": "^0.17.21",
-    "vite": "^2.8.4",
-    "vue": "^3.2.31"
+    "unplugin-auto-import": "^0.7.1",
+    "unplugin-icons": "^0.14.3",
+    "unplugin-vue-components": "^0.19.3",
+    "vite": "^2.9.8",
+    "vue": "^3.2.33"
   }
 }

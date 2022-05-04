@@ -37,6 +37,9 @@ head:
     content: "https://harlanzw.com/social/vue-automatic-component-imports.png"
 ---
 
+<SchemaOrgArticle date-published="2020-12-22" />
+
+
 When first learning Vue, you are taught you need to import and add components to `components` in the script block.
 
 ```vue

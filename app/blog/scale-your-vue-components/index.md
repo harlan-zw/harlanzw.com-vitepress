@@ -37,6 +37,8 @@ head:
     content: "https://harlanzw.com/social/scale-your-vue-components.png"
 ---
 
+<SchemaOrgArticle date-published="2021-01-12" />
+
 One of the key pieces in scaling your Vue app is having good component architecture.
 
 - How are components named?

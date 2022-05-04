@@ -9,6 +9,12 @@ head:
 <script setup>
 import { useData } from 'vitepress'
 const { page } = useData()
+
+useSchemaOrg([
+ defineWebPagePartial({
+  '@type': 'AboutPage',
+ })
+])
 </script>
 
 # {{ page.title }}

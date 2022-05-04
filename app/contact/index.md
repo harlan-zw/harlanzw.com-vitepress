@@ -40,6 +40,12 @@ head:
 <script setup>
 import { useData } from 'vitepress'
 const { page } = useData()
+
+useSchemaOrg([
+ defineWebPagePartial({
+  '@type': 'ContactPage',
+ })
+])
 </script>
 
 # {{ page.title }}
