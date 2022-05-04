@@ -45,7 +45,7 @@ theme.enhanceApp = (ctx) => {
 
     // analytics
     app.provide('analytics', Panelbear)
-    Panelbear.load(import.meta.env.VITE_PANELBEAR_ID, {
+    Panelbear.load('9EWSXgG8txm', {
         spaMode: 'history',
         autoTrack: true,
         debug: false, //import.meta.env.DEV

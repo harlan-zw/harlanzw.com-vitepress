@@ -39,7 +39,7 @@ export default defineComponent({
       email: '',
       submitting: false,
       success: false,
-      postUrl: import.meta.env.VITE_NEWSLETTER_SUBMIT_URL
+      postUrl: 'https://hooks.zapier.com/hooks/catch/3750603/ocopz6c'
     }
   },
   methods: {
