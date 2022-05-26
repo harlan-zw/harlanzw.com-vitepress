@@ -61,7 +61,7 @@ Code is open source under the MIT license. See on Github: [harlanzw.com](https:/
 
 Powered by Panelbear.
 
-[Open Pabelbear](https://app.panelbear.com/share/4fDa4dnKGsyhrVn2JdgP48/)
+[Open Panelbear](https://app.panelbear.com/share/4fDa4dnKGsyhrVn2JdgP48/)
 
 ## Newsletter
 
